@@ -5,7 +5,16 @@ public struct Gridel {
 
 //    private var window: UIWindow?
 
-    public static var configStyle: ConfigStyle = .simple
+    static var configStyle: ConfigStyle = .simple
+
+    static var window: UIWindow? {
+            guard let scene = UIApplication.shared.connectedScenes.first,
+                  let windowSceneDelegate = scene.delegate as? UIWindowSceneDelegate,
+                  let window = windowSceneDelegate.window else {
+                return nil
+            }
+            return window
+        }
 
     public init() {
 
@@ -16,19 +25,16 @@ public struct Gridel {
     }
 
     public static func applyGrid() {
-        guard let keyWindow = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
+        guard let window else { return }
 
         switch configStyle {
         case .simple:
-            keyWindow.window?.rootViewController?.view.backgroundColor = .green
+            window.rootViewController?.view.backgroundColor = .green
         case .verbose:
-            keyWindow.window?.rootViewController?.view.backgroundColor = .orange
+            window.rootViewController?.view.backgroundColor = .orange
         }
 
     }
-
-
-
 
 }
 
