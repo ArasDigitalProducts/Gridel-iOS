@@ -1,12 +1,11 @@
 import UIKit
 
 public struct Gridel {
-//    public private(set) var text = "Hello, World!"
-
 //    private var window: UIWindow?
 
     static var configStyle: ConfigStyle = .simple(configuration: SimpleConfiguration(width: 8, height: 8))
-    static var activationAction: ActivationAction = .shake
+
+    static var trigger = Triggers.shake
 
     static var window: UIWindow? {
             guard let scene = UIApplication.shared.connectedScenes.first,
@@ -17,33 +16,26 @@ public struct Gridel {
             return window
         }
 
-    public init() {}
+    public init() {
+    }
 
     public static func configure(with activationAction: ActivationAction) {
-        self.activationAction = activationAction
+        self.trigger = activationAction.mapToTrigger
+
+        trigger.subscribe {
+            window?.rootViewController?.present(SettingsViewController(), animated: true)
+        }
     }
 
-    public static func handleMotion(_ motion: UIEvent.EventSubtype) {
-        guard motion == activationAction.asEventSubtype else { return }
-
-        window?.rootViewController?.present(SettingsViewController(), animated: true)
-    }
-
-}
-
-public extension UIApplication {
-    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        Gridel.handleMotion(motion)
-    }
 }
 
 public enum ActivationAction {
     case shake
 
-    var asEventSubtype: UIEvent.EventSubtype {
+    var mapToTrigger: Trigger {
         switch self {
         case .shake:
-            return .motionShake
+            return Triggers.shake
         }
     }
 }
