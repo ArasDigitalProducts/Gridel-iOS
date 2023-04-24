@@ -96,7 +96,7 @@ class SettingsViewController: UIViewController {
         marginSizeTextField.snp.makeConstraints { make in
             make.leading.equalTo(marginSizeLabel.snp.trailing).offset(16)
             make.centerY.equalTo(marginSizeLabel.snp.centerY)
-            make.trailing.equalToSuperview().offset(8)
+            make.trailing.equalToSuperview().offset(-8)
         }
 
         //columnCount
@@ -111,7 +111,7 @@ class SettingsViewController: UIViewController {
         columnCountTextField.snp.makeConstraints { make in
             make.leading.equalTo(columnCountLabel.snp.trailing).offset(16)
             make.centerY.equalTo(columnCountLabel.snp.centerY)
-            make.trailing.equalToSuperview().offset(8)
+            make.trailing.equalToSuperview().offset(-8)
         }
 
         //gutterSize
@@ -126,7 +126,7 @@ class SettingsViewController: UIViewController {
         gutterSizeTextField.snp.makeConstraints { make in
             make.leading.equalTo(gutterSizeLabel.snp.trailing).offset(16)
             make.centerY.equalTo(gutterSizeLabel.snp.centerY)
-            make.trailing.equalToSuperview().offset(8)
+            make.trailing.equalToSuperview().offset(-8)
         }
 
         //rowHeight
@@ -141,7 +141,7 @@ class SettingsViewController: UIViewController {
         rowHeightTextField.snp.makeConstraints { make in
             make.leading.equalTo(rowHeightLabel.snp.trailing).offset(16)
             make.centerY.equalTo(rowHeightLabel.snp.centerY)
-            make.trailing.equalToSuperview().offset(8)
+            make.trailing.equalToSuperview().offset(-8)
         }
 
         //rowSpacing
@@ -156,7 +156,7 @@ class SettingsViewController: UIViewController {
         rowSpacingTextField.snp.makeConstraints { make in
             make.leading.equalTo(rowSpacingLabel.snp.trailing).offset(16)
             make.centerY.equalTo(rowSpacingLabel.snp.centerY)
-            make.trailing.equalToSuperview().offset(8)
+            make.trailing.equalToSuperview().offset(-8)
         }
 
         //Slider
@@ -175,7 +175,7 @@ class SettingsViewController: UIViewController {
         applyButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(64)
-            make.bottom.equalToSuperview().offset(64)
+            make.bottom.equalToSuperview().offset(-64)
         }
 
     }
