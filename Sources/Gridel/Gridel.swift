@@ -1,12 +1,6 @@
 import UIKit
 
 public struct Gridel {
-//    private var window: UIWindow?
-
-    static var configStyle: ConfigStyle = .simple(configuration: SimpleConfiguration(width: 8, height: 8))
-
-    static var trigger = Triggers.shake
-
     static var window: UIWindow? {
             guard let scene = UIApplication.shared.connectedScenes.first,
                   let windowSceneDelegate = scene.delegate as? UIWindowSceneDelegate,
@@ -16,6 +10,12 @@ public struct Gridel {
             return window
         }
 
+    static var configStyle: ConfigStyle?
+
+    static var trigger = Triggers.shake
+
+    static var isGridActive = false
+
     public init() {
     }
 
@@ -23,8 +23,40 @@ public struct Gridel {
         self.trigger = activationAction.mapToTrigger
 
         trigger.subscribe {
-            window?.rootViewController?.present(SettingsViewController(), animated: true)
+            if isGridActive {
+                removeGrid()
+            } else {
+                window?.rootViewController?.present(SettingsViewController(), animated: true)
+            }
         }
+    }
+
+    static func applyGrid(with configStyle: ConfigStyle) {
+        switch configStyle {
+        case .simple(let config):
+            applySimpleGrid(with: config)
+        case .verbose(let config):
+            applyVerboseGrid(with: config)
+        }
+    }
+
+    static func applySimpleGrid(with configuration: SimpleConfiguration) {
+
+
+
+//        isGridActive = true
+    }
+
+    static func applyVerboseGrid(with configuration: VerboseConfiguration) {
+
+        print("applied grid: \(configuration)")
+        isGridActive = true
+    }
+
+    static func removeGrid() {
+
+        print("removed grid")
+        isGridActive = false
     }
 
 }
@@ -53,7 +85,7 @@ public struct SimpleConfiguration {
 public struct VerboseConfiguration {
     let colorPrimary: UIColor
     let colorSecondary: UIColor
-    let colorFill: UIColor // = .white
+    let colorSpacing: UIColor
     let opacity: Double
 
     let marginSize: Int
@@ -63,16 +95,3 @@ public struct VerboseConfiguration {
     let rowHeight: Int
     let rowSpacing: Int
 }
-
-
-//public static func applyGrid() {
-//    guard let window else { return }
-//
-//    switch configStyle {
-//    case .simple:
-//        window.rootViewController?.view.backgroundColor = .green
-//    case .verbose:
-//        window.rootViewController?.view.backgroundColor = .orange
-//    }
-//
-//}

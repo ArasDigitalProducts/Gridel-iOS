@@ -13,12 +13,12 @@ class SettingsViewController: UIViewController {
 //        Gridel.configStyle = style
 //    }
 
-    var marginSize: Int = 0
-    var columnCount: Int = 0
-    var gutterSize: Int = 0
-    var rowHeight: Int = 0
-    var rowSpacing: Int = 0
-    var opacity: Double = 1
+//    var marginSize: Int = 0
+//    var columnCount: Int = 0
+//    var gutterSize: Int = 0
+//    var rowHeight: Int = 0
+//    var rowSpacing: Int = 0
+//    var opacity: Double = 1
     var colorPrimary: UIColor = .cyan
     var colorSecondary: UIColor = .magenta
     var colorSpacing: UIColor = .white
@@ -76,6 +76,8 @@ class SettingsViewController: UIViewController {
 
         opacitySlider.maximumValue = 1
         opacitySlider.minimumValue = 0
+
+        applyButton.addTarget(self, action: #selector(applyButtonTapped), for: .touchUpInside)
 
     }
 
@@ -169,8 +171,6 @@ class SettingsViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(16)
         }
 
-
-
         containerView.addSubview(applyButton)
         applyButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
@@ -178,6 +178,23 @@ class SettingsViewController: UIViewController {
             make.bottom.equalToSuperview().offset(-64)
         }
 
+    }
+
+    @objc
+    private func applyButtonTapped() {
+
+        let configStyle = ConfigStyle.verbose(configuration: VerboseConfiguration(
+            colorPrimary: colorPrimary,
+            colorSecondary: colorSecondary,
+            colorSpacing: colorSpacing,
+            opacity: Double(opacitySlider.value),
+            marginSize: Int(marginSizeTextField.text ?? "0") ?? 0,
+            columnCount: Int(columnCountTextField.text ?? "0") ?? 0,
+            gutterSize: Int(gutterSizeTextField.text ?? "0") ?? 0,
+            rowHeight: Int(rowHeightTextField.text ?? "0") ?? 0,
+            rowSpacing: Int(rowSpacingTextField.text ?? "0") ?? 0)
+        )
+        Gridel.applyGrid(with: configStyle)
     }
 
 
