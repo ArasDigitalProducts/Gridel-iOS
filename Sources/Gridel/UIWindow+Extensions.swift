@@ -7,6 +7,8 @@
 
 import UIKit
 
+
+// TODO: excludeaj SettingsViewController i vidi radi li
 extension UIWindow {
     func topViewController() -> UIViewController? {
         var top = self.rootViewController
