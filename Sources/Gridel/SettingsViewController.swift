@@ -42,6 +42,7 @@ class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         view.backgroundColor = .white
+        setupHideKeyboardOnTap()
 
         setupUI()
         renderViews()
