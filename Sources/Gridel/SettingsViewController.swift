@@ -58,7 +58,7 @@ class SettingsViewController: UIViewController {
     private func renderViews() {
         view.addSubview(containerView)
         containerView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.edges.equalTo(view.safeAreaLayoutGuide.snp.edges)
         }
 
         containerView.addSubview(applyButton)
