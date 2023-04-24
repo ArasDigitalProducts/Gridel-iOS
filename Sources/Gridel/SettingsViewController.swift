@@ -90,12 +90,12 @@ class SettingsViewController: UIViewController {
         containerView.addSubview(marginSizeTextField)
 
         marginSizeLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
+            make.top.equalToSuperview().offset(64)
             make.leading.equalToSuperview().offset(8)
         }
         marginSizeTextField.snp.makeConstraints { make in
-            make.centerY.equalTo(marginSizeLabel.snp.centerY)
             make.leading.equalTo(marginSizeLabel.snp.trailing).offset(16)
+            make.centerY.equalTo(marginSizeLabel.snp.centerY)
             make.trailing.equalToSuperview().offset(8)
         }
 
@@ -175,7 +175,7 @@ class SettingsViewController: UIViewController {
         applyButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(64)
-            make.bottom.equalToSuperview().offset(16)
+            make.bottom.equalToSuperview().offset(64)
         }
 
     }
