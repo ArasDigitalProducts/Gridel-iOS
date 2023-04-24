@@ -59,6 +59,9 @@ public struct VerboseConfiguration {
     let marginSize: Int
     let columnCount: Int
     let gutterSize: Int // razmak izmedju stupaca
+
+    let rowHeight: Int
+    let rowSpacing: Int
 }
 
 

@@ -13,49 +13,64 @@ class SettingsViewController: UIViewController {
 //        Gridel.configStyle = style
 //    }
 
-    var marginSize: Int?
-    var columnCount: Int?
-    var gutterSize: Int?
-
-    var opacity: Double?
-    var colorPrimary: UIColor?
-    var colorSecondary: UIColor?
+    var marginSize: Int = 0
+    var columnCount: Int = 0
+    var gutterSize: Int = 0
+    var rowHeight: Int = 0
+    var rowSpacing: Int = 0
+    var opacity: Double = 1
+    var colorPrimary: UIColor = .cyan
+    var colorSecondary: UIColor = .magenta
+    var colorSpacing: UIColor = .white
 
     let containerView = UIView()
-    let stackView = UIStackView()
 
-    let simpleConfigContainerView = UIView()
-    let verboseConfigContainerView = UIView()
-    let pageControl = UIPageControl()
-    let scrollView = UIScrollView()
     let applyButton = UIButton(type: .roundedRect)
 
+    let marginSizeLabel = UILabel()
+    let marginSizeTextField = UITextField()
+    let columnCountLabel = UILabel()
+    let columnCountTextField = UITextField()
+    let gutterSizeLabel = UILabel()
+    let gutterSizeTextField = UITextField()
+    let rowHeightLabel = UILabel()
+    let rowHeightTextField = UITextField()
+    let rowSpacingLabel = UILabel()
+    let rowSpacingTextField = UITextField()
+
+    let opacitySlider = UISlider()
 
     override func viewDidLoad() {
         view.backgroundColor = .gray
 
-        scrollView.delegate = self
         setupUI()
         renderViews()
     }
 
     private func setupUI() {
-        simpleConfigContainerView.backgroundColor = .systemOrange
-        verboseConfigContainerView.backgroundColor = .systemGreen
-
-        stackView.axis = .horizontal
-
         applyButton.setTitle("Apply", for: .normal)
         applyButton.layer.cornerRadius = 20
         applyButton.backgroundColor = .systemBlue
         applyButton.setTitleColor(.white, for: .normal)
 
-        setupPageControl()
-    }
+        marginSizeLabel.text = "Margin size"
+        marginSizeTextField.keyboardType = .numberPad
 
-    private func setupPageControl() {
-        pageControl.numberOfPages = 2
-        pageControl.currentPage = 0
+        columnCountLabel.text = "Number of columns"
+        columnCountTextField.keyboardType = .numberPad
+
+        gutterSizeLabel.text = "Gutter size"
+        gutterSizeTextField.keyboardType = .numberPad
+
+        rowHeightLabel.text = "Row height"
+        rowHeightTextField.keyboardType = .numberPad
+
+        rowSpacingLabel.text = "Row spacing"
+        rowSpacingTextField.keyboardType = .numberPad
+
+        opacitySlider.maximumValue = 1
+        opacitySlider.minimumValue = 0
+
     }
 
     private func renderViews() {
@@ -64,6 +79,92 @@ class SettingsViewController: UIViewController {
             make.edges.equalTo(view.safeAreaLayoutGuide.snp.edges)
         }
 
+        //marginSize
+        containerView.addSubview(marginSizeLabel)
+        containerView.addSubview(marginSizeTextField)
+
+        marginSizeLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(16)
+            make.leading.equalToSuperview().offset(8)
+        }
+        marginSizeTextField.snp.makeConstraints { make in
+            make.centerY.equalTo(marginSizeLabel.snp.centerY)
+            make.leading.equalTo(marginSizeLabel.snp.trailing)
+            make.trailing.equalToSuperview().offset(8)
+        }
+
+        //columnCount
+        containerView.addSubview(columnCountLabel)
+        containerView.addSubview(columnCountTextField)
+
+        columnCountLabel.snp.makeConstraints { make in
+            make.top.equalTo(marginSizeLabel.snp.bottom).offset(4)
+            make.leading.equalToSuperview().offset(8)
+        }
+
+        columnCountTextField.snp.makeConstraints { make in
+            make.leading.equalTo(columnCountLabel.snp.trailing)
+            make.centerY.equalTo(columnCountLabel.snp.centerY)
+            make.trailing.equalToSuperview().offset(8)
+        }
+
+        //gutterSize
+        containerView.addSubview(gutterSizeLabel)
+        containerView.addSubview(gutterSizeTextField)
+
+        gutterSizeLabel.snp.makeConstraints { make in
+            make.top.equalTo(columnCountLabel.snp.bottom).offset(4)
+            make.leading.equalToSuperview().offset(8)
+        }
+
+        gutterSizeTextField.snp.makeConstraints { make in
+            make.leading.equalTo(gutterSizeLabel.snp.trailing)
+            make.centerY.equalTo(gutterSizeLabel.snp.centerY)
+            make.trailing.equalToSuperview().offset(8)
+        }
+
+        //rowHeight
+        containerView.addSubview(rowHeightLabel)
+        containerView.addSubview(rowHeightTextField)
+
+        rowHeightLabel.snp.makeConstraints { make in
+            make.top.equalTo(gutterSizeLabel.snp.bottom).offset(4)
+            make.leading.equalToSuperview().offset(8)
+        }
+
+        rowHeightTextField.snp.makeConstraints { make in
+            make.leading.equalTo(rowHeightLabel.snp.trailing)
+            make.centerY.equalTo(rowHeightLabel.snp.centerY)
+            make.trailing.equalToSuperview().offset(8)
+        }
+
+        //rowSpacing
+        containerView.addSubview(rowSpacingLabel)
+        containerView.addSubview(rowSpacingTextField)
+
+        rowSpacingLabel.snp.makeConstraints { make in
+            make.top.equalTo(rowHeightLabel.snp.bottom).offset(4)
+            make.leading.equalToSuperview().offset(8)
+        }
+
+        rowSpacingTextField.snp.makeConstraints { make in
+            make.leading.equalTo(rowSpacingLabel.snp.trailing)
+            make.centerY.equalTo(rowSpacingLabel.snp.centerY)
+            make.trailing.equalToSuperview().offset(8)
+        }
+
+        //Slider
+
+        containerView.addSubview(opacitySlider)
+        opacitySlider.snp.makeConstraints { make in
+            make.top.equalTo(rowSpacingLabel.snp.bottom).offset(64)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(64)
+            make.leading.trailing.equalToSuperview().inset(16)
+        }
+
+
+
         containerView.addSubview(applyButton)
         applyButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
@@ -71,39 +172,7 @@ class SettingsViewController: UIViewController {
             make.bottom.equalToSuperview().offset(16)
         }
 
-        containerView.addSubview(scrollView)
-        scrollView.snp.makeConstraints { make in
-            make.leading.trailing.top.equalToSuperview()
-            make.bottom.equalTo(applyButton.snp.top)
-        }
-
-        scrollView.addSubview(stackView)
-        stackView.snp.makeConstraints { make in
-            make.leading.top.bottom.equalToSuperview()
-        }
-
-        stackView.addArrangedSubview(simpleConfigContainerView)
-        stackView.addArrangedSubview(verboseConfigContainerView)
-
-        simpleConfigContainerView.snp.makeConstraints { make in
-            make.width.equalTo(scrollView.snp.width)
-            make.height.equalTo(scrollView.snp.width)
-        }
-
-        verboseConfigContainerView.snp.makeConstraints { make in
-            make.width.equalTo(scrollView.snp.width)
-            make.height.equalTo(scrollView.snp.width)
-        }
-
     }
 
 
-}
-
-extension SettingsViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let width = scrollView.frame.size.width
-        let page = Int((scrollView.contentOffset.x + width / 2) / width)
-        pageControl.currentPage = page
-    }
 }
