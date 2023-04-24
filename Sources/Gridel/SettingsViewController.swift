@@ -41,7 +41,7 @@ class SettingsViewController: UIViewController {
     let opacitySlider = UISlider()
 
     override func viewDidLoad() {
-        view.backgroundColor = .gray
+        view.backgroundColor = .white
 
         setupUI()
         renderViews()
@@ -55,18 +55,23 @@ class SettingsViewController: UIViewController {
 
         marginSizeLabel.text = "Margin size"
         marginSizeTextField.keyboardType = .numberPad
+        marginSizeTextField.borderStyle = .bezel
 
         columnCountLabel.text = "Number of columns"
         columnCountTextField.keyboardType = .numberPad
+        columnCountTextField.borderStyle = .bezel
 
         gutterSizeLabel.text = "Gutter size"
         gutterSizeTextField.keyboardType = .numberPad
+        gutterSizeTextField.borderStyle = .bezel
 
         rowHeightLabel.text = "Row height"
         rowHeightTextField.keyboardType = .numberPad
+        rowHeightTextField.borderStyle = .bezel
 
         rowSpacingLabel.text = "Row spacing"
         rowSpacingTextField.keyboardType = .numberPad
+        rowSpacingTextField.borderStyle = .bezel
 
         opacitySlider.maximumValue = 1
         opacitySlider.minimumValue = 0
@@ -89,7 +94,7 @@ class SettingsViewController: UIViewController {
         }
         marginSizeTextField.snp.makeConstraints { make in
             make.centerY.equalTo(marginSizeLabel.snp.centerY)
-            make.leading.equalTo(marginSizeLabel.snp.trailing)
+            make.leading.equalTo(marginSizeLabel.snp.trailing).offset(16)
             make.trailing.equalToSuperview().offset(8)
         }
 
@@ -98,12 +103,12 @@ class SettingsViewController: UIViewController {
         containerView.addSubview(columnCountTextField)
 
         columnCountLabel.snp.makeConstraints { make in
-            make.top.equalTo(marginSizeLabel.snp.bottom).offset(4)
+            make.top.equalTo(marginSizeLabel.snp.bottom).offset(16)
             make.leading.equalToSuperview().offset(8)
         }
 
         columnCountTextField.snp.makeConstraints { make in
-            make.leading.equalTo(columnCountLabel.snp.trailing)
+            make.leading.equalTo(columnCountLabel.snp.trailing).offset(16)
             make.centerY.equalTo(columnCountLabel.snp.centerY)
             make.trailing.equalToSuperview().offset(8)
         }
@@ -113,12 +118,12 @@ class SettingsViewController: UIViewController {
         containerView.addSubview(gutterSizeTextField)
 
         gutterSizeLabel.snp.makeConstraints { make in
-            make.top.equalTo(columnCountLabel.snp.bottom).offset(4)
+            make.top.equalTo(columnCountLabel.snp.bottom).offset(16)
             make.leading.equalToSuperview().offset(8)
         }
 
         gutterSizeTextField.snp.makeConstraints { make in
-            make.leading.equalTo(gutterSizeLabel.snp.trailing)
+            make.leading.equalTo(gutterSizeLabel.snp.trailing).offset(16)
             make.centerY.equalTo(gutterSizeLabel.snp.centerY)
             make.trailing.equalToSuperview().offset(8)
         }
@@ -128,12 +133,12 @@ class SettingsViewController: UIViewController {
         containerView.addSubview(rowHeightTextField)
 
         rowHeightLabel.snp.makeConstraints { make in
-            make.top.equalTo(gutterSizeLabel.snp.bottom).offset(4)
+            make.top.equalTo(gutterSizeLabel.snp.bottom).offset(16)
             make.leading.equalToSuperview().offset(8)
         }
 
         rowHeightTextField.snp.makeConstraints { make in
-            make.leading.equalTo(rowHeightLabel.snp.trailing)
+            make.leading.equalTo(rowHeightLabel.snp.trailing).offset(16)
             make.centerY.equalTo(rowHeightLabel.snp.centerY)
             make.trailing.equalToSuperview().offset(8)
         }
@@ -143,12 +148,12 @@ class SettingsViewController: UIViewController {
         containerView.addSubview(rowSpacingTextField)
 
         rowSpacingLabel.snp.makeConstraints { make in
-            make.top.equalTo(rowHeightLabel.snp.bottom).offset(4)
+            make.top.equalTo(rowHeightLabel.snp.bottom).offset(16)
             make.leading.equalToSuperview().offset(8)
         }
 
         rowSpacingTextField.snp.makeConstraints { make in
-            make.leading.equalTo(rowSpacingLabel.snp.trailing)
+            make.leading.equalTo(rowSpacingLabel.snp.trailing).offset(16)
             make.centerY.equalTo(rowSpacingLabel.snp.centerY)
             make.trailing.equalToSuperview().offset(8)
         }
