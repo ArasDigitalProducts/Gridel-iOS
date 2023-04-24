@@ -22,6 +22,7 @@ class SettingsViewController: UIViewController {
     var colorSecondary: UIColor?
 
     let containerView = UIView()
+    let stackView = UIStackView()
 
     let simpleConfigContainerView = UIView()
     let verboseConfigContainerView = UIView()
@@ -41,6 +42,8 @@ class SettingsViewController: UIViewController {
     private func setupUI() {
         simpleConfigContainerView.backgroundColor = .systemOrange
         verboseConfigContainerView.backgroundColor = .systemGreen
+
+        stackView.axis = .horizontal
 
         applyButton.setTitle("Apply", for: .normal)
         applyButton.layer.cornerRadius = 20
@@ -74,15 +77,22 @@ class SettingsViewController: UIViewController {
             make.bottom.equalTo(applyButton.snp.top)
         }
 
-        scrollView.addSubview(simpleConfigContainerView)
-        scrollView.addSubview(verboseConfigContainerView)
+        scrollView.addSubview(stackView)
+        stackView.snp.makeConstraints { make in
+            make.leading.top.bottom.equalToSuperview()
+        }
+
+        stackView.addArrangedSubview(simpleConfigContainerView)
+        stackView.addArrangedSubview(verboseConfigContainerView)
 
         simpleConfigContainerView.snp.makeConstraints { make in
-            make.width.height.equalToSuperview()
+            make.width.equalTo(scrollView.snp.width)
+            make.height.equalTo(scrollView.snp.width)
         }
-        verboseConfigContainerView.snp.makeConstraints { make in
-            make.width.height.equalToSuperview()
 
+        verboseConfigContainerView.snp.makeConstraints { make in
+            make.width.equalTo(scrollView.snp.width)
+            make.height.equalTo(scrollView.snp.width)
         }
 
     }
