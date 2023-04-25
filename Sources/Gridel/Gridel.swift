@@ -1,12 +1,6 @@
 import UIKit
 
 public struct Gridel {
-//    private var window: UIWindow?
-
-    static var configStyle: ConfigStyle = .simple(configuration: SimpleConfiguration(width: 8, height: 8))
-
-    static var trigger = Triggers.shake
-
     static var window: UIWindow? {
             guard let scene = UIApplication.shared.connectedScenes.first,
                   let windowSceneDelegate = scene.delegate as? UIWindowSceneDelegate,
@@ -16,6 +10,14 @@ public struct Gridel {
             return window
         }
 
+    static var gridView = GridView()
+
+//    static var configStyle: ConfigStyle?
+
+    static var trigger = Triggers.shake
+
+    static var isGridActive = false
+
     public init() {
     }
 
@@ -23,8 +25,32 @@ public struct Gridel {
         self.trigger = activationAction.mapToTrigger
 
         trigger.subscribe {
-            window?.rootViewController?.present(SettingsViewController(), animated: true)
+            if isGridActive {
+                removeGrid()
+            } else {
+                window?.rootViewController?.present(SettingsViewController(), animated: true)
+            }
         }
+    }
+
+    static func applyGrid(with configStyle: ConfigStyle) {
+        guard let window else { return }
+
+        gridView = GridView()
+        gridView.frame = window.bounds
+        gridView.setup(with: configStyle)
+
+        gridView.isUserInteractionEnabled = false
+        window.addSubview(gridView)
+
+        print("applied \(configStyle)")
+        isGridActive = true
+    }
+
+    static func removeGrid() {
+        gridView.removeFromSuperview()
+        print("removed grid")
+        isGridActive = false
     }
 
 }
@@ -46,30 +72,22 @@ public enum ConfigStyle {
 }
 
 public struct SimpleConfiguration {
-    let width: Int
     let height: Int
+    let opacity: Float
+    let colorPrimary: UIColor
+    let colorSpacing: UIColor
 }
 
 public struct VerboseConfiguration {
     let colorPrimary: UIColor
     let colorSecondary: UIColor
-    let colorFill: UIColor // = .white
-    let opacity: Double
+    let colorSpacing: UIColor
+    let opacity: Float
 
     let marginSize: Int
     let columnCount: Int
     let gutterSize: Int // razmak izmedju stupaca
+
+    let rowHeight: Int
+    let rowSpacing: Int
 }
-
-
-//public static func applyGrid() {
-//    guard let window else { return }
-//
-//    switch configStyle {
-//    case .simple:
-//        window.rootViewController?.view.backgroundColor = .green
-//    case .verbose:
-//        window.rootViewController?.view.backgroundColor = .orange
-//    }
-//
-//}
