@@ -34,37 +34,17 @@ public struct Gridel {
     }
 
     static func applyGrid(with configStyle: ConfigStyle) {
-        switch configStyle {
-        case .simple(let config):
-            applySimpleGrid(with: config)
-        case .verbose(let config):
-            applyVerboseGrid(with: config)
-        }
-    }
 
-    static func applySimpleGrid(with configuration: SimpleConfiguration) {
         guard let window else { return }
 
+        gridView = GridView()
         gridView.frame = window.bounds
-        gridView.backgroundColor = .lightGray
-        gridView.layer.opacity = configuration.opacity
+        gridView.setup(with: configStyle)
+
         gridView.isUserInteractionEnabled = false
         window.addSubview(gridView)
 
-        print("applied \(configuration)")
-        isGridActive = true
-    }
-
-    static func applyVerboseGrid(with configuration: VerboseConfiguration) {
-        guard let window else { return }
-
-        gridView.frame = window.bounds
-        gridView.backgroundColor = .lightGray
-        gridView.layer.opacity = configuration.opacity
-        gridView.isUserInteractionEnabled = false
-        window.addSubview(gridView)
-
-        print("applied grid: \(configuration)")
+        print("applied \(configStyle)")
         isGridActive = true
     }
 
