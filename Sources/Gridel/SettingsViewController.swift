@@ -191,12 +191,10 @@ class SettingsViewController: UIViewController {
         //Option switch
         containerView.addSubview(optionSwitch)
         optionSwitch.snp.makeConstraints { make in
-            make.centerX.equalTo(optionLabel.snp.centerX)
+            make.centerY.equalTo(optionLabel.snp.centerY)
             make.trailing.equalToSuperview().inset(16)
             make.leading.equalTo(optionLabel.snp.trailing)
         }
-
-
 
         //Apply button
         containerView.addSubview(applyButton)
