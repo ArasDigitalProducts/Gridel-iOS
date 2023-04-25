@@ -80,8 +80,8 @@ class SettingsViewController: UIViewController {
 
         applyButton.addTarget(self, action: #selector(applyButtonTapped), for: .touchUpInside)
 
-        optionSwitch.isOn = true
         optionSwitch.addTarget(self, action: #selector(switchChanged), for: UIControl.Event.valueChanged)
+        optionSwitch.isOn = true
 
     }
 
