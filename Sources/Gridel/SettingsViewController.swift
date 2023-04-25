@@ -38,8 +38,6 @@ class SettingsViewController: UIViewController {
     let opacitySlider = UISlider()
     let optionSwitch = UISwitch()
 
-    var selectedConfiguration: ConfigStyle?
-
     override func viewDidLoad() {
         view.backgroundColor = .white
         setupHideKeyboardOnTap()
@@ -191,18 +189,25 @@ class SettingsViewController: UIViewController {
     @objc
     private func applyButtonTapped() {
 
-        let configStyle = ConfigStyle.verbose(configuration: VerboseConfiguration(
-            colorPrimary: colorPrimary,
-            colorSecondary: colorSecondary,
-            colorSpacing: colorSpacing,
-            opacity: Double(opacitySlider.value),
-            marginSize: Int(marginSizeTextField.text ?? "0") ?? 0,
-            columnCount: Int(columnCountTextField.text ?? "0") ?? 0,
-            gutterSize: Int(gutterSizeTextField.text ?? "0") ?? 0,
-            rowHeight: Int(rowHeightTextField.text ?? "0") ?? 0,
-            rowSpacing: Int(rowSpacingTextField.text ?? "0") ?? 0)
-        )
-        Gridel.applyGrid(with: configStyle)
+        if optionSwitch.isOn {
+            let configStyle = ConfigStyle.simple(configuration: .init(width: 0, height: Int(rowHeightTextField.text ?? "0") ?? 0, opacity: opacitySlider.value, colorPrimary: colorPrimary, colorSpacing: colorSpacing))
+
+            Gridel.applyGrid(with: configStyle)
+        } else {
+            let configStyle = ConfigStyle.verbose(configuration: VerboseConfiguration(
+                colorPrimary: colorPrimary,
+                colorSecondary: colorSecondary,
+                colorSpacing: colorSpacing,
+                opacity: opacitySlider.value,
+                marginSize: Int(marginSizeTextField.text ?? "0") ?? 0,
+                columnCount: Int(columnCountTextField.text ?? "0") ?? 0,
+                gutterSize: Int(gutterSizeTextField.text ?? "0") ?? 0,
+                rowHeight: Int(rowHeightTextField.text ?? "0") ?? 0,
+                rowSpacing: Int(rowSpacingTextField.text ?? "0") ?? 0)
+            )
+            Gridel.applyGrid(with: configStyle)
+        }
+
     }
 
     @objc

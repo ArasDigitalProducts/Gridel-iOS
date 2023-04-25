@@ -42,9 +42,15 @@ public struct Gridel {
 
     static func applySimpleGrid(with configuration: SimpleConfiguration) {
 
+        guard let window else { return }
 
+        let gridView = UIView(frame: window.bounds)
+        gridView.backgroundColor = .lightGray
+        gridView.layer.opacity = configuration.opacity
+        window.addSubview(gridView)
 
-//        isGridActive = true
+        print("applied \(configuration)")
+        isGridActive = true
     }
 
     static func applyVerboseGrid(with configuration: VerboseConfiguration) {
@@ -80,13 +86,16 @@ public enum ConfigStyle {
 public struct SimpleConfiguration {
     let width: Int
     let height: Int
+    let opacity: Float
+    let colorPrimary: UIColor
+    let colorSpacing: UIColor
 }
 
 public struct VerboseConfiguration {
     let colorPrimary: UIColor
     let colorSecondary: UIColor
     let colorSpacing: UIColor
-    let opacity: Double
+    let opacity: Float
 
     let marginSize: Int
     let columnCount: Int
