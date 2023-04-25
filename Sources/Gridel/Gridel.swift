@@ -47,6 +47,7 @@ public struct Gridel {
         let gridView = UIView(frame: window.bounds)
         gridView.backgroundColor = .lightGray
         gridView.layer.opacity = configuration.opacity
+        gridView.isUserInteractionEnabled = false
         window.addSubview(gridView)
 
         print("applied \(configuration)")
