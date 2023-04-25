@@ -207,7 +207,17 @@ class SettingsViewController: UIViewController {
 
     @objc
     private func switchChanged(configSwitch: UISwitch) {
-        print(configSwitch.isOn)
+        if configSwitch.isOn {
+            marginSizeTextField.isEnabled = false
+            columnCountTextField.isEnabled = false
+            gutterSizeTextField.isEnabled = false
+            rowSpacingTextField.isEnabled = false
+        } else {
+            marginSizeTextField.isEnabled = true
+            columnCountTextField.isEnabled = true
+            gutterSizeTextField.isEnabled = true
+            rowSpacingTextField.isEnabled = true
+        }
     }
 
 
