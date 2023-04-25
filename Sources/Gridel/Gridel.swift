@@ -34,6 +34,7 @@ public struct Gridel {
         gridelWindow = UIWindow(windowScene: scene)
         gridelWindow?.windowLevel = UIWindow.Level.alert + 1
         gridelWindow?.backgroundColor = .orange
+        gridelWindow?.isHidden = false
 //        gridelWindow?.rootViewController = UIViewController()
 //        gridelWindow?.makeKeyAndVisible()
 
