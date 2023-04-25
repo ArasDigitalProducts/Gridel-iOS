@@ -74,6 +74,7 @@ class SettingsViewController: UIViewController {
 
         opacitySlider.maximumValue = 1
         opacitySlider.minimumValue = 0
+        opacitySlider.value = 0.5
 
         applyButton.addTarget(self, action: #selector(applyButtonTapped), for: .touchUpInside)
         optionSwitch.addTarget(self, action: #selector(switchChanged), for: UIControl.Event.valueChanged)
@@ -190,7 +191,7 @@ class SettingsViewController: UIViewController {
     private func applyButtonTapped() {
 
         if optionSwitch.isOn {
-            let configStyle = ConfigStyle.simple(configuration: .init(width: 0, height: Int(rowHeightTextField.text ?? "0") ?? 0, opacity: opacitySlider.value, colorPrimary: colorPrimary, colorSpacing: colorSpacing))
+            let configStyle = ConfigStyle.simple(configuration: .init(height: Int(rowHeightTextField.text ?? "0") ?? 0, opacity: opacitySlider.value, colorPrimary: colorPrimary, colorSpacing: colorSpacing))
 
             Gridel.applyGrid(with: configStyle)
         } else {

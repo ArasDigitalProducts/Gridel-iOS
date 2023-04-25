@@ -73,7 +73,6 @@ public enum ConfigStyle {
 }
 
 public struct SimpleConfiguration {
-    let width: Int
     let height: Int
     let opacity: Float
     let colorPrimary: UIColor
