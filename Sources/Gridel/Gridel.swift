@@ -32,8 +32,6 @@ public struct Gridel {
 //        gridelWindow = UIWindow(frame: UIScreen.main.bounds)
 
         gridelWindow = UIWindow(windowScene: scene)
-
-        gridelWindow?.backgroundColor = UIColor.red
         gridelWindow?.windowLevel = UIWindow.Level.alert + 1
         gridelWindow?.rootViewController = UIViewController()
         gridelWindow?.makeKeyAndVisible()
@@ -51,14 +49,15 @@ public struct Gridel {
     }
 
     static func applyGrid(with configStyle: ConfigStyle) {
-        guard let window else { return }
+//        guard let window else { return }
+        guard let gridelWindow else { return }
 
         gridView = GridView()
-        gridView.frame = window.bounds
+        gridView.frame = gridelWindow.bounds
         gridView.setup(with: configStyle)
 
         gridView.isUserInteractionEnabled = false
-        window.addSubview(gridView)
+        gridelWindow.addSubview(gridView)
 
         print("applied \(configStyle)")
         isGridActive = true
