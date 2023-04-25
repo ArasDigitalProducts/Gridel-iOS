@@ -10,7 +10,7 @@ public struct Gridel {
             return window
         }
 
-    static var gridView = UIView()
+    static var gridView = GridView()
 
     static var configStyle: ConfigStyle?
 
@@ -56,15 +56,20 @@ public struct Gridel {
     }
 
     static func applyVerboseGrid(with configuration: VerboseConfiguration) {
+        guard let window else { return }
+
+        gridView.frame = window.bounds
+        gridView.backgroundColor = .lightGray
+        gridView.layer.opacity = configuration.opacity
+        gridView.isUserInteractionEnabled = false
+        window.addSubview(gridView)
 
         print("applied grid: \(configuration)")
         isGridActive = true
     }
 
     static func removeGrid() {
-
         gridView.removeFromSuperview()
-
         print("removed grid")
         isGridActive = false
     }
