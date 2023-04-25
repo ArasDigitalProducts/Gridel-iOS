@@ -10,6 +10,8 @@ public struct Gridel {
             return window
         }
 
+    static var gridView = UIView()
+
     static var configStyle: ConfigStyle?
 
     static var trigger = Triggers.shake
@@ -41,10 +43,9 @@ public struct Gridel {
     }
 
     static func applySimpleGrid(with configuration: SimpleConfiguration) {
-
         guard let window else { return }
 
-        let gridView = UIView(frame: window.bounds)
+        gridView.frame = window.bounds
         gridView.backgroundColor = .lightGray
         gridView.layer.opacity = configuration.opacity
         gridView.isUserInteractionEnabled = false
@@ -61,6 +62,8 @@ public struct Gridel {
     }
 
     static func removeGrid() {
+
+        gridView.removeFromSuperview()
 
         print("removed grid")
         isGridActive = false
