@@ -233,6 +233,8 @@ class SettingsViewController: UIViewController {
     @objc
     private func switchChanged(configSwitch: UISwitch) {
         if configSwitch.isOn {
+            optionLabel.text = "Simple"
+
             marginSizeTextField.isEnabled = false
             marginSizeTextField.backgroundColor = .gray
             columnCountTextField.isEnabled = false
@@ -242,6 +244,8 @@ class SettingsViewController: UIViewController {
             rowSpacingTextField.isEnabled = false
             rowSpacingTextField.backgroundColor = .gray
         } else {
+            optionLabel.text = "Verbose"
+
             marginSizeTextField.isEnabled = true
             marginSizeTextField.backgroundColor = .systemBackground
             columnCountTextField.isEnabled = true
