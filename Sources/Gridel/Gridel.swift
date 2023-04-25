@@ -34,7 +34,8 @@ public struct Gridel {
             if isGridActive {
                 removeGrid()
             } else {
-                gridelWindow?.rootViewController?.present(SettingsViewController(), animated: true)
+                gridelWindow?.rootViewController = SettingsViewController()
+//                gridelWindow?.rootViewController?.present(SettingsViewController(), animated: true)
             }
         }
     }
