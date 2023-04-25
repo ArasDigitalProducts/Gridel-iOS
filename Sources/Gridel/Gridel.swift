@@ -34,7 +34,6 @@ public struct Gridel {
     }
 
     static func applyGrid(with configStyle: ConfigStyle) {
-
         guard let window else { return }
 
         gridView = GridView()
