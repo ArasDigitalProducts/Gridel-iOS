@@ -9,9 +9,6 @@ import UIKit
 import SnapKit
 
 class SettingsViewController: UIViewController {
-//    func configureStyle(with style: ConfigStyle) {
-//        Gridel.configStyle = style
-//    }
 
 //    var marginSize: Int = 0
 //    var columnCount: Int = 0
@@ -40,6 +37,8 @@ class SettingsViewController: UIViewController {
 
     let opacitySlider = UISlider()
     let optionSwitch = UISwitch()
+
+    var selectedConfiguration: ConfigStyle?
 
     override func viewDidLoad() {
         view.backgroundColor = .white
@@ -79,6 +78,7 @@ class SettingsViewController: UIViewController {
         opacitySlider.minimumValue = 0
 
         applyButton.addTarget(self, action: #selector(applyButtonTapped), for: .touchUpInside)
+        optionSwitch.addTarget(self, action: #selector(switchChanged), for: UIControl.Event.valueChanged)
 
     }
 
@@ -203,6 +203,11 @@ class SettingsViewController: UIViewController {
             rowSpacing: Int(rowSpacingTextField.text ?? "0") ?? 0)
         )
         Gridel.applyGrid(with: configStyle)
+    }
+
+    @objc
+    private func switchChanged(configSwitch: UISwitch) {
+        print(configSwitch.isOn)
     }
 
 
