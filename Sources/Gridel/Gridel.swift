@@ -33,8 +33,9 @@ public struct Gridel {
 
         gridelWindow = UIWindow(windowScene: scene)
         gridelWindow?.windowLevel = UIWindow.Level.alert + 1
-        gridelWindow?.rootViewController = UIViewController()
-        gridelWindow?.makeKeyAndVisible()
+        gridelWindow?.backgroundColor = .orange
+//        gridelWindow?.rootViewController = UIViewController()
+//        gridelWindow?.makeKeyAndVisible()
 
         trigger.subscribe {
             if isGridActive {
