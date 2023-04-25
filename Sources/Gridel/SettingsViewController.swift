@@ -35,6 +35,7 @@ class SettingsViewController: UIViewController {
     let rowSpacingLabel = UILabel()
     let rowSpacingTextField = UITextField()
 
+    let opacityLabel = UILabel()
     let opacitySlider = UISlider()
     let optionSwitch = UISwitch()
 
@@ -72,11 +73,14 @@ class SettingsViewController: UIViewController {
         rowSpacingTextField.keyboardType = .numberPad
         rowSpacingTextField.borderStyle = .bezel
 
+        opacityLabel.text = "Opacity"
         opacitySlider.maximumValue = 1
         opacitySlider.minimumValue = 0
         opacitySlider.value = 0.5
 
         applyButton.addTarget(self, action: #selector(applyButtonTapped), for: .touchUpInside)
+
+        optionSwitch.isOn = true
         optionSwitch.addTarget(self, action: #selector(switchChanged), for: UIControl.Event.valueChanged)
 
     }
@@ -162,9 +166,15 @@ class SettingsViewController: UIViewController {
         }
 
         //Slider
+        containerView.addSubview(opacityLabel)
+        opacityLabel.snp.makeConstraints { make in
+            make.top.equalTo(rowSpacingLabel.snp.bottom).offset(64)
+            make.centerX.equalToSuperview()
+        }
+
         containerView.addSubview(opacitySlider)
         opacitySlider.snp.makeConstraints { make in
-            make.top.equalTo(rowSpacingLabel.snp.bottom).offset(64)
+            make.top.equalTo(opacityLabel.snp.bottom).offset(16)
             make.centerX.equalToSuperview()
             make.height.equalTo(64)
             make.leading.trailing.equalToSuperview().inset(16)

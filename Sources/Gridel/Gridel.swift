@@ -12,7 +12,7 @@ public struct Gridel {
 
     static var gridView = GridView()
 
-    static var configStyle: ConfigStyle?
+//    static var configStyle: ConfigStyle?
 
     static var trigger = Triggers.shake
 
