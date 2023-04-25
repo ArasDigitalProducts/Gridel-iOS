@@ -37,7 +37,9 @@ class SettingsViewController: UIViewController {
 
     let opacityLabel = UILabel()
     let opacitySlider = UISlider()
+
     let optionSwitch = UISwitch()
+    let optionLabel = UILabel()
 
     override func viewDidLoad() {
         view.backgroundColor = .white
@@ -81,6 +83,7 @@ class SettingsViewController: UIViewController {
         applyButton.addTarget(self, action: #selector(applyButtonTapped), for: .touchUpInside)
 
         optionSwitch.addTarget(self, action: #selector(switchChanged), for: UIControl.Event.valueChanged)
+        optionLabel.text = "Verbose"
     }
 
     private func renderViews() {
@@ -178,12 +181,22 @@ class SettingsViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(16)
         }
 
+
+        //OptionLabel
+        containerView.addSubview(optionLabel)
+        optionLabel.snp.makeConstraints { make in
+            make.top.equalTo(opacitySlider.snp.bottom).offset(32)
+            make.leading.equalToSuperview().offset(16)
+        }
         //Option switch
         containerView.addSubview(optionSwitch)
         optionSwitch.snp.makeConstraints { make in
-            make.top.equalTo(opacitySlider.snp.bottom).offset(32)
-            make.centerX.equalToSuperview()
+            make.centerX.equalTo(optionLabel.snp.centerX)
+            make.trailing.equalToSuperview().inset(16)
+            make.leading.equalTo(optionLabel.snp.trailing)
         }
+
+
 
         //Apply button
         containerView.addSubview(applyButton)
