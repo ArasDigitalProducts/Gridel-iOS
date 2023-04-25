@@ -39,6 +39,7 @@ class SettingsViewController: UIViewController {
     let rowSpacingTextField = UITextField()
 
     let opacitySlider = UISlider()
+    let optionSwitch = UISwitch()
 
     override func viewDidLoad() {
         view.backgroundColor = .white
@@ -162,7 +163,6 @@ class SettingsViewController: UIViewController {
         }
 
         //Slider
-
         containerView.addSubview(opacitySlider)
         opacitySlider.snp.makeConstraints { make in
             make.top.equalTo(rowSpacingLabel.snp.bottom).offset(64)
@@ -171,6 +171,14 @@ class SettingsViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(16)
         }
 
+        //Option switch
+        containerView.addSubview(optionSwitch)
+        optionSwitch.snp.makeConstraints { make in
+            make.top.equalTo(opacitySlider.snp.bottom).offset(32)
+            make.centerX.equalToSuperview()
+        }
+
+        //Apply button
         containerView.addSubview(applyButton)
         applyButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
