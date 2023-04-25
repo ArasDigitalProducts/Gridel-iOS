@@ -35,6 +35,7 @@ public struct Gridel {
         gridelWindow?.windowLevel = UIWindow.Level.alert + 1
         gridelWindow?.backgroundColor = .clear
         gridelWindow?.isHidden = false
+        gridelWindow?.isUserInteractionEnabled = false
 //        gridelWindow?.rootViewController = UIViewController()
 //        gridelWindow?.makeKeyAndVisible()
 
