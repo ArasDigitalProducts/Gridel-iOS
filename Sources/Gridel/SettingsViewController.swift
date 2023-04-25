@@ -209,14 +209,22 @@ class SettingsViewController: UIViewController {
     private func switchChanged(configSwitch: UISwitch) {
         if configSwitch.isOn {
             marginSizeTextField.isEnabled = false
+            marginSizeTextField.backgroundColor = .gray
             columnCountTextField.isEnabled = false
+            columnCountTextField.backgroundColor = .gray
             gutterSizeTextField.isEnabled = false
+            gutterSizeTextField.backgroundColor = .gray
             rowSpacingTextField.isEnabled = false
+            rowSpacingTextField.backgroundColor = .gray
         } else {
             marginSizeTextField.isEnabled = true
+            marginSizeTextField.backgroundColor = .systemBackground
             columnCountTextField.isEnabled = true
+            columnCountTextField.backgroundColor = .systemBackground
             gutterSizeTextField.isEnabled = true
+            gutterSizeTextField.backgroundColor = .systemBackground
             rowSpacingTextField.isEnabled = true
+            rowSpacingTextField.backgroundColor = .systemBackground
         }
     }
 
