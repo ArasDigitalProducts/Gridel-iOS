@@ -36,14 +36,13 @@ class GridView: UIView {
     override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
 
-        // Set the fill color to white
-        context?.setFillColor(UIColor.white.cgColor)
-
         // Loop through the height of the view in increments of 8 points
         for y in stride(from: 0, to: bounds.height, by: 8) {
             // If the row number is even, set the fill color to red
             if y.remainder(dividingBy: 8) == 0 {
                 context?.setFillColor(UIColor.red.cgColor)
+            } else {
+                context?.setFillColor(UIColor.white.cgColor)
             }
 
             // Create a rectangle for the row
