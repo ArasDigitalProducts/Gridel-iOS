@@ -36,14 +36,13 @@ public struct Gridel {
         gridelWindow?.rootViewController = UIViewController()
         gridelWindow?.makeKeyAndVisible()
 
-
-
         trigger.subscribe {
             if isGridActive {
                 removeGrid()
             } else {
 //                gridelWindow?.rootViewController = SettingsViewController()
-                gridelWindow?.rootViewController?.present(SettingsViewController(), animated: true)
+//                gridelWindow?.rootViewController?.present(SettingsViewController(), animated: true)
+                window?.rootViewController?.present(SettingsViewController(), animated: true)
             }
         }
     }
