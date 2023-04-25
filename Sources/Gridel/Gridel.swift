@@ -10,6 +10,8 @@ public struct Gridel {
             return window
         }
 
+    static var gridelWindow: UIWindow?
+
     static var gridView = GridView()
 
 //    static var configStyle: ConfigStyle?
@@ -23,12 +25,16 @@ public struct Gridel {
 
     public static func configure(with activationAction: ActivationAction) {
         self.trigger = activationAction.mapToTrigger
+        guard let window else { return }
+
+        gridelWindow = UIWindow(frame: window.frame)
+        gridelWindow?.makeKeyAndVisible()
 
         trigger.subscribe {
             if isGridActive {
                 removeGrid()
             } else {
-                window?.rootViewController?.present(SettingsViewController(), animated: true)
+                gridelWindow.rootViewController?.present(SettingsViewController(), animated: true)
             }
         }
     }
