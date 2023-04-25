@@ -25,17 +25,22 @@ public struct Gridel {
 
     public static func configure(with activationAction: ActivationAction) {
         self.trigger = activationAction.mapToTrigger
-        guard let window else { return }
+//        guard let window else { return }
 
-        gridelWindow = UIWindow(frame: window.frame)
+//        gridelWindow = UIWindow(frame: window.frame)
+
+        gridelWindow = UIWindow(frame: UIScreen.main.bounds)
+        gridelWindow?.backgroundColor = UIColor.red
+        gridelWindow?.windowLevel = UIWindow.Level.alert + 1
+        gridelWindow?.rootViewController = UIViewController()
         gridelWindow?.makeKeyAndVisible()
 
         trigger.subscribe {
             if isGridActive {
                 removeGrid()
             } else {
-                gridelWindow?.rootViewController = SettingsViewController()
-//                gridelWindow?.rootViewController?.present(SettingsViewController(), animated: true)
+//                gridelWindow?.rootViewController = SettingsViewController()
+                gridelWindow?.rootViewController?.present(SettingsViewController(), animated: true)
             }
         }
     }
