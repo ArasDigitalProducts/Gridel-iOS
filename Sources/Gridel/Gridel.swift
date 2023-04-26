@@ -29,16 +29,19 @@ public struct Gridel {
 
         gridelWindow = UIWindow(windowScene: scene)
         gridelWindow?.windowLevel = UIWindow.Level.alert + 1
-        gridelWindow?.backgroundColor = .clear
+//        gridelWindow?.backgroundColor = .clear
         gridelWindow?.isHidden = false
         gridelWindow?.isUserInteractionEnabled = false
+        let rootView = UIViewController()
+        rootView.view.backgroundColor = .clear
+        gridelWindow?.rootViewController = UIViewController()
 
         trigger.subscribe {
             if isGridActive {
                 removeGrid()
             } else {
-                // TODO: handle from any topmost viewcontroller
-                window?.rootViewController?.present(SettingsViewController(), animated: true)
+                gridelWindow?.isUserInteractionEnabled = true
+                gridelWindow?.rootViewController?.present(SettingsViewController(), animated: true)
             }
         }
     }
