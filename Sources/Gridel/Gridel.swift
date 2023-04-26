@@ -12,7 +12,8 @@ public struct Gridel {
 
     public static var gridelWindow: UIWindow?
 
-    static var gridView = GridView()
+    static var gridViewRows = GridViewRows()
+    static var gridViewColumns = GridViewColumns()
 
 //    static var configStyle: ConfigStyle?
 
@@ -47,21 +48,49 @@ public struct Gridel {
     }
 
     static func applyGrid(with configStyle: ConfigStyle) {
-        guard let gridelWindow else { return }
-
-        gridView = GridView()
-        gridView.frame = gridelWindow.bounds
-        gridView.setup(with: configStyle)
-
-        gridView.isUserInteractionEnabled = false
-        gridelWindow.addSubview(gridView)
+        switch configStyle {
+        case .simple(let configuration):
+            applySimpleGrid(with: configuration)
+        case .verbose(let configuration):
+            applyVerboseGrid(with: configuration)
+        }
 
         print("applied \(configStyle)")
         isGridActive = true
     }
 
+    static func applySimpleGrid(with config: SimpleConfiguration) {
+        guard let gridelWindow else { return }
+
+        gridViewRows = GridViewRows()
+        gridViewRows.frame = gridelWindow.bounds
+        gridViewRows.setup(with: config)
+
+        gridViewRows.isUserInteractionEnabled = false
+        gridelWindow.addSubview(gridViewRows)
+    }
+
+    static func applyVerboseGrid(with config: VerboseConfiguration) {
+        guard let gridelWindow else { return }
+
+        gridViewRows = GridViewRows()
+        gridViewRows.frame = gridelWindow.bounds
+        gridViewRows.setup(with: config.toSimpleConfig)
+        gridViewRows.isUserInteractionEnabled = false
+
+        gridViewColumns = GridViewColumns()
+        gridViewColumns.frame = gridelWindow.bounds
+        gridViewColumns.setup(with: config)
+        gridViewColumns.isUserInteractionEnabled = false
+
+        gridelWindow.addSubview(gridViewRows)
+        gridelWindow.addSubview(gridViewColumns)
+
+    }
+
     static func removeGrid() {
-        gridView.removeFromSuperview()
+        gridViewRows.removeFromSuperview()
+        gridViewColumns.removeFromSuperview()
         print("removed grid")
         isGridActive = false
     }
@@ -102,4 +131,8 @@ public struct VerboseConfiguration {
     let gutterSize: Int // razmak izmedju stupaca
 
     let rowHeight: Int
+
+    var toSimpleConfig: SimpleConfiguration{
+        return SimpleConfiguration(height: rowHeight, opacity: opacity, colorPrimary: colorPrimary, colorSpacing: colorSpacing)
+    }
 }
