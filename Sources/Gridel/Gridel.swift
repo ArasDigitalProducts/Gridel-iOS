@@ -102,5 +102,4 @@ public struct VerboseConfiguration {
     let gutterSize: Int // razmak izmedju stupaca
 
     let rowHeight: Int
-    let rowSpacing: Int
 }

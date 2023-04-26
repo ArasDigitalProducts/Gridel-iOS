@@ -32,8 +32,6 @@ class SettingsViewController: UIViewController {
     let gutterSizeTextField = UITextField()
     let rowHeightLabel = UILabel()
     let rowHeightTextField = UITextField()
-    let rowSpacingLabel = UILabel()
-    let rowSpacingTextField = UITextField()
 
     let opacityLabel = UILabel()
     let opacitySlider = UISlider()
@@ -74,10 +72,6 @@ class SettingsViewController: UIViewController {
         rowHeightLabel.text = "Row height"
         rowHeightTextField.keyboardType = .numberPad
         rowHeightTextField.borderStyle = .bezel
-
-        rowSpacingLabel.text = "Row spacing"
-        rowSpacingTextField.keyboardType = .numberPad
-        rowSpacingTextField.borderStyle = .bezel
 
         opacityLabel.text = "Opacity"
         opacitySlider.maximumValue = 1
@@ -155,25 +149,10 @@ class SettingsViewController: UIViewController {
             make.trailing.equalToSuperview().offset(-8)
         }
 
-        //rowSpacing
-        containerView.addSubview(rowSpacingLabel)
-        containerView.addSubview(rowSpacingTextField)
-
-        rowSpacingLabel.snp.makeConstraints { make in
-            make.top.equalTo(rowHeightLabel.snp.bottom).offset(16)
-            make.leading.equalToSuperview().offset(8)
-        }
-
-        rowSpacingTextField.snp.makeConstraints { make in
-            make.leading.equalTo(rowSpacingLabel.snp.trailing).offset(16)
-            make.centerY.equalTo(rowSpacingLabel.snp.centerY)
-            make.trailing.equalToSuperview().offset(-8)
-        }
-
         //Slider
         containerView.addSubview(opacityLabel)
         opacityLabel.snp.makeConstraints { make in
-            make.top.equalTo(rowSpacingLabel.snp.bottom).offset(64)
+            make.top.equalTo(rowHeightLabel.snp.bottom).offset(64)
             make.centerX.equalToSuperview()
         }
 
@@ -226,9 +205,9 @@ class SettingsViewController: UIViewController {
                 marginSize: Int(marginSizeTextField.text ?? "0") ?? 0,
                 columnCount: Int(columnCountTextField.text ?? "0") ?? 0,
                 gutterSize: Int(gutterSizeTextField.text ?? "0") ?? 0,
-                rowHeight: Int(rowHeightTextField.text ?? "0") ?? 0,
-                rowSpacing: Int(rowSpacingTextField.text ?? "0") ?? 0)
+                rowHeight: Int(rowHeightTextField.text ?? "0") ?? 0
             )
+
             Gridel.applyGrid(with: configStyle)
         }
 
@@ -246,8 +225,6 @@ class SettingsViewController: UIViewController {
             columnCountTextField.backgroundColor = .gray
             gutterSizeTextField.isEnabled = false
             gutterSizeTextField.backgroundColor = .gray
-            rowSpacingTextField.isEnabled = false
-            rowSpacingTextField.backgroundColor = .gray
         } else {
             optionLabel.text = "Verbose"
 
@@ -257,8 +234,6 @@ class SettingsViewController: UIViewController {
             columnCountTextField.backgroundColor = .systemBackground
             gutterSizeTextField.isEnabled = true
             gutterSizeTextField.backgroundColor = .systemBackground
-            rowSpacingTextField.isEnabled = true
-            rowSpacingTextField.backgroundColor = .systemBackground
         }
     }
 
