@@ -47,6 +47,9 @@ class GridView: UIView {
     }
 
     func drawVerbose(_ rect: CGRect, config: VerboseConfiguration) {
+        // plaese make sure that the pixels dont overlap
+        // and implement rows also
+
         let margin = Float(config.marginSize)
         let columns = config.columnCount
         let gutter = Float(config.gutterSize)
@@ -64,10 +67,7 @@ class GridView: UIView {
 
         let columnWidth = (bounds.width - 2 * CGFloat(margin) - CGFloat(columns - 1) * CGFloat(gutter)) / CGFloat(columns)
 
-//        var columnWidth = ( Float(bounds.width) - 2 * margin - (columns - 1) * gutter ) \ columns
-
         var xStart = CGFloat(margin)
-//        var xEnd = bounds.width - CGFloat(margin)
 
         for _ in 1...(columns - 1) {
             let columnRect = CGRect(x: xStart, y: 0, width: columnWidth, height: bounds.height)
