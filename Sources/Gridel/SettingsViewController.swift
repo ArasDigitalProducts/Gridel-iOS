@@ -206,6 +206,7 @@ class SettingsViewController: UIViewController {
                 columnCount: Int(columnCountTextField.text ?? "0") ?? 0,
                 gutterSize: Int(gutterSizeTextField.text ?? "0") ?? 0,
                 rowHeight: Int(rowHeightTextField.text ?? "0") ?? 0
+                )
             )
 
             Gridel.applyGrid(with: configStyle)
