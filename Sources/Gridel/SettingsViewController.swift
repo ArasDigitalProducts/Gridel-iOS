@@ -9,13 +9,6 @@ import UIKit
 import SnapKit
 
 class SettingsViewController: UIViewController {
-
-//    var marginSize: Int = 0
-//    var columnCount: Int = 0
-//    var gutterSize: Int = 0
-//    var rowHeight: Int = 0
-//    var rowSpacing: Int = 0
-//    var opacity: Double = 1
     var colorPrimary: UIColor = .cyan
     var colorSecondary: UIColor = .magenta
     var colorSpacing: UIColor = .white
