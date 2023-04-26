@@ -49,6 +49,10 @@ class SettingsViewController: UIViewController {
         renderViews()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        Gridel.gridelWindow?.isUserInteractionEnabled = false
+    }
+
     private func setupUI() {
         applyButton.setTitle("Apply", for: .normal)
         applyButton.layer.cornerRadius = 20
@@ -228,9 +232,7 @@ class SettingsViewController: UIViewController {
             Gridel.applyGrid(with: configStyle)
         }
 
-        Gridel.gridelWindow?.isUserInteractionEnabled = false
         self.dismiss(animated: true)
-
     }
 
     @objc
