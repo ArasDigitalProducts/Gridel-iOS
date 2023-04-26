@@ -133,6 +133,6 @@ public struct VerboseConfiguration {
     let rowHeight: Int
 
     var toSimpleConfig: SimpleConfiguration{
-        return SimpleConfiguration(height: rowHeight, opacity: opacity, colorPrimary: colorPrimary, colorSpacing: colorSpacing)
+        return SimpleConfiguration(height: rowHeight, opacity: opacity, colorPrimary: colorSecondary, colorSpacing: colorSpacing)
     }
 }
