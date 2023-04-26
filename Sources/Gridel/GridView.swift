@@ -53,11 +53,30 @@ class GridView: UIView {
         let margin = Float(config.marginSize)
         let columns = config.columnCount
         let gutter = Float(config.gutterSize)
+        let height = CGFloat(Float(config.rowHeight))
+
+        guard margin > 0, columns > 0, gutter > 0 else { return }
 
         layer.opacity = config.opacity
 
         let context = UIGraphicsGetCurrentContext()
 
+        //rows
+        if height > 0 {
+            var swapColors = true
+            for y in stride(from: 0, to: bounds.height, by: height) {
+                if swapColors {
+                    context?.setFillColor(config.colorPrimary.cgColor)
+                } else {
+                    context?.setFillColor(config.colorSpacing.cgColor)
+                }
+                swapColors.toggle()
+                let rowRect = CGRect(x: 0, y: CGFloat(y), width: bounds.width, height: height)
+                context?.fill(rowRect)
+            }
+        }
+
+        //columns
         let startMarginRect = CGRect(x: 0, y: 0, width: CGFloat(margin), height: bounds.height)
         context?.setFillColor(config.colorSpacing.cgColor)
         context?.fill(startMarginRect)
