@@ -10,6 +10,8 @@ public struct Gridel {
             return window
         }
 
+    public static var gridelWindow: UIWindow?
+
     static var gridView = GridView()
 
 //    static var configStyle: ConfigStyle?
@@ -23,25 +25,36 @@ public struct Gridel {
 
     public static func configure(with activationAction: ActivationAction) {
         self.trigger = activationAction.mapToTrigger
+        guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+
+        gridelWindow = UIWindow(windowScene: scene)
+        gridelWindow?.windowLevel = UIWindow.Level.alert + 1
+//        gridelWindow?.backgroundColor = .clear
+        gridelWindow?.isHidden = false
+        gridelWindow?.isUserInteractionEnabled = false
+        let rootView = UIViewController()
+        rootView.view.backgroundColor = .clear
+        gridelWindow?.rootViewController = UIViewController()
 
         trigger.subscribe {
             if isGridActive {
                 removeGrid()
             } else {
-                window?.rootViewController?.present(SettingsViewController(), animated: true)
+                gridelWindow?.isUserInteractionEnabled = true
+                gridelWindow?.rootViewController?.present(SettingsViewController(), animated: true)
             }
         }
     }
 
     static func applyGrid(with configStyle: ConfigStyle) {
-        guard let window else { return }
+        guard let gridelWindow else { return }
 
         gridView = GridView()
-        gridView.frame = window.bounds
+        gridView.frame = gridelWindow.bounds
         gridView.setup(with: configStyle)
 
         gridView.isUserInteractionEnabled = false
-        window.addSubview(gridView)
+        gridelWindow.addSubview(gridView)
 
         print("applied \(configStyle)")
         isGridActive = true
