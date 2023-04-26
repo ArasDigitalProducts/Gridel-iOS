@@ -23,7 +23,7 @@ class GridViewColumns: UIView{
         let margin = Float(config.marginSize)
         let columns = config.columnCount
         let gutter = Float(config.gutterSize)
-        let height = CGFloat(Float(config.rowHeight))
+//        let height = CGFloat(Float(config.rowHeight))
 
         guard margin > 0, columns > 0, gutter > 0 else { return }
 
