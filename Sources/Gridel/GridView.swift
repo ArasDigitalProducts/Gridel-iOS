@@ -66,7 +66,7 @@ class GridView: UIView {
             var swapColors = true
             for y in stride(from: 0, to: bounds.height, by: height) {
                 if swapColors {
-                    context?.setFillColor(config.colorPrimary.cgColor)
+                    context?.setFillColor(config.colorSecondary.cgColor)
                 } else {
                     context?.setFillColor(config.colorSpacing.cgColor)
                 }
