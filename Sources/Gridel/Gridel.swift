@@ -10,7 +10,7 @@ public struct Gridel {
             return window
         }
 
-    static var gridelWindow: UIWindow?
+    public static var gridelWindow: UIWindow?
 
     static var gridView = GridView()
 

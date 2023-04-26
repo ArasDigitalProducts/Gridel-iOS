@@ -228,6 +228,9 @@ class SettingsViewController: UIViewController {
             Gridel.applyGrid(with: configStyle)
         }
 
+        Gridel.gridelWindow?.isUserInteractionEnabled = false
+        self.dismiss(animated: true)
+
     }
 
     @objc
