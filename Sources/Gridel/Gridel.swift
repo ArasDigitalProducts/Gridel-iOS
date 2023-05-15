@@ -35,7 +35,7 @@ public struct Gridel {
         gridelWindow?.isUserInteractionEnabled = false
         let rootView = UIViewController()
         rootView.view.backgroundColor = .clear
-        gridelWindow?.rootViewController = UIViewController()
+        gridelWindow?.rootViewController = UINavigationController()
 
         trigger.subscribe {
             if isGridActive {
