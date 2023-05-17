@@ -34,20 +34,19 @@ public struct Gridel {
         gridelWindow?.isHidden = false
         gridelWindow?.isUserInteractionEnabled = false
 
-//        let rootView = UIViewController()
-//        rootView.view.backgroundColor = .clear
+        let rootView = UIViewController()
+        rootView.view.backgroundColor = .clear
 
-        let navigationController = UINavigationController()
-        navigationController.isNavigationBarHidden = true
+        let settingsNavigationController = UINavigationController(rootViewController: SettingsViewController())
 
-        gridelWindow?.rootViewController = navigationController
+        gridelWindow?.rootViewController = rootView
 
         trigger.subscribe {
             if isGridActive {
                 removeGrid()
             } else {
                 gridelWindow?.isUserInteractionEnabled = true
-                gridelWindow?.rootViewController?.present(SettingsViewController(), animated: true)
+                gridelWindow?.rootViewController?.present(settingsNavigationController, animated: true)
             }
         }
     }

@@ -14,7 +14,6 @@ class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         view.backgroundColor = .white
-        navigationController?.isNavigationBarHidden = false
         setupHideKeyboardOnTap()
 
         setupUI()
@@ -23,7 +22,6 @@ class SettingsViewController: UIViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         Gridel.gridelWindow?.isUserInteractionEnabled = false
-        navigationController?.isNavigationBarHidden = true
     }
 
     private func setupUI() {
