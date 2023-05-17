@@ -29,10 +29,10 @@ class SettingsViewController: UIViewController {
         title = "Gridel"
 
         navigationItem.leftBarButtonItem = cancelButton
-        cancelButton.tintColor = .primary1
+        cancelButton.tintColor = .p300
 
         navigationItem.rightBarButtonItem = saveButton
-        saveButton.tintColor = .primary1
+        saveButton.tintColor = .p300
     }
 
     private func renderViews() {
