@@ -40,7 +40,5 @@ extension UIColor {
     static var g500: UIColor {
         return UIColor(named: "G500") ?? .red
     }
-    
-
 
 }
