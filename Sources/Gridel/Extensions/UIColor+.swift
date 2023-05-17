@@ -30,7 +30,7 @@ extension UIColor {
     }
 
     static var p300: UIColor {
-        return UIColor(named: "P300") ?? .red
+        return UIColor(named: "P300", in: Bundle.module, compatibleWith: nil) ?? .red
     }
 
     static var g400: UIColor {
