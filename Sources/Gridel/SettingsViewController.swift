@@ -27,8 +27,9 @@ class SettingsViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .blackBackground
 
-        title = "Gridel"
-        navigationController?.navigationBar.tintColor = .white
+//        title = "Gridel"
+        navigationItem.title = "Gridel"
+        navigationItem.titleView?.tintColor = .white
 
         cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(leftButtonAction))
         saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(rightButtonAction))
