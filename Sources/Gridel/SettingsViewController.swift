@@ -9,8 +9,8 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
-    let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: SettingsViewController.self, action: #selector(leftButtonAction))
-    let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: SettingsViewController.self, action: #selector(rightButtonAction))
+    var cancelButton: UIBarButtonItem!
+    var saveButton: UIBarButtonItem!
 
     override func viewDidLoad() {
         view.backgroundColor = .white
@@ -25,8 +25,10 @@ class SettingsViewController: UIViewController {
     }
 
     private func setupUI() {
-
         title = "Gridel"
+
+        cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(leftButtonAction))
+        saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(rightButtonAction))
 
         navigationItem.leftBarButtonItem = cancelButton
         cancelButton.tintColor = .p300
