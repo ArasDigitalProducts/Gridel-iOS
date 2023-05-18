@@ -29,7 +29,8 @@ class SettingsViewController: UIViewController {
 
 //        title = "Gridel"
         navigationItem.title = "Gridel"
-        navigationItem.titleView?.tintColor = .white
+//        navigationItem.titleView?.tintColor = .white
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
 
         cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(leftButtonAction))
         saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(rightButtonAction))
