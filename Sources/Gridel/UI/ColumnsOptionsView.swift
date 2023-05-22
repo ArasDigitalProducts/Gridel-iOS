@@ -14,6 +14,10 @@ class ColumnsOptionsView: UIView {
     var showColumnsLabel = UILabel()
     var showColumnsSwitch = UISwitch()
     var gridDemoView = GridDemoView()
+    var countBackgroundView = RoundedContainerView()
+    var countTextField = UITextField()
+    var arrowImage = UIImageView(image: UIImage(named: "down-arrow", in: Bundle.module, compatibleWith: nil))
+//    var countRightIcon = UIButton()
 
     init() {
         super.init(frame: .zero)
@@ -37,6 +41,12 @@ class ColumnsOptionsView: UIView {
         showColumnsSwitch.onTintColor = .p300
         //grid demo view
         gridDemoView.backgroundColor = .p300
+        //count
+        countTextField.backgroundColor = .g500
+        countTextField.placeholder = "count"
+        countTextField.keyboardType = .numberPad
+        countTextField.rightView = arrowImage
+        countTextField.textColor = .white
 
     }
 
@@ -82,6 +92,21 @@ class ColumnsOptionsView: UIView {
             gridDemoView.topAnchor.constraint(equalTo: showColumnsView.bottomAnchor, constant: 32),
             gridDemoView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             gridDemoView.heightAnchor.constraint(equalToConstant: 136)
+        ])
+        // count
+        containerView.addSubview(countBackgroundView)
+        countBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            countBackgroundView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            countBackgroundView.topAnchor.constraint(equalTo: gridDemoView.bottomAnchor, constant: 40),
+            countBackgroundView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
+            countBackgroundView.heightAnchor.constraint(equalToConstant: 56)
+        ])
+        countBackgroundView.addSubview(countTextField)
+        countTextField.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            countTextField.leadingAnchor.constraint(equalTo: countBackgroundView.leadingAnchor, constant: 16),
+            countTextField.trailingAnchor.constraint(equalTo: countBackgroundView.trailingAnchor, constant: -16)
         ])
     }
 }
