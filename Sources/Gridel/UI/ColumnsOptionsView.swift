@@ -15,6 +15,7 @@ class ColumnsOptionsView: UIView {
     var showColumnsSwitch = UISwitch()
     var gridDemoView = GridDemoView()
     var countBackgroundView = RoundedContainerView()
+    var countLabel = UILabel()
     var countTextField = UITextField()
     var chevronImage = UIImageView(image: UIImage(systemName: "chevron.down"))
 //    var countRightIcon = UIButton()
@@ -43,8 +44,8 @@ class ColumnsOptionsView: UIView {
         gridDemoView.backgroundColor = .p300
         //count
         countTextField.backgroundColor = .g500
-        countTextField.placeholder = "count"
-        countTextField.attributedPlaceholder = NSAttributedString(string: "count", attributes: [ NSAttributedString.Key.foregroundColor: UIColor.g75 ])
+        countLabel.text = "Count"
+        countLabel.textColor = .g75
         countTextField.keyboardType = .numberPad
         countTextField.textColor = .white
         countTextField.rightView = chevronImage
@@ -104,12 +105,22 @@ class ColumnsOptionsView: UIView {
             countBackgroundView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
             countBackgroundView.heightAnchor.constraint(equalToConstant: 56)
         ])
+
+        countBackgroundView.addSubview(countLabel)
+        countLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            countLabel.leadingAnchor.constraint(equalTo: countBackgroundView.leadingAnchor, constant: 16),
+            countLabel.topAnchor.constraint(equalTo: countBackgroundView.topAnchor, constant: 8),
+            countLabel.heightAnchor.constraint(equalToConstant: 16)
+        ])
+
         countBackgroundView.addSubview(countTextField)
         countTextField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             countTextField.leadingAnchor.constraint(equalTo: countBackgroundView.leadingAnchor, constant: 16),
             countTextField.trailingAnchor.constraint(equalTo: countBackgroundView.trailingAnchor, constant: -16),
-            countTextField.centerYAnchor.constraint(equalTo: countBackgroundView.centerYAnchor)
+            countTextField.topAnchor.constraint(equalTo: countLabel.bottomAnchor),
+            countTextField.bottomAnchor.constraint(equalTo: countBackgroundView.bottomAnchor, constant: -8)
         ])
         //chevron image
         chevronImage.frame = CGRect(x: countTextField.frame.size.width - 40 , y: countBackgroundView.frame.height / 2, width: 16, height: 16)
