@@ -25,11 +25,14 @@ class ColumnsOptionsView: UIView {
     }
 
     private func setupViews() {
+        layer.cornerRadius = 12
         containerView.backgroundColor = .blackBackground
         // show columns view
         showColumnsView.backgroundColor = .g500
         showColumnsLabel.text = "Show Columns"
         showColumnsSwitch.isOn = true
+        showColumnsSwitch.tintColor = .g75
+        showColumnsSwitch.onTintColor = .p300
 
     }
 
@@ -64,9 +67,7 @@ class ColumnsOptionsView: UIView {
         showColumnsView.addSubview(showColumnsSwitch)
         showColumnsSwitch.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-//            showColumnsSwitch.topAnchor.constraint(equalTo: showColumnsView.topAnchor, constant: 12),
             showColumnsSwitch.trailingAnchor.constraint(equalTo: showColumnsView.trailingAnchor, constant: -16),
-//            showColumnsSwitch.bottomAnchor.constraint(equalTo: showColumnsView.bottomAnchor, constant: -12)
             showColumnsSwitch.centerYAnchor.constraint(equalTo: showColumnsView.centerYAnchor)
         ])
     }

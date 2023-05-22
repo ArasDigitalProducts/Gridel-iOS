@@ -33,6 +33,10 @@ extension UIColor {
         return UIColor(named: "P300", in: Bundle.module, compatibleWith: nil) ?? .red
     }
 
+    static var g75: UIColor {
+        return UIColor(named: "G75", in: Bundle.module, compatibleWith: nil) ?? .red
+    }
+
     static var g400: UIColor {
         return UIColor(named: "G400", in: Bundle.module, compatibleWith: nil) ?? .red
     }
