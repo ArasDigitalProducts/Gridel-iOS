@@ -106,7 +106,8 @@ class ColumnsOptionsView: UIView {
         countTextField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             countTextField.leadingAnchor.constraint(equalTo: countBackgroundView.leadingAnchor, constant: 16),
-            countTextField.trailingAnchor.constraint(equalTo: countBackgroundView.trailingAnchor, constant: -16)
+            countTextField.trailingAnchor.constraint(equalTo: countBackgroundView.trailingAnchor, constant: -16),
+            countTextField.centerYAnchor.constraint(equalTo: countBackgroundView.centerYAnchor)
         ])
     }
 }
