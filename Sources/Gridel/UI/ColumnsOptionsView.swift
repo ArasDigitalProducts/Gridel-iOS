@@ -16,7 +16,7 @@ class ColumnsOptionsView: UIView {
     var gridDemoView = GridDemoView()
     var countBackgroundView = RoundedContainerView()
     var countTextField = UITextField()
-    var arrowImage = UIImageView(image: UIImage(named: "down-arrow", in: Bundle.module, compatibleWith: nil))
+    var chevronImage = UIImageView(image: UIImage(systemName: "chevron.down"))
 //    var countRightIcon = UIButton()
 
     init() {
@@ -45,7 +45,7 @@ class ColumnsOptionsView: UIView {
         countTextField.backgroundColor = .g500
         countTextField.placeholder = "count"
         countTextField.keyboardType = .numberPad
-        countTextField.rightView = arrowImage
+        countTextField.rightView = chevronImage
         countTextField.textColor = .white
 
     }
