@@ -36,7 +36,7 @@ class ColumnsOptionsView: UIView {
         showColumnsSwitch.tintColor = .g75
         showColumnsSwitch.onTintColor = .p300
         //grid demo view
-        gridDemoView.backgroundColor = .p50
+        gridDemoView.backgroundColor = .p300
 
     }
 
