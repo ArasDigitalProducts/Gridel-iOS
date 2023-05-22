@@ -38,7 +38,8 @@ class SettingsViewController: UIViewController {
     }
 
     private func setupUI() {
-        view.backgroundColor = .blackBackground
+//        view.backgroundColor = .blackBackground
+        containerView.backgroundColor = .blackBackground
 
         navigationItem.title = "Gridel"
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
@@ -57,11 +58,13 @@ class SettingsViewController: UIViewController {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            containerView.topAnchor.constraint(equalTo: view.topAnchor),
+            containerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 52),
             containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        containerView.backgroundColor = .orange
+
+
+
 
     }
 
