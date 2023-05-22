@@ -10,9 +10,14 @@ import UIKit
 class ColumnsOptionsView: UIView {
     var containerView = UIView()
 
+    var showColumnsView = UIView()
+    var showColumnsLabel = UILabel()
+    var showColumnsSwitch = UISwitch()
+
     init() {
         super.init(frame: .zero)
         setupViews()
+        renderViews()
     }
 
     required init?(coder: NSCoder) {
@@ -20,6 +25,48 @@ class ColumnsOptionsView: UIView {
     }
 
     private func setupViews() {
-        backgroundColor = .orange
+        containerView.backgroundColor = .blackBackground
+        // show columns view
+        showColumnsView.backgroundColor = .g500
+        showColumnsLabel.text = "Show Columns"
+        showColumnsSwitch.isOn = true
+
+    }
+
+    func renderViews() {
+        // containerView
+        addSubview(containerView)
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            containerView.topAnchor.constraint(equalTo: topAnchor),
+            containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            containerView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+        //show columns view
+        containerView.addSubview(showColumnsView)
+        showColumnsView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            showColumnsView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            showColumnsView.topAnchor.constraint(equalTo: containerView.topAnchor),
+            showColumnsView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
+            showColumnsView.heightAnchor.constraint(equalToConstant: 48)
+        ])
+        //show columns label
+        showColumnsView.addSubview(showColumnsLabel)
+        showColumnsLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            showColumnsLabel.leadingAnchor.constraint(equalTo: showColumnsView.leadingAnchor, constant: 16),
+            showColumnsLabel.topAnchor.constraint(equalTo: showColumnsView.topAnchor, constant: 12),
+            showColumnsLabel.bottomAnchor.constraint(equalTo: showColumnsView.bottomAnchor, constant: -12),
+        ])
+        //show columns switch
+        showColumnsView.addSubview(showColumnsSwitch)
+        showColumnsSwitch.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            showColumnsSwitch.topAnchor.constraint(equalTo: showColumnsView.topAnchor, constant: 12),
+            showColumnsSwitch.trailingAnchor.constraint(equalTo: showColumnsView.trailingAnchor, constant: -16),
+            showColumnsSwitch.bottomAnchor.constraint(equalTo: showColumnsView.bottomAnchor, constant: -12)
+        ])
     }
 }

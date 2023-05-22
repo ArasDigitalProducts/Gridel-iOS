@@ -33,9 +33,7 @@ class SettingsViewController: UIViewController {
         cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(leftButtonAction))
         saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(rightButtonAction))
         optionSegmentView = UISegmentedControl(items: ["Columns", "Rows"])
-
         containerView = UIView()
-
         columnsOptionsView = ColumnsOptionsView()
 
     }
