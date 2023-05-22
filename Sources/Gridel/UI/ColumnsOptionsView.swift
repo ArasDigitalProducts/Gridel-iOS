@@ -45,6 +45,7 @@ class ColumnsOptionsView: UIView {
         countTextField.backgroundColor = .g500
         countTextField.placeholder = "count"
         countTextField.keyboardType = .numberPad
+        chevronImage.tintColor = .white
         countTextField.rightView = chevronImage
         countTextField.textColor = .white
 
