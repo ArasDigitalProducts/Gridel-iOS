@@ -53,7 +53,8 @@ class SettingsViewController: UIViewController {
         optionSegmentView.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
         optionSegmentView.backgroundColor = .g400
         optionSegmentView.selectedSegmentTintColor = .p300
-        optionSegmentView.tintColor = .white
+        
+        optionSegmentView.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
         optionSegmentView.selectedSegmentIndex = 0
     }
 
