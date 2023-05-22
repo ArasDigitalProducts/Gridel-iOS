@@ -13,7 +13,7 @@ class SettingsViewController: UIViewController {
 
     var cancelButton: UIBarButtonItem!
     var saveButton: UIBarButtonItem!
-    var optionSegmentedControl: UISegmentedControl!
+    var optionSegmentView: UISegmentedControl!
 
     override func viewDidLoad() {
         view.backgroundColor = .white
@@ -31,14 +31,14 @@ class SettingsViewController: UIViewController {
     private func initViews() {
         cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(leftButtonAction))
         saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(rightButtonAction))
-        optionSegmentedControl = UISegmentedControl(items: ["Columns", "Rows"])
+        optionSegmentView = UISegmentedControl(items: ["Columns", "Rows"])
 
         containerView = UIView()
 
     }
 
     private func setupUI() {
-//        view.backgroundColor = .blackBackground
+        view.backgroundColor = .blackBackground
         containerView.backgroundColor = .blackBackground
 
         navigationItem.title = "Gridel"
@@ -50,7 +50,7 @@ class SettingsViewController: UIViewController {
         navigationItem.rightBarButtonItem = saveButton
         saveButton.tintColor = .p300
 
-        optionSegmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
+        optionSegmentView.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
     }
 
     private func renderViews() {
@@ -63,7 +63,14 @@ class SettingsViewController: UIViewController {
             containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
 
-
+        containerView.addSubview(optionSegmentView)
+        optionSegmentView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            optionSegmentView.heightAnchor.constraint(equalToConstant: 32),
+            optionSegmentView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            optionSegmentView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 24),
+            optionSegmentView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 20)
+        ])
 
 
     }
