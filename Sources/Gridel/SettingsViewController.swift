@@ -51,6 +51,10 @@ class SettingsViewController: UIViewController {
         saveButton.tintColor = .p300
 
         optionSegmentView.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
+        optionSegmentView.backgroundColor = .g400
+        optionSegmentView.selectedSegmentTintColor = .p300
+        optionSegmentView.tintColor = .white
+        optionSegmentView.selectedSegmentIndex = 0
     }
 
     private func renderViews() {
@@ -69,7 +73,7 @@ class SettingsViewController: UIViewController {
             optionSegmentView.heightAnchor.constraint(equalToConstant: 32),
             optionSegmentView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
             optionSegmentView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 24),
-            optionSegmentView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 20)
+            optionSegmentView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20)
         ])
 
 
