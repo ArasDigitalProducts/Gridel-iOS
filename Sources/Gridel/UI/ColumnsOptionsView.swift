@@ -28,6 +28,7 @@ class ColumnsOptionsView: UIView {
         containerView.backgroundColor = .blackBackground
         // show columns view
         showColumnsView.backgroundColor = .g500
+        showColumnsView.layer.cornerRadius = 12
         showColumnsLabel.text = "Show Columns"
         showColumnsLabel.textColor = .white
         showColumnsSwitch.isOn = true

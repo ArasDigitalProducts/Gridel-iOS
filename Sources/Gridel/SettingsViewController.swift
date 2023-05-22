@@ -56,8 +56,6 @@ class SettingsViewController: UIViewController {
         optionSegmentView.selectedSegmentTintColor = .p300
         optionSegmentView.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
         optionSegmentView.selectedSegmentIndex = 0
-
-        columnsOptionsView.layer.cornerRadius = 12
     }
 
     private func renderViews() {
