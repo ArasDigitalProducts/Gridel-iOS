@@ -13,7 +13,7 @@ class ColumnsOptionsView: UIView {
     var showColumnsView = UIView()
     var showColumnsLabel = UILabel()
     var showColumnsSwitch = UISwitch()
-    var gridDemoView = GridDemoView()
+    var gridDemoView = UIView()
 
     init() {
         super.init(frame: .zero)
