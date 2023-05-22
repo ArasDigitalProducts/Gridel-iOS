@@ -67,7 +67,7 @@ class ColumnsOptionsView: UIView {
 //            showColumnsSwitch.topAnchor.constraint(equalTo: showColumnsView.topAnchor, constant: 12),
             showColumnsSwitch.trailingAnchor.constraint(equalTo: showColumnsView.trailingAnchor, constant: -16),
 //            showColumnsSwitch.bottomAnchor.constraint(equalTo: showColumnsView.bottomAnchor, constant: -12)
-            showColumnsSwitch.centerYAnchor.constraint(equalTo: showColumnsSwitch.centerYAnchor)
+            showColumnsSwitch.centerYAnchor.constraint(equalTo: showColumnsView.centerYAnchor)
         ])
     }
 }
