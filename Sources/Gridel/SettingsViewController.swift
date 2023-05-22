@@ -14,6 +14,7 @@ class SettingsViewController: UIViewController {
     var cancelButton: UIBarButtonItem!
     var saveButton: UIBarButtonItem!
     var optionSegmentView: UISegmentedControl!
+    var columnsOptionsView: ColumnsOptionsView!
 
     override func viewDidLoad() {
         view.backgroundColor = .white
@@ -35,6 +36,8 @@ class SettingsViewController: UIViewController {
 
         containerView = UIView()
 
+        columnsOptionsView = ColumnsOptionsView()
+
     }
 
     private func setupUI() {
@@ -53,7 +56,7 @@ class SettingsViewController: UIViewController {
         optionSegmentView.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
         optionSegmentView.backgroundColor = .g400
         optionSegmentView.selectedSegmentTintColor = .p300
-        
+
         optionSegmentView.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
         optionSegmentView.selectedSegmentIndex = 0
     }
@@ -75,6 +78,15 @@ class SettingsViewController: UIViewController {
             optionSegmentView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
             optionSegmentView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 24),
             optionSegmentView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20)
+        ])
+
+        containerView.addSubview(columnsOptionsView)
+
+        NSLayoutConstraint.activate([
+            columnsOptionsView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            columnsOptionsView.topAnchor.constraint(equalTo: optionSegmentView.bottomAnchor, constant: 32),
+            columnsOptionsView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            columnsOptionsView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
         ])
 
 
