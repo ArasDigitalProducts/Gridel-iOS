@@ -81,7 +81,7 @@ class ColumnsOptionsView: UIView {
             gridDemoView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             gridDemoView.topAnchor.constraint(equalTo: showColumnsView.bottomAnchor, constant: 32),
             gridDemoView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            gridDemoView.widthAnchor.constraint(equalToConstant: 136)
+            gridDemoView.heightAnchor.constraint(equalToConstant: 136)
         ])
     }
 }
