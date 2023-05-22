@@ -13,6 +13,7 @@ class ColumnsOptionsView: UIView {
     var showColumnsView = UIView()
     var showColumnsLabel = UILabel()
     var showColumnsSwitch = UISwitch()
+    var gridDemoView = GridDemoView()
 
     init() {
         super.init(frame: .zero)
@@ -34,6 +35,8 @@ class ColumnsOptionsView: UIView {
         showColumnsSwitch.isOn = true
         showColumnsSwitch.tintColor = .g75
         showColumnsSwitch.onTintColor = .p300
+        //grid demo view
+        gridDemoView.backgroundColor = .p50
 
     }
 
@@ -70,6 +73,13 @@ class ColumnsOptionsView: UIView {
         NSLayoutConstraint.activate([
             showColumnsSwitch.trailingAnchor.constraint(equalTo: showColumnsView.trailingAnchor, constant: -16),
             showColumnsSwitch.centerYAnchor.constraint(equalTo: showColumnsView.centerYAnchor)
+        ])
+        // grid demo view
+        containerView.addSubview(gridDemoView)
+        NSLayoutConstraint.activate([
+            gridDemoView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            gridDemoView.topAnchor.constraint(equalTo: showColumnsView.bottomAnchor, constant: 32),
+            gridDemoView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
         ])
     }
 }
