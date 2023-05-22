@@ -112,6 +112,6 @@ class ColumnsOptionsView: UIView {
             countTextField.centerYAnchor.constraint(equalTo: countBackgroundView.centerYAnchor)
         ])
         //chevron image
-        chevronImage.frame = CGRect(x: countTextField.frame.size.width - 40 , y: countTextField.frame.height / 2, width: 16, height: 16)
+        chevronImage.frame = CGRect(x: countTextField.frame.size.width - 40 , y: countBackgroundView.frame.height / 2, width: 16, height: 16)
     }
 }
