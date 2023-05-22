@@ -44,14 +44,12 @@ class ColumnsOptionsView: UIView {
         //count
         countTextField.backgroundColor = .g500
         countTextField.placeholder = "count"
+        countTextField.attributedPlaceholder = NSAttributedString(string: "count", attributes: [ NSAttributedString.Key.foregroundColor: UIColor.g75 ])
         countTextField.keyboardType = .numberPad
         countTextField.textColor = .white
         countTextField.rightView = chevronImage
         chevronImage.tintColor = .white
         countTextField.rightViewMode = .always
-        chevronImage.frame = CGRect(x: countTextField.frame.size.width - 40 , y: countTextField.frame.height / 2, width: 16, height: 16)
-//        countTextField.rightViewRect(forBounds:)
-
     }
 
     func renderViews() {
@@ -113,5 +111,7 @@ class ColumnsOptionsView: UIView {
             countTextField.trailingAnchor.constraint(equalTo: countBackgroundView.trailingAnchor, constant: -16),
             countTextField.centerYAnchor.constraint(equalTo: countBackgroundView.centerYAnchor)
         ])
+        //chevron image
+        chevronImage.frame = CGRect(x: countTextField.frame.size.width - 40 , y: countTextField.frame.height / 2, width: 16, height: 16)
     }
 }
