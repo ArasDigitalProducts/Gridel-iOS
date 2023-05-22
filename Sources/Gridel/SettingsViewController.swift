@@ -56,7 +56,6 @@ class SettingsViewController: UIViewController {
         optionSegmentView.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
         optionSegmentView.backgroundColor = .g400
         optionSegmentView.selectedSegmentTintColor = .p300
-
         optionSegmentView.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
         optionSegmentView.selectedSegmentIndex = 0
     }
@@ -81,7 +80,7 @@ class SettingsViewController: UIViewController {
         ])
 
         containerView.addSubview(columnsOptionsView)
-
+        columnsOptionsView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             columnsOptionsView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             columnsOptionsView.topAnchor.constraint(equalTo: optionSegmentView.bottomAnchor, constant: 32),
