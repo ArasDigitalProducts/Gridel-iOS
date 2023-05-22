@@ -27,9 +27,7 @@ class SettingsViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .blackBackground
 
-//        title = "Gridel"
         navigationItem.title = "Gridel"
-//        navigationItem.titleView?.tintColor = .white
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
 
         cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(leftButtonAction))
@@ -47,11 +45,11 @@ class SettingsViewController: UIViewController {
     }
 
     @objc func leftButtonAction() {
-        // Code to handle left button tap
+
     }
 
     @objc func rightButtonAction() {
-        // Code to handle right button tap
+        
     }
 
 }
