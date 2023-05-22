@@ -25,11 +25,11 @@ class ColumnsOptionsView: UIView {
     }
 
     private func setupViews() {
-        layer.cornerRadius = 12
         containerView.backgroundColor = .blackBackground
         // show columns view
         showColumnsView.backgroundColor = .g500
         showColumnsLabel.text = "Show Columns"
+        showColumnsLabel.tintColor = .white
         showColumnsSwitch.isOn = true
         showColumnsSwitch.tintColor = .g75
         showColumnsSwitch.onTintColor = .p300
