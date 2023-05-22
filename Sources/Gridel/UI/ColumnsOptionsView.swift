@@ -13,7 +13,7 @@ class ColumnsOptionsView: UIView {
     var showColumnsView = UIView()
     var showColumnsLabel = UILabel()
     var showColumnsSwitch = UISwitch()
-    var gridDemoView = UIView()
+    var gridDemoView = GridDemoView()
 
     init() {
         super.init(frame: .zero)
@@ -76,6 +76,7 @@ class ColumnsOptionsView: UIView {
         ])
         // grid demo view
         containerView.addSubview(gridDemoView)
+        gridDemoView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             gridDemoView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             gridDemoView.topAnchor.constraint(equalTo: showColumnsView.bottomAnchor, constant: 32),
