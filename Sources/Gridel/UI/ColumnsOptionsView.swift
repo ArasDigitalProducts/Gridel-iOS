@@ -45,9 +45,12 @@ class ColumnsOptionsView: UIView {
         countTextField.backgroundColor = .g500
         countTextField.placeholder = "count"
         countTextField.keyboardType = .numberPad
-        chevronImage.tintColor = .white
-        countTextField.rightView = chevronImage
         countTextField.textColor = .white
+        countTextField.rightView = chevronImage
+        chevronImage.tintColor = .white
+        countTextField.rightViewMode = .always
+        chevronImage.frame = CGRect(x: countTextField.frame.size.width - 40 , y: countTextField.frame.height / 2, width: 16, height: 16)
+//        countTextField.rightViewRect(forBounds:)
 
     }
 
