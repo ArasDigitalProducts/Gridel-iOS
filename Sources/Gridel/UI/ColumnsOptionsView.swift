@@ -67,7 +67,8 @@ class ColumnsOptionsView: UIView {
         )
 
         colorLeftView.backgroundColor = .p300
-        colorInputView?.textField.isUserInteractionEnabled = false
+        colorInputView.textField.isUserInteractionEnabled = false
+        colorInputView.textField.leftViewMode = .always
         colorRightLabel.text = "20%"
         colorRightLabel.textColor = .white
 
