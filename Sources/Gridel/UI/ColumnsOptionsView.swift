@@ -145,8 +145,11 @@ class ColumnsOptionsView: UIView {
         NSLayoutConstraint.activate([
             colorInputView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
             colorInputView.topAnchor.constraint(equalTo: marginAndGutterStackView.bottomAnchor, constant: 16),
-            colorInputView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16)
+            colorInputView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
+            colorInputView.leftView!.heightAnchor.constraint(equalToConstant: 16),
+            colorInputView.leftView!.widthAnchor.constraint(equalToConstant: 16)
         ])
+
 
 
 //        containerView.addSubview(marginInputView)
