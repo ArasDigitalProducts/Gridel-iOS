@@ -27,7 +27,7 @@ class ColumnsOptionsView: UIView {
     var colorLeftView = UIView()
     var colorRightLabel = UILabel()
 
-    var colorInputView: GridelInputView?
+    var colorInputView: GridelInputView!
 
     init() {
         super.init(frame: .zero)
@@ -138,7 +138,6 @@ class ColumnsOptionsView: UIView {
             marginAndGutterStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
             marginAndGutterStackView.heightAnchor.constraint(equalToConstant: 56)
         ])
-
 
         containerView.addSubview(colorInputView)
         colorInputView.translatesAutoresizingMaskIntoConstraints = false
