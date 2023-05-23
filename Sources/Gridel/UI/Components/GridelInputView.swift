@@ -35,9 +35,10 @@ class GridelInputView: RoundedContainerView {
 
     private func setupViews() {
         textField.backgroundColor = .g500
+        textField.placeholder = "wadkodakwpo"
         titleLabel.text = title
         titleLabel.textColor = .g75
-        titleLabel.font = .systemFont(ofSize: 6)
+        titleLabel.font = .systemFont(ofSize: 10)
         textField.keyboardType = keyboardType
         textField.textColor = .white
 
