@@ -51,6 +51,7 @@ class ColumnsOptionsView: UIView {
         //margin and gutter
         marginAndGutterStackView.axis = .horizontal
         marginAndGutterStackView.distribution = .fillEqually
+        marginAndGutterStackView.spacing = 16
     }
 
     func renderViews() {
