@@ -37,8 +37,10 @@ class GridelInputView: RoundedContainerView {
         textField.backgroundColor = .g500
         titleLabel.text = title
         titleLabel.textColor = .g75
+        titleLabel.font = .systemFont(ofSize: 6)
         textField.keyboardType = keyboardType
         textField.textColor = .white
+
     }
 
     private func renderViews() {
@@ -65,7 +67,7 @@ class GridelInputView: RoundedContainerView {
             textField.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
 //            textField.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
             textField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
-            textField.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8)
+            textField.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
         ])
         //rightView
 
