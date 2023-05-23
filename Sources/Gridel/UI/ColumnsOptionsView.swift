@@ -62,7 +62,8 @@ class ColumnsOptionsView: UIView {
             title: "Color",
             keyboardType: .asciiCapable,
             leftView: colorLeftView,
-            rightView: colorRightLabel
+            rightView: colorRightLabel,
+            onTap: colorInputTapped
         )
         colorLeftView.backgroundColor = .p300
         colorLeftView.layer.cornerRadius = 2
@@ -144,27 +145,11 @@ class ColumnsOptionsView: UIView {
         NSLayoutConstraint.activate([
             colorInputView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
             colorInputView.topAnchor.constraint(equalTo: marginAndGutterStackView.bottomAnchor, constant: 16),
-            colorInputView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
-//            colorInputView.leftView!.heightAnchor.constraint(equalToConstant: 16),
-//            colorInputView.leftView!.widthAnchor.constraint(equalToConstant: 16)
+            colorInputView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16)
         ])
+    }
 
-
-
-//        containerView.addSubview(marginInputView)
-//        NSLayoutConstraint.activate([
-//            marginInputView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-//            marginInputView.topAnchor.constraint(equalTo: countInputView.bottomAnchor, constant: 16),
-//            marginInputView.heightAnchor.constraint(equalToConstant: 56)
-//        ])
-//
-//        containerView.addSubview(gutterInputView)
-//        NSLayoutConstraint.activate([
-//            gutterInputView.leadingAnchor.constraint(equalTo: marginInputView.trailingAnchor, constant: 16),
-//            gutterInputView.topAnchor.constraint(equalTo: countInputView.bottomAnchor, constant: 16),
-//            gutterInputView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16)
-//        ])
-
-        
+    private func colorInputTapped() {
+        print("color input tapped")
     }
 }

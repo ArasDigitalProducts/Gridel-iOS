@@ -11,15 +11,20 @@ class GridelInputView: RoundedContainerView {
 
     private var title: String?
     private var keyboardType: UIKeyboardType
+    private var onTap: (() -> Void)?
 
     private var containerView = UIView()
-
     var textField = UITextField()
     var titleLabel = UILabel()
     var rightView: UIView
     var leftView: UIView?
 
-    init(title: String? = nil, keyboardType: UIKeyboardType, leftView: UIView? = nil, rightView: UIView = UIView()) {
+    init(title: String? = nil,
+         keyboardType: UIKeyboardType,
+         leftView: UIView? = nil,
+         rightView: UIView = UIView(),
+         onTap: (() -> Void)? = nil
+    ) {
         self.title = title
         self.keyboardType = keyboardType
         self.rightView = rightView
@@ -95,7 +100,13 @@ class GridelInputView: RoundedContainerView {
 
     @objc private func handleTap(_ gesture: UITapGestureRecognizer) {
         if gesture.state == .ended {
-            textField.becomeFirstResponder()
+
+            if let onTap {
+                onTap()
+            } else {
+                textField.becomeFirstResponder()
+            }
+
         }
     }
 
