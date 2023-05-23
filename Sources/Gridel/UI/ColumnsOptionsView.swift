@@ -22,6 +22,7 @@ class ColumnsOptionsView: UIView {
     )
     var marginInputView = GridelInputView(title: "Margins", keyboardType: .numberPad)
     var gutterInputView = GridelInputView(title: "Gutter", keyboardType: .numberPad)
+    var marginAndGutterStackView = UIStackView()
 
     init() {
         super.init(frame: .zero)
@@ -47,6 +48,9 @@ class ColumnsOptionsView: UIView {
         gridDemoView.backgroundColor = .p300
         //count input view
         countInputView.rightView.tintColor = .white
+        //margin and gutter
+        marginAndGutterStackView.axis = .horizontal
+        marginAndGutterStackView.distribution = .fillEqually
     }
 
     func renderViews() {
@@ -104,19 +108,31 @@ class ColumnsOptionsView: UIView {
             countInputView.heightAnchor.constraint(equalToConstant: 56)
         ])
 
-        containerView.addSubview(marginInputView)
+        marginAndGutterStackView.addArrangedSubview(marginInputView)
+        marginAndGutterStackView.addArrangedSubview(gutterInputView)
+        containerView.addSubview(marginAndGutterStackView)
+        marginAndGutterStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            marginInputView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-            marginInputView.topAnchor.constraint(equalTo: countInputView.bottomAnchor, constant: 16),
-            marginInputView.heightAnchor.constraint(equalToConstant: 56)
+            marginAndGutterStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            marginAndGutterStackView.topAnchor.constraint(equalTo: countInputView.bottomAnchor, constant: 16),
+            marginAndGutterStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
+            marginAndGutterStackView.heightAnchor.constraint(equalToConstant: 56)
         ])
 
-        containerView.addSubview(gutterInputView)
-        NSLayoutConstraint.activate([
-            gutterInputView.leadingAnchor.constraint(equalTo: marginInputView.trailingAnchor, constant: 16),
-            gutterInputView.topAnchor.constraint(equalTo: countInputView.bottomAnchor, constant: 16),
-            gutterInputView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16)
-        ])
+
+//        containerView.addSubview(marginInputView)
+//        NSLayoutConstraint.activate([
+//            marginInputView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+//            marginInputView.topAnchor.constraint(equalTo: countInputView.bottomAnchor, constant: 16),
+//            marginInputView.heightAnchor.constraint(equalToConstant: 56)
+//        ])
+//
+//        containerView.addSubview(gutterInputView)
+//        NSLayoutConstraint.activate([
+//            gutterInputView.leadingAnchor.constraint(equalTo: marginInputView.trailingAnchor, constant: 16),
+//            gutterInputView.topAnchor.constraint(equalTo: countInputView.bottomAnchor, constant: 16),
+//            gutterInputView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16)
+//        ])
 
         
     }
