@@ -29,6 +29,7 @@ class GridelInputView: RoundedContainerView {
         self.keyboardType = keyboardType
         self.rightView = rightView
         self.leftView = leftView
+        self.onTap = onTap
 
         super.init()
 
