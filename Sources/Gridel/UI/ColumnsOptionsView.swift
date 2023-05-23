@@ -24,7 +24,7 @@ class ColumnsOptionsView: UIView {
     var gutterInputView = GridelInputView(title: "Gutter", keyboardType: .numberPad)
     var marginAndGutterStackView = UIStackView()
 
-    var colorLeftView = UIView()
+    var colorLeftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
     var colorRightLabel = UILabel()
 
     var colorInputView: GridelInputView!
@@ -58,15 +58,14 @@ class ColumnsOptionsView: UIView {
         marginAndGutterStackView.distribution = .fillEqually
         marginAndGutterStackView.spacing = 16
         //color
-
         colorInputView = GridelInputView(
             title: "Color",
             keyboardType: .asciiCapable,
             leftView: colorLeftView,
             rightView: colorRightLabel
         )
-
         colorLeftView.backgroundColor = .p300
+        colorLeftView.layer.cornerRadius = 2
         colorInputView.textField.isUserInteractionEnabled = false
         colorInputView.textField.leftViewMode = .always
         colorRightLabel.text = "20%"
@@ -146,8 +145,8 @@ class ColumnsOptionsView: UIView {
             colorInputView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
             colorInputView.topAnchor.constraint(equalTo: marginAndGutterStackView.bottomAnchor, constant: 16),
             colorInputView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
-            colorInputView.leftView!.heightAnchor.constraint(equalToConstant: 16),
-            colorInputView.leftView!.widthAnchor.constraint(equalToConstant: 16)
+//            colorInputView.leftView!.heightAnchor.constraint(equalToConstant: 16),
+//            colorInputView.leftView!.widthAnchor.constraint(equalToConstant: 16)
         ])
 
 
