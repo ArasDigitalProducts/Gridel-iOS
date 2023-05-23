@@ -46,7 +46,7 @@ class ColumnsOptionsView: UIView {
         showColumnsSwitch.onTintColor = .p300
         //grid demo view
         gridDemoView.backgroundColor = .p300
-        
+        countInputView.rightView.tintColor = .white
     }
 
     func renderViews() {
