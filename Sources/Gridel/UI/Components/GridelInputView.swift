@@ -17,11 +17,13 @@ class GridelInputView: RoundedContainerView {
     var textField = UITextField()
     var titleLabel = UILabel()
     var rightView: UIView
+    var leftView: UIView?
 
-    init(title: String? = nil, keyboardType: UIKeyboardType, rightView: UIView = UIView()) {
+    init(title: String? = nil, keyboardType: UIKeyboardType, leftView: UIView? = nil, rightView: UIView = UIView()) {
         self.title = title
         self.keyboardType = keyboardType
         self.rightView = rightView
+        self.leftView = leftView
 
         super.init()
 
@@ -41,6 +43,11 @@ class GridelInputView: RoundedContainerView {
         titleLabel.font = .systemFont(ofSize: 10)
         textField.keyboardType = keyboardType
         textField.textColor = .white
+
+        if let leftView {
+            textField.leftView = leftView
+            
+        }
 
     }
 

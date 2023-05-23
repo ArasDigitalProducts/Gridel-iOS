@@ -23,6 +23,8 @@ class ColumnsOptionsView: UIView {
     var marginInputView = GridelInputView(title: "Margins", keyboardType: .numberPad)
     var gutterInputView = GridelInputView(title: "Gutter", keyboardType: .numberPad)
     var marginAndGutterStackView = UIStackView()
+    var colorInputView = GridelInputView(title: "Color", keyboardType: .asciiCapable, leftView: UIView())
+
 
     init() {
         super.init(frame: .zero)
@@ -52,6 +54,9 @@ class ColumnsOptionsView: UIView {
         marginAndGutterStackView.axis = .horizontal
         marginAndGutterStackView.distribution = .fillEqually
         marginAndGutterStackView.spacing = 16
+        //color
+        colorInputView.leftView?.backgroundColor = .p300
+        colorInputView.textField.isUserInteractionEnabled = false
     }
 
     func renderViews() {
@@ -118,6 +123,15 @@ class ColumnsOptionsView: UIView {
             marginAndGutterStackView.topAnchor.constraint(equalTo: countInputView.bottomAnchor, constant: 16),
             marginAndGutterStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
             marginAndGutterStackView.heightAnchor.constraint(equalToConstant: 56)
+        ])
+
+
+        containerView.addSubview(colorInputView)
+        colorInputView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            colorInputView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            colorInputView.topAnchor.constraint(equalTo: marginAndGutterStackView.bottomAnchor, constant: 16),
+            colorInputView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16)
         ])
 
 
