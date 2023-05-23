@@ -62,9 +62,10 @@ class ColumnsOptionsView: UIView {
             title: "Color",
             keyboardType: .asciiCapable,
             leftView: colorLeftView,
-            rightView: colorRightLabel,
-            onTap: colorInputTapped
-        )
+            rightView: colorRightLabel
+        ) { [weak self] in
+            self?.colorInputTapped()
+        }
         colorLeftView.backgroundColor = .p300
         colorLeftView.layer.cornerRadius = 2
         colorInputView.textField.isUserInteractionEnabled = false
