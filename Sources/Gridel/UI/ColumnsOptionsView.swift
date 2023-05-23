@@ -96,11 +96,12 @@ class ColumnsOptionsView: UIView {
         // STAVI OVO SVE U ZASEBNI VIEW PA KAD SE CIJELI TAPNE DA SE OTVORI TEXTFIELD
 
         containerView.addSubview(countInputView)
+        countInputView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             countInputView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
             countInputView.topAnchor.constraint(equalTo: gridDemoView.bottomAnchor, constant: 40),
             countInputView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
-            countInputView.heightAnchor.constraint(equalToConstant: 56)
+            countInputView.heightAnchor.constraint(equalToConstant: 80)
         ])
 
         
