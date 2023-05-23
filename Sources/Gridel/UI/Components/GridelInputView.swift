@@ -47,6 +47,7 @@ class GridelInputView: RoundedContainerView {
     private func renderViews() {
         //container view
         addSubview(containerView)
+        containerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
             containerView.topAnchor.constraint(equalTo: topAnchor),
@@ -68,8 +69,7 @@ class GridelInputView: RoundedContainerView {
             textField.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
             textField.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
             textField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
-            textField.heightAnchor.constraint(equalToConstant: 32)
-//            textField.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+            textField.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
         ])
         //rightView
         containerView.addSubview(rightView)
