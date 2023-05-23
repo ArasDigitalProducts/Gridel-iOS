@@ -27,6 +27,7 @@ class GridelInputView: RoundedContainerView {
 
         setupViews()
         renderViews()
+        setupTouchGesture()
     }
 
     required init?(coder: NSCoder) {
@@ -79,7 +80,18 @@ class GridelInputView: RoundedContainerView {
             rightView.widthAnchor.constraint(equalToConstant: 16),
             rightView.heightAnchor.constraint(equalToConstant: 16)
         ])
-
-//        chevronImage.frame = CGRect(x: countTextField.frame.size.width - 40 , y: countBackgroundView.frame.height / 2, width: 16, height: 16)
     }
+
+    private func setupTouchGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        addGestureRecognizer(tapGesture)
+
+    }
+
+    @objc private func handleTap(_ gesture: UITapGestureRecognizer) {
+        if gesture.state == .ended {
+            textField.becomeFirstResponder()
+        }
+    }
+
 }
