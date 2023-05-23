@@ -20,6 +20,8 @@ class ColumnsOptionsView: UIView {
         keyboardType: .numberPad,
         rightView: UIImageView(image: UIImage(systemName: "chevron.down"))
     )
+    var marginInputView = GridelInputView(title: "Margins", keyboardType: .numberPad)
+    var gutterInputView = GridelInputView(title: "Gutter", keyboardType: .numberPad)
 
     init() {
         super.init(frame: .zero)
@@ -100,6 +102,20 @@ class ColumnsOptionsView: UIView {
             countInputView.topAnchor.constraint(equalTo: gridDemoView.bottomAnchor, constant: 40),
             countInputView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
             countInputView.heightAnchor.constraint(equalToConstant: 56)
+        ])
+
+        containerView.addSubview(marginInputView)
+        NSLayoutConstraint.activate([
+            marginInputView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            marginInputView.topAnchor.constraint(equalTo: countInputView.bottomAnchor, constant: 16),
+            marginInputView.heightAnchor.constraint(equalToConstant: 56)
+        ])
+
+        containerView.addSubview(gutterInputView)
+        NSLayoutConstraint.activate([
+            gutterInputView.leadingAnchor.constraint(equalTo: marginInputView.trailingAnchor, constant: 16),
+            gutterInputView.topAnchor.constraint(equalTo: countInputView.bottomAnchor, constant: 16),
+            gutterInputView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16)
         ])
 
         
