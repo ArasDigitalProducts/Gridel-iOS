@@ -23,13 +23,11 @@ class ColumnsOptionsView: UIView {
     var marginInputView = GridelInputView(title: "Margins", keyboardType: .numberPad)
     var gutterInputView = GridelInputView(title: "Gutter", keyboardType: .numberPad)
     var marginAndGutterStackView = UIStackView()
-    var colorInputView = GridelInputView(
-        title: "Color",
-        keyboardType: .asciiCapable,
-        leftView: UIView(),
-        rightView: UILabel()
-    )
 
+    var colorLeftView = UIView()
+    var colorRightLabel = UILabel()
+
+    var colorInputView: GridelInputView?
 
     init() {
         super.init(frame: .zero)
@@ -60,11 +58,19 @@ class ColumnsOptionsView: UIView {
         marginAndGutterStackView.distribution = .fillEqually
         marginAndGutterStackView.spacing = 16
         //color
-        colorInputView.leftView?.backgroundColor = .p300
-        colorInputView.textField.isUserInteractionEnabled = false
-        let rightView = colorInputView.rightView as? UILabel
-        rightView?.text = "20%"
-        rightView?.textColor = .white
+
+        colorInputView = GridelInputView(
+            title: "Color",
+            keyboardType: .asciiCapable,
+            leftView: colorLeftView,
+            rightView: colorRightLabel
+        )
+
+        colorLeftView.backgroundColor = .p300
+        colorInputView?.textField.isUserInteractionEnabled = false
+        colorRightLabel.text = "20%"
+        colorRightLabel.textColor = .white
+
     }
 
     func renderViews() {

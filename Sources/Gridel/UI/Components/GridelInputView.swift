@@ -46,7 +46,6 @@ class GridelInputView: RoundedContainerView {
 
         if let leftView {
             textField.leftView = leftView
-            
         }
 
     }
@@ -84,7 +83,6 @@ class GridelInputView: RoundedContainerView {
         NSLayoutConstraint.activate([
             rightView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
             rightView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
-//            rightView.widthAnchor.constraint(equalToConstant: 16),
             rightView.heightAnchor.constraint(equalToConstant: 16)
         ])
     }
