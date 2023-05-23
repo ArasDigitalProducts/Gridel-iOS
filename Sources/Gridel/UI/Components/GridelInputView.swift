@@ -59,7 +59,7 @@ class GridelInputView: RoundedContainerView {
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
             titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8),
-            titleLabel.heightAnchor.constraint(equalToConstant: 16)
+//            titleLabel.heightAnchor.constraint(equalToConstant: 16) // revise this (FONT)
         ])
         //textField
         containerView.addSubview(textField)
@@ -68,7 +68,7 @@ class GridelInputView: RoundedContainerView {
             textField.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
             textField.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
             textField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
-            textField.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+            textField.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8)
         ])
         //rightView
         containerView.addSubview(rightView)

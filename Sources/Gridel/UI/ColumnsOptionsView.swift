@@ -15,14 +15,11 @@ class ColumnsOptionsView: UIView {
     var showColumnsSwitch = UISwitch()
     var gridDemoView = GridDemoView()
     var countBackgroundView = RoundedContainerView()
-//    var countLabel = UILabel()
-//    var countTextField = UITextField()
     var countInputView = GridelInputView(
         title: "Count",
         keyboardType: .numberPad,
         rightView: UIImageView(image: UIImage(systemName: "chevron.down"))
     )
-//    var countRightIcon = UIButton()
 
     init() {
         super.init(frame: .zero)
@@ -46,6 +43,7 @@ class ColumnsOptionsView: UIView {
         showColumnsSwitch.onTintColor = .p300
         //grid demo view
         gridDemoView.backgroundColor = .p300
+        //count input view
         countInputView.rightView.tintColor = .white
     }
 
