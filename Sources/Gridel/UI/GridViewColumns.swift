@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GridViewColumns: UIView{
+class GridViewColumns: UIView {
 
     private var config: VerboseConfiguration?
 

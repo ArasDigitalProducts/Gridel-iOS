@@ -15,9 +15,13 @@ class ColumnsOptionsView: UIView {
     var showColumnsSwitch = UISwitch()
     var gridDemoView = GridDemoView()
     var countBackgroundView = RoundedContainerView()
-    var countLabel = UILabel()
-    var countTextField = UITextField()
-    var chevronImage = UIImageView(image: UIImage(systemName: "chevron.down"))
+//    var countLabel = UILabel()
+//    var countTextField = UITextField()
+    var countInputView = GridelInputView(
+        title: "Count",
+        keyboardType: .numberPad,
+        rightView: UIImageView(image: UIImage(systemName: "chevron.down"))
+    )
 //    var countRightIcon = UIButton()
 
     init() {
@@ -42,15 +46,7 @@ class ColumnsOptionsView: UIView {
         showColumnsSwitch.onTintColor = .p300
         //grid demo view
         gridDemoView.backgroundColor = .p300
-        //count
-        countTextField.backgroundColor = .g500
-        countLabel.text = "Count"
-        countLabel.textColor = .g75
-        countTextField.keyboardType = .numberPad
-        countTextField.textColor = .white
-        countTextField.rightView = chevronImage
-        chevronImage.tintColor = .white
-        countTextField.rightViewMode = .always
+        
     }
 
     func renderViews() {
@@ -97,32 +93,16 @@ class ColumnsOptionsView: UIView {
             gridDemoView.heightAnchor.constraint(equalToConstant: 136)
         ])
         // count
-        containerView.addSubview(countBackgroundView)
-        countBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        // STAVI OVO SVE U ZASEBNI VIEW PA KAD SE CIJELI TAPNE DA SE OTVORI TEXTFIELD
+
+        containerView.addSubview(countInputView)
         NSLayoutConstraint.activate([
-            countBackgroundView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-            countBackgroundView.topAnchor.constraint(equalTo: gridDemoView.bottomAnchor, constant: 40),
-            countBackgroundView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
-            countBackgroundView.heightAnchor.constraint(equalToConstant: 56)
+            countInputView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            countInputView.topAnchor.constraint(equalTo: gridDemoView.bottomAnchor, constant: 40),
+            countInputView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
+            countInputView.heightAnchor.constraint(equalToConstant: 56)
         ])
 
-        countBackgroundView.addSubview(countLabel)
-        countLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            countLabel.leadingAnchor.constraint(equalTo: countBackgroundView.leadingAnchor, constant: 16),
-            countLabel.topAnchor.constraint(equalTo: countBackgroundView.topAnchor, constant: 8),
-            countLabel.heightAnchor.constraint(equalToConstant: 16)
-        ])
-
-        countBackgroundView.addSubview(countTextField)
-        countTextField.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            countTextField.leadingAnchor.constraint(equalTo: countBackgroundView.leadingAnchor, constant: 16),
-            countTextField.trailingAnchor.constraint(equalTo: countBackgroundView.trailingAnchor, constant: -16),
-            countTextField.topAnchor.constraint(equalTo: countLabel.bottomAnchor),
-            countTextField.bottomAnchor.constraint(equalTo: countBackgroundView.bottomAnchor, constant: -8)
-        ])
-        //chevron image
-        chevronImage.frame = CGRect(x: countTextField.frame.size.width - 40 , y: countBackgroundView.frame.height / 2, width: 16, height: 16)
+        
     }
 }
