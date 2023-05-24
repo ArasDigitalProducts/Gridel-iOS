@@ -132,7 +132,7 @@ class SettingsViewController: UIViewController {
         columnsOptionsView.gridDemoView.backgroundColor = color
         columnsOptionsView.colorInputView.leftView?.backgroundColor = color
         columnsOptionsView.colorInputView.textField.text = color.toHexString().uppercased()
-        columnsOptionsView.colorRightLabel.text = color.cgColor.alpha.description
+        columnsOptionsView.colorRightLabel.text = color.cgColor.alpha.toPercentageString()
     }
 
     private func rowsColorUpdated(with color: UIColor) {
