@@ -29,6 +29,9 @@ class ColumnsOptionsView: UIView {
 
     var colorInputView: GridelInputView!
 
+    //delegate
+    weak var delegate: ColumnsOptionsDelegate?
+
     init() {
         super.init(frame: .zero)
         setupViews()
@@ -120,8 +123,6 @@ class ColumnsOptionsView: UIView {
             gridDemoView.heightAnchor.constraint(equalToConstant: 136)
         ])
         // count
-        // STAVI OVO SVE U ZASEBNI VIEW PA KAD SE CIJELI TAPNE DA SE OTVORI TEXTFIELD
-
         containerView.addSubview(countInputView)
         countInputView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -153,7 +154,11 @@ class ColumnsOptionsView: UIView {
     }
 
     private func colorInputTapped() {
-        
-
+        delegate?.colorInputTapped()
     }
+}
+
+protocol ColumnsOptionsDelegate: AnyObject {
+    func colorInputTapped()
+    func colorSelected(color: UIColor)
 }

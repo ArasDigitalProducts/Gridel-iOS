@@ -35,6 +35,7 @@ class SettingsViewController: UIViewController {
         optionSegmentView = UISegmentedControl(items: ["Columns", "Rows"])
         containerView = UIView()
         columnsOptionsView = ColumnsOptionsView()
+        columnsOptionsView.delegate = self
 
     }
 
@@ -109,16 +110,21 @@ class SettingsViewController: UIViewController {
     }
 
     @objc func leftButtonAction() {
-        let colorPickerViewController = UIColorPickerViewController()
-        present(colorPickerViewController, animated: true)
+
     }
 
     @objc func rightButtonAction() {
         
     }
+}
 
-    private func colorPickerTapped() {
-
+extension SettingsViewController: ColumnsOptionsDelegate {
+    func colorInputTapped() {
+        let colorPickerViewController = UIColorPickerViewController()
+        present(colorPickerViewController, animated: true)
     }
 
+    func colorSelected(color: UIColor) {
+
+    }
 }
