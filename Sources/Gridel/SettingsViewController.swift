@@ -149,7 +149,15 @@ class SettingsViewController: UIViewController {
     }
 
     private func columnsSelected() {
-        print("columns")
+        rowsOptionsView.removeFromSuperview()
+        containerView.addSubview(columnsOptionsView)
+        columnsOptionsView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            columnsOptionsView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            columnsOptionsView.topAnchor.constraint(equalTo: optionSegmentView.bottomAnchor, constant: 32),
+            columnsOptionsView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            columnsOptionsView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+        ])
     }
 
     @objc func cancelTapped() {
