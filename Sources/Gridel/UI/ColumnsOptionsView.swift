@@ -160,9 +160,10 @@ class ColumnsOptionsView: UIView {
 
     func setupDemoView(with config: ColumnsConfiguration) {
         gridDemoView = GridViewColumns()
-        gridDemoViewContainer.addSubview(gridDemoView)
+
         gridDemoView.frame = gridDemoViewContainer.bounds
         gridDemoView.setup(with: config)
+        gridDemoViewContainer.addSubview(gridDemoView)
     }
 }
 
