@@ -17,7 +17,7 @@ class SettingsViewController: UIViewController {
 
     var columnsColor: UIColor = .p300 {
         didSet {
-            columnsConfigUpdated(with: columnsColor)
+            columnsConfigUpdated()
         }
     }
     var rowsColor: UIColor = .p300 {
