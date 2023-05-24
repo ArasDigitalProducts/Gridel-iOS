@@ -17,7 +17,7 @@ class SettingsViewController: UIViewController {
 
     var columnsColor: UIColor = .p300 {
         didSet {
-            columnsColorUpdated(with: columnsColor)
+            columnsConfigUpdated(with: columnsColor)
         }
     }
     var rowsColor: UIColor = .p300 {
@@ -127,15 +127,15 @@ class SettingsViewController: UIViewController {
         
     }
 
-    private func columnsColorUpdated(with color: UIColor) {
+    private func columnsConfigUpdated() {
 //        columnsOptionsView.gridDemoView.backgroundColor = color
 
-        let config = ColumnsConfiguration(color: color, colorSpacing: .blackBackground, marginSize: 16, columnCount: 5, gutterSize: 8)
+        let config = ColumnsConfiguration(color: columnsColor, colorSpacing: .blackBackground, marginSize: 16, columnCount: 5, gutterSize: 8)
 
         columnsOptionsView.setupDemoView(with: config)
-        columnsOptionsView.colorInputView.leftView?.backgroundColor = color
-        columnsOptionsView.colorInputView.textField.text = color.toHexString().uppercased()
-        columnsOptionsView.colorRightLabel.text = color.cgColor.alpha.toPercentageString()
+        columnsOptionsView.colorInputView.leftView?.backgroundColor = columnsColor
+        columnsOptionsView.colorInputView.textField.text = columnsColor.toHexString().uppercased()
+        columnsOptionsView.colorRightLabel.text = columnsColor.cgColor.alpha.toPercentageString()
     }
 
     private func rowsColorUpdated(with color: UIColor) {
