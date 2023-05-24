@@ -147,15 +147,17 @@ class SettingsViewController: UIViewController {
     }
 
     private func columnsConfigUpdated() {
-//        columnsOptionsView.gridDemoView.backgroundColor = color
-
         let marginSize = columnsMargins ?? 0
         let columnCount = columnsCount ?? 1
         let gutterSize = columnsGutter ?? 0
 
         let config = ColumnsConfiguration(color: columnsColor, colorSpacing: .blackBackground, marginSize: marginSize, columnCount: columnCount, gutterSize: gutterSize)
 
-        columnsOptionsView.setupDemoView(with: config)
+        UIView.animate(withDuration: 2) { [weak self] in
+            self?.columnsOptionsView.setupDemoView(with: config)
+        }
+
+//        columnsOptionsView.setupDemoView(with: config)
         columnsOptionsView.colorInputView.leftView?.backgroundColor = columnsColor
         columnsOptionsView.colorInputView.textField.text = columnsColor.toHexString().uppercased()
         columnsOptionsView.colorRightLabel.text = columnsColor.cgColor.alpha.toPercentageString()
