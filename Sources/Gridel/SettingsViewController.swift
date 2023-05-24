@@ -16,7 +16,7 @@ class SettingsViewController: UIViewController {
     var columnsOptionsView: ColumnsOptionsView!
 
 
-    //columns settings
+    // MARK: - columns settings
     var columnsColor: UIColor = .p300 {
         didSet {
             columnsConfigUpdated()
@@ -38,13 +38,14 @@ class SettingsViewController: UIViewController {
         }
     }
 
-    //rows settings
+    // MARK: - rows settings
     var rowsColor: UIColor = .p300 {
         didSet {
             rowsColorUpdated(with: rowsColor)
         }
     }
 
+    // MARK: - lifecycle
     override func viewDidLoad() {
         view.backgroundColor = .white
         setupHideKeyboardOnTap()
@@ -52,6 +53,7 @@ class SettingsViewController: UIViewController {
         initViews()
         setupUI()
         renderViews()
+        setupDelegates()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -59,13 +61,15 @@ class SettingsViewController: UIViewController {
     }
 
     private func initViews() {
-        cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(leftButtonAction))
-        saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(rightButtonAction))
+        cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelTapped))
+        saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveTapped))
         optionSegmentView = UISegmentedControl(items: ["Columns", "Rows"])
         containerView = UIView()
         columnsOptionsView = ColumnsOptionsView()
-        columnsOptionsView.delegate = self
+    }
 
+    private func setupDelegates() {
+        columnsOptionsView.delegate = self
     }
 
     private func setupUI() {
@@ -116,7 +120,6 @@ class SettingsViewController: UIViewController {
             columnsOptionsView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
         ])
 
-
     }
 
     @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
@@ -138,25 +141,12 @@ class SettingsViewController: UIViewController {
         print("columns")
     }
 
-    @objc func leftButtonAction() {
+    @objc func cancelTapped() {
 
     }
 
-    @objc func rightButtonAction() {
+    @objc func saveTapped() {
         
-    }
-
-    private func columnsConfigUpdated() {
-        let marginSize = columnsMargins ?? 0
-        let columnCount = columnsCount ?? 1
-        let gutterSize = columnsGutter ?? 0
-
-        let config = ColumnsConfiguration(color: columnsColor, colorSpacing: .blackBackground, marginSize: marginSize, columnCount: columnCount, gutterSize: gutterSize)
-
-        columnsOptionsView.setupDemoView(with: config)
-        columnsOptionsView.colorInputView.leftView?.backgroundColor = columnsColor
-        columnsOptionsView.colorInputView.textField.text = columnsColor.toHexString().uppercased()
-        columnsOptionsView.colorRightLabel.text = columnsColor.cgColor.alpha.toPercentageString()
     }
 
     private func rowsColorUpdated(with color: UIColor) {
@@ -164,6 +154,20 @@ class SettingsViewController: UIViewController {
     }
 }
 
+// MARK: - Color picker delegate
+extension SettingsViewController: UIColorPickerViewControllerDelegate {
+    func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: UIColor, continuously: Bool) {
+        switch optionSegmentView.selectedSegmentIndex {
+        case 0:
+            columnsColor = color
+        case 1:
+            rowsColor = color
+        default: return
+        }
+    }
+}
+
+// MARK: - Columns settings
 extension SettingsViewController: ColumnsOptionsDelegate {
     func colorInputTapped() {
         let colorPickerViewController = UIColorPickerViewController()
@@ -182,16 +186,17 @@ extension SettingsViewController: ColumnsOptionsDelegate {
     func gutterUpdated(with gutter: Int) {
         columnsGutter = gutter
     }
-}
 
-extension SettingsViewController: UIColorPickerViewControllerDelegate {
-    func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: UIColor, continuously: Bool) {
-        switch optionSegmentView.selectedSegmentIndex {
-        case 0:
-            columnsColor = color
-        case 1:
-            rowsColor = color
-        default: return
-        }
+    private func columnsConfigUpdated() {
+        let marginSize = columnsMargins ?? 0
+        let columnCount = columnsCount ?? 1
+        let gutterSize = columnsGutter ?? 0
+
+        let config = ColumnsConfiguration(color: columnsColor, colorSpacing: .blackBackground, marginSize: marginSize, columnCount: columnCount, gutterSize: gutterSize)
+
+        columnsOptionsView.setupDemoView(with: config)
+        columnsOptionsView.colorInputView.leftView?.backgroundColor = columnsColor
+        columnsOptionsView.colorInputView.textField.text = columnsColor.toHexString().uppercased()
+        columnsOptionsView.colorRightLabel.text = columnsColor.cgColor.alpha.toPercentageString()
     }
 }
