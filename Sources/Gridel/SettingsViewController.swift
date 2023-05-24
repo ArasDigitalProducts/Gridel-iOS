@@ -130,7 +130,7 @@ class SettingsViewController: UIViewController {
     private func columnsColorUpdated(with color: UIColor) {
 //        columnsOptionsView.gridDemoView.backgroundColor = color
 
-        let config = ColumnsConfiguration(color: color, colorSpacing: .clear, marginSize: 16, columnCount: 5, gutterSize: 8)
+        let config = ColumnsConfiguration(color: color, colorSpacing: .blackBackground, marginSize: 16, columnCount: 5, gutterSize: 8)
 
         columnsOptionsView.setupDemoView(with: config)
         columnsOptionsView.colorInputView.leftView?.backgroundColor = color
