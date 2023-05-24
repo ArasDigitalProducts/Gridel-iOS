@@ -153,11 +153,7 @@ class SettingsViewController: UIViewController {
 
         let config = ColumnsConfiguration(color: columnsColor, colorSpacing: .blackBackground, marginSize: marginSize, columnCount: columnCount, gutterSize: gutterSize)
 
-        UIView.animate(withDuration: 2) { [weak self] in
-            self?.columnsOptionsView.setupDemoView(with: config)
-        }
-
-//        columnsOptionsView.setupDemoView(with: config)
+        columnsOptionsView.setupDemoView(with: config)
         columnsOptionsView.colorInputView.leftView?.backgroundColor = columnsColor
         columnsOptionsView.colorInputView.textField.text = columnsColor.toHexString().uppercased()
         columnsOptionsView.colorRightLabel.text = columnsColor.cgColor.alpha.toPercentageString()
