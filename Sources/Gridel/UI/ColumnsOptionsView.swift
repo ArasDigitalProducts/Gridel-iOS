@@ -160,5 +160,4 @@ class ColumnsOptionsView: UIView {
 
 protocol ColumnsOptionsDelegate: AnyObject {
     func colorInputTapped()
-    func colorSelected(color: UIColor)
 }

@@ -16,6 +16,17 @@ class SettingsViewController: UIViewController {
     var optionSegmentView: UISegmentedControl!
     var columnsOptionsView: ColumnsOptionsView!
 
+    var columnsColor: UIColor = .p300 {
+        didSet {
+            columnsColorUpdated(with: columnsColor)
+        }
+    }
+    var rowsColor: UIColor = .p300 {
+        didSet {
+            rowsColorUpdated(with: rowsColor)
+        }
+    }
+
     override func viewDidLoad() {
         view.backgroundColor = .white
         setupHideKeyboardOnTap()
@@ -116,15 +127,32 @@ class SettingsViewController: UIViewController {
     @objc func rightButtonAction() {
         
     }
+
+    private func columnsColorUpdated(with color: UIColor) {
+        columnsOptionsView.gridDemoView.backgroundColor = color
+    }
+
+    private func rowsColorUpdated(with color: UIColor) {
+
+    }
 }
 
 extension SettingsViewController: ColumnsOptionsDelegate {
     func colorInputTapped() {
         let colorPickerViewController = UIColorPickerViewController()
+        colorPickerViewController.delegate = self
         present(colorPickerViewController, animated: true)
     }
+}
 
-    func colorSelected(color: UIColor) {
-
+extension SettingsViewController: UIColorPickerViewControllerDelegate {
+    func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: UIColor, continuously: Bool) {
+        switch optionSegmentView.selectedSegmentIndex {
+        case 0:
+            columnsColor = color
+        case 1:
+            rowsColor = color
+        default: return
+        }
     }
 }
