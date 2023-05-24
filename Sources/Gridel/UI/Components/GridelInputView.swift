@@ -101,7 +101,6 @@ class GridelInputView: RoundedContainerView {
 
     @objc private func handleTap(_ gesture: UITapGestureRecognizer) {
         if gesture.state == .ended {
-
             if let onTap {
                 onTap()
             } else {
