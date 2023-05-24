@@ -115,13 +115,13 @@ class ColumnsOptionsView: UIView {
             showColumnsSwitch.centerYAnchor.constraint(equalTo: showColumnsView.centerYAnchor)
         ])
         // grid demo view
-        containerView.addSubview(gridDemoView)
+        containerView.addSubview(gridDemoViewContainer)
         gridDemoView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            gridDemoView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            gridDemoView.topAnchor.constraint(equalTo: showColumnsView.bottomAnchor, constant: 32),
-            gridDemoView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            gridDemoView.heightAnchor.constraint(equalToConstant: 136)
+            gridDemoViewContainer.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            gridDemoViewContainer.topAnchor.constraint(equalTo: showColumnsView.bottomAnchor, constant: 32),
+            gridDemoViewContainer.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            gridDemoViewContainer.heightAnchor.constraint(equalToConstant: 136)
         ])
         // count
         containerView.addSubview(countInputView)
@@ -160,7 +160,6 @@ class ColumnsOptionsView: UIView {
 
     func setupDemoView(with config: ColumnsConfiguration) {
         gridDemoView = GridViewColumns()
-
         gridDemoView.frame = gridDemoViewContainer.bounds
         gridDemoView.setup(with: config)
         gridDemoViewContainer.addSubview(gridDemoView)
