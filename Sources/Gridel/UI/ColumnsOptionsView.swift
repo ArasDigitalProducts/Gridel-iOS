@@ -116,7 +116,7 @@ class ColumnsOptionsView: UIView {
         ])
         // grid demo view
         containerView.addSubview(gridDemoViewContainer)
-        gridDemoView.translatesAutoresizingMaskIntoConstraints = false
+        gridDemoViewContainer.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             gridDemoViewContainer.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             gridDemoViewContainer.topAnchor.constraint(equalTo: showColumnsView.bottomAnchor, constant: 32),
