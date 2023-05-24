@@ -128,9 +128,9 @@ class SettingsViewController: UIViewController {
     @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            rowsSelected()
-        case 1:
             columnsSelected()
+        case 1:
+            rowsSelected()
         default:
             break
         }
