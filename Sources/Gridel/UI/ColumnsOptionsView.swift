@@ -13,7 +13,8 @@ class ColumnsOptionsView: UIView {
     var showColumnsView = UIView()
     var showColumnsLabel = UILabel()
     var showColumnsSwitch = UISwitch()
-    var gridDemoView = GridDemoView()
+    var gridDemoViewContainer = UIView()
+    var gridDemoView = GridViewColumns()
     var countBackgroundView = RoundedContainerView()
     var countInputView = GridelInputView(
         title: "Count",
@@ -53,7 +54,7 @@ class ColumnsOptionsView: UIView {
         showColumnsSwitch.tintColor = .g75
         showColumnsSwitch.onTintColor = .p300
         //grid demo view
-        gridDemoView.backgroundColor = .p300
+        gridDemoView.backgroundColor = .clear
         //count input view
         countInputView.rightView.tintColor = .white
         //margin and gutter
@@ -155,6 +156,13 @@ class ColumnsOptionsView: UIView {
 
     private func colorInputTapped() {
         delegate?.colorInputTapped()
+    }
+
+    func setupDemoView(with config: ColumnsConfiguration) {
+        gridDemoView = GridViewColumns()
+        gridDemoViewContainer.addSubview(gridDemoView)
+        gridDemoView.frame = gridDemoViewContainer.bounds
+        gridDemoView.setup(with: config)
     }
 }
 

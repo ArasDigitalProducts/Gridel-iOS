@@ -64,31 +64,31 @@ public struct Gridel {
     }
 
     static func applySimpleGrid(with config: SimpleConfiguration) {
-        guard let gridelWindow else { return }
-
-        gridViewRows = GridViewRows()
-        gridViewRows.frame = gridelWindow.bounds
-        gridViewRows.setup(with: config)
-
-        gridViewRows.isUserInteractionEnabled = false
-        gridelWindow.addSubview(gridViewRows)
+//        guard let gridelWindow else { return }
+//
+//        gridViewRows = GridViewRows()
+//        gridViewRows.frame = gridelWindow.bounds
+//        gridViewRows.setup(with: config)
+//
+//        gridViewRows.isUserInteractionEnabled = false
+//        gridelWindow.addSubview(gridViewRows)
     }
 
-    static func applyVerboseGrid(with config: VerboseConfiguration) {
-        guard let gridelWindow else { return }
-
-        gridViewRows = GridViewRows()
-        gridViewRows.frame = gridelWindow.bounds
-        gridViewRows.setup(with: config.toSimpleConfig)
-        gridViewRows.isUserInteractionEnabled = false
-
-        gridViewColumns = GridViewColumns()
-        gridViewColumns.frame = gridelWindow.bounds
-        gridViewColumns.setup(with: config)
-        gridViewColumns.isUserInteractionEnabled = false
-
-        gridelWindow.addSubview(gridViewRows)
-        gridelWindow.addSubview(gridViewColumns)
+    static func applyVerboseGrid(with config: ColumnsConfiguration) {
+//        guard let gridelWindow else { return }
+//
+//        gridViewRows = GridViewRows()
+//        gridViewRows.frame = gridelWindow.bounds
+//        gridViewRows.setup(with: config.toSimpleConfig)
+//        gridViewRows.isUserInteractionEnabled = false
+//
+//        gridViewColumns = GridViewColumns()
+//        gridViewColumns.frame = gridelWindow.bounds
+//        gridViewColumns.setup(with: config)
+//        gridViewColumns.isUserInteractionEnabled = false
+//
+//        gridelWindow.addSubview(gridViewRows)
+//        gridelWindow.addSubview(gridViewColumns)
 
     }
 
@@ -114,7 +114,7 @@ public enum ActivationAction {
 
 public enum ConfigStyle {
     case simple(configuration: SimpleConfiguration)
-    case verbose(configuration: VerboseConfiguration)
+    case verbose(configuration: ColumnsConfiguration)
 }
 
 public struct SimpleConfiguration {
@@ -124,19 +124,18 @@ public struct SimpleConfiguration {
     let colorSpacing: UIColor
 }
 
-public struct VerboseConfiguration {
-    let colorPrimary: UIColor
-    let colorSecondary: UIColor
+public struct ColumnsConfiguration {
+    let color: UIColor
     let colorSpacing: UIColor
-    let opacity: Float
+//    let opacity: Float
 
     let marginSize: Int
     let columnCount: Int
-    let gutterSize: Int // razmak izmedju stupaca
+    let gutterSize: Int
 
-    let rowHeight: Int
+//    let rowHeight: Int
 
-    var toSimpleConfig: SimpleConfiguration{
-        return SimpleConfiguration(height: rowHeight, opacity: opacity, colorPrimary: colorSecondary, colorSpacing: colorSpacing)
-    }
+//    var toSimpleConfig: SimpleConfiguration{
+//        return SimpleConfiguration(height: rowHeight, opacity: opacity, colorPrimary: colorSecondary, colorSpacing: colorSpacing)
+//    }
 }

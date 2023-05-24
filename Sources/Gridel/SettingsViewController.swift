@@ -10,7 +10,6 @@ import UIKit
 class SettingsViewController: UIViewController {
 
     var containerView: UIView!
-
     var cancelButton: UIBarButtonItem!
     var saveButton: UIBarButtonItem!
     var optionSegmentView: UISegmentedControl!
@@ -129,7 +128,11 @@ class SettingsViewController: UIViewController {
     }
 
     private func columnsColorUpdated(with color: UIColor) {
-        columnsOptionsView.gridDemoView.backgroundColor = color
+//        columnsOptionsView.gridDemoView.backgroundColor = color
+
+        let config = ColumnsConfiguration(color: color, colorSpacing: .clear, marginSize: 16, columnCount: 5, gutterSize: 8)
+
+        columnsOptionsView.setupDemoView(with: config)
         columnsOptionsView.colorInputView.leftView?.backgroundColor = color
         columnsOptionsView.colorInputView.textField.text = color.toHexString().uppercased()
         columnsOptionsView.colorRightLabel.text = color.cgColor.alpha.toPercentageString()
