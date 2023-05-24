@@ -15,11 +15,30 @@ class SettingsViewController: UIViewController {
     var optionSegmentView: UISegmentedControl!
     var columnsOptionsView: ColumnsOptionsView!
 
+
+    //columns settings
     var columnsColor: UIColor = .p300 {
         didSet {
             columnsConfigUpdated()
         }
     }
+    var columnsCount: Int? {
+        didSet {
+            columnsConfigUpdated()
+        }
+    }
+    var columnsMargins: Int? {
+        didSet {
+            columnsConfigUpdated()
+        }
+    }
+    var columnsGutter: Int? {
+        didSet {
+            columnsConfigUpdated()
+        }
+    }
+
+    //rows settings
     var rowsColor: UIColor = .p300 {
         didSet {
             rowsColorUpdated(with: rowsColor)
@@ -130,7 +149,11 @@ class SettingsViewController: UIViewController {
     private func columnsConfigUpdated() {
 //        columnsOptionsView.gridDemoView.backgroundColor = color
 
-        let config = ColumnsConfiguration(color: columnsColor, colorSpacing: .blackBackground, marginSize: 16, columnCount: 5, gutterSize: 8)
+        let marginSize = columnsMargins ?? 0
+        let columnCount = columnsCount ?? 1
+        let gutterSize = columnsGutter ?? 0
+
+        let config = ColumnsConfiguration(color: columnsColor, colorSpacing: .blackBackground, marginSize: marginSize, columnCount: columnCount, gutterSize: gutterSize)
 
         columnsOptionsView.setupDemoView(with: config)
         columnsOptionsView.colorInputView.leftView?.backgroundColor = columnsColor
@@ -148,6 +171,18 @@ extension SettingsViewController: ColumnsOptionsDelegate {
         let colorPickerViewController = UIColorPickerViewController()
         colorPickerViewController.delegate = self
         present(colorPickerViewController, animated: true)
+    }
+
+    func countUpdated(with count: Int) {
+        columnsCount = count
+    }
+
+    func marginsUpdated(with margins: Int) {
+        columnsMargins = margins
+    }
+
+    func gutterUpdated(with gutter: Int) {
+        columnsGutter = gutter
     }
 }
 

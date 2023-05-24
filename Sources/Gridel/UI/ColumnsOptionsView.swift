@@ -37,6 +37,7 @@ class ColumnsOptionsView: UIView {
         super.init(frame: .zero)
         setupViews()
         renderViews()
+        setupDelegates()
     }
 
     required init?(coder: NSCoder) {
@@ -50,7 +51,7 @@ class ColumnsOptionsView: UIView {
         showColumnsView.layer.cornerRadius = 12
         showColumnsLabel.text = "Show Columns"
         showColumnsLabel.textColor = .white
-        showColumnsSwitch.isOn = true
+        showColumnsSwitch.isOn = false
         showColumnsSwitch.tintColor = .g75
         showColumnsSwitch.onTintColor = .p300
         //grid demo view
@@ -77,7 +78,6 @@ class ColumnsOptionsView: UIView {
         colorInputView.textField.leftViewMode = .always
         colorRightLabel.text = "20%"
         colorRightLabel.textColor = .white
-
     }
 
     func renderViews() {
@@ -154,6 +154,12 @@ class ColumnsOptionsView: UIView {
         ])
     }
 
+    private func setupDelegates() {
+        countInputView.textField.delegate = self
+        marginInputView.textField.delegate = self
+        gutterInputView.textField.delegate = self
+    }
+
     private func colorInputTapped() {
         delegate?.colorInputTapped()
     }
@@ -166,6 +172,21 @@ class ColumnsOptionsView: UIView {
     }
 }
 
+extension ColumnsOptionsView: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == countInputView.textField {
+            delegate?.countUpdated(with: Int(textField.text ?? "1") ?? 1)
+        } else if textField == marginInputView.textField {
+            delegate?.marginsUpdated(with: Int(textField.text ?? "0") ?? 0)
+        } else if textField == gutterInputView.textField {
+            delegate?.gutterUpdated(with: Int(textField.text ?? "0") ?? 0)
+        }
+    }
+}
+
 protocol ColumnsOptionsDelegate: AnyObject {
     func colorInputTapped()
+    func countUpdated(with count: Int)
+    func marginsUpdated(with margins: Int)
+    func gutterUpdated(with gutter: Int)
 }
