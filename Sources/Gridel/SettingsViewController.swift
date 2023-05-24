@@ -14,7 +14,7 @@ class SettingsViewController: UIViewController {
     var saveButton: UIBarButtonItem!
     var optionSegmentView: UISegmentedControl!
     var columnsOptionsView: ColumnsOptionsView!
-
+    var rowsOptionsView: UIView!
 
     // MARK: - columns settings
     var columnsColor: UIColor = .p300 {
@@ -66,6 +66,9 @@ class SettingsViewController: UIViewController {
         optionSegmentView = UISegmentedControl(items: ["Columns", "Rows"])
         containerView = UIView()
         columnsOptionsView = ColumnsOptionsView()
+
+        rowsOptionsView = UIView()
+        rowsOptionsView.backgroundColor = .orange
     }
 
     private func setupDelegates() {
@@ -134,7 +137,15 @@ class SettingsViewController: UIViewController {
     }
 
     private func rowsSelected() {
-        print("rows")
+        columnsOptionsView.removeFromSuperview()
+        containerView.addSubview(rowsOptionsView)
+        rowsOptionsView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            rowsOptionsView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            rowsOptionsView.topAnchor.constraint(equalTo: optionSegmentView.bottomAnchor, constant: 32),
+            rowsOptionsView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            rowsOptionsView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+        ])
     }
 
     private func columnsSelected() {
