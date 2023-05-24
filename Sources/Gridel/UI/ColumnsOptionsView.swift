@@ -153,6 +153,7 @@ class ColumnsOptionsView: UIView {
     }
 
     private func colorInputTapped() {
-        print("color input tapped")
+        
+
     }
 }

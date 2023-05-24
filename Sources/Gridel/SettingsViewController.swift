@@ -109,11 +109,16 @@ class SettingsViewController: UIViewController {
     }
 
     @objc func leftButtonAction() {
-
+        let colorPickerViewController = UIColorPickerViewController()
+        present(colorPickerViewController, animated: true)
     }
 
     @objc func rightButtonAction() {
         
+    }
+
+    private func colorPickerTapped() {
+
     }
 
 }
