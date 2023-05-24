@@ -128,7 +128,7 @@ class ColumnsOptionsView: UIView {
         countInputView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             countInputView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-            countInputView.topAnchor.constraint(equalTo: gridDemoView.bottomAnchor, constant: 40),
+            countInputView.topAnchor.constraint(equalTo: gridDemoViewContainer.bottomAnchor, constant: 40),
             countInputView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
             countInputView.heightAnchor.constraint(equalToConstant: 56)
         ])
