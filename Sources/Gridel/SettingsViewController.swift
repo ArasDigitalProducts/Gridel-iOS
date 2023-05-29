@@ -67,8 +67,7 @@ class SettingsViewController: UIViewController {
         containerView = UIView()
         columnsOptionsView = ColumnsOptionsView()
 
-        rowsOptionsView = UIView()
-        rowsOptionsView.backgroundColor = .orange
+        rowsOptionsView = RowsOptionsView()
     }
 
     private func setupDelegates() {
