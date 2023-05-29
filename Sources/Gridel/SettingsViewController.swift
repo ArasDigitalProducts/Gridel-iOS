@@ -136,15 +136,15 @@ class SettingsViewController: UIViewController {
     }
 
     private func rowsSelected() {
-        columnsOptionsView.removeFromSuperview()
-        containerView.addSubview(rowsOptionsView)
-        rowsOptionsView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            rowsOptionsView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            rowsOptionsView.topAnchor.constraint(equalTo: optionSegmentView.bottomAnchor, constant: 32),
-            rowsOptionsView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            rowsOptionsView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
-        ])
+//        columnsOptionsView.removeFromSuperview()
+//        containerView.addSubview(rowsOptionsView)
+//        rowsOptionsView.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            rowsOptionsView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+//            rowsOptionsView.topAnchor.constraint(equalTo: optionSegmentView.bottomAnchor, constant: 32),
+//            rowsOptionsView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+//            rowsOptionsView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+//        ])
     }
 
     private func columnsSelected() {
