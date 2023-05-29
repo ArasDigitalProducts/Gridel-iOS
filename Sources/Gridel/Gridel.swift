@@ -63,7 +63,7 @@ public struct Gridel {
         isGridActive = true
     }
 
-    static func applySimpleGrid(with config: SimpleConfiguration) {
+    static func applySimpleGrid(with config: RowsConfiguration) {
 //        guard let gridelWindow else { return }
 //
 //        gridViewRows = GridViewRows()
@@ -113,13 +113,13 @@ public enum ActivationAction {
 }
 
 public enum ConfigStyle {
-    case simple(configuration: SimpleConfiguration)
+    case simple(configuration: RowsConfiguration)
     case verbose(configuration: ColumnsConfiguration)
 }
 
-public struct SimpleConfiguration {
+public struct RowsConfiguration {
     let height: Int
-    let opacity: Float
+//    let opacity: Float
     let colorPrimary: UIColor
     let colorSpacing: UIColor
 }

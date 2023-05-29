@@ -9,9 +9,9 @@ import UIKit
 
 class GridViewRows: UIView {
 
-    private var config: SimpleConfiguration?
+    private var config: RowsConfiguration?
     
-    func setup(with config: SimpleConfiguration) {
+    func setup(with config: RowsConfiguration) {
         self.config = config
     }
 
@@ -21,7 +21,7 @@ class GridViewRows: UIView {
         let height = CGFloat(Float(config.height))
         guard height > 0 else { return }
 
-        layer.opacity = config.opacity
+//        layer.opacity = config.opacity
 
         var swapColors = true
         let context = UIGraphicsGetCurrentContext()
