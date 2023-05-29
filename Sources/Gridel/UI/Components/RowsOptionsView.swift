@@ -40,6 +40,7 @@ class RowsOptionsView: UIView {
 
     private func renderViews() {
         // container view
+        addSubview(containerView)
         containerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
