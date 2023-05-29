@@ -35,7 +35,7 @@ class ColumnsOptionsView: UIView {
 
     init() {
         super.init(frame: .zero)
-        setupViews()
+        setupUI()
         renderViews()
         setupDelegates()
     }
@@ -44,7 +44,8 @@ class ColumnsOptionsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func setupViews() {
+    private func setupUI() {
+        // container view
         containerView.backgroundColor = .blackBackground
         // show columns view
         showColumnsView.backgroundColor = .g500
