@@ -257,7 +257,7 @@ extension SettingsViewController: RowsOptionsDelegate {
         let config = RowsConfiguration(height: height, colorPrimary: rowsColor, colorSpacing: .blackBackground)
 
         rowsOptionsView.setupDemoView(with: config)
-        rowsOptionsView.colorInputView.leftView?.backgroundColor = columnsColor
+        rowsOptionsView.colorInputView.leftView?.backgroundColor = rowsColor
         rowsOptionsView.colorInputView.textField.text = rowsColor.toHexString().uppercased()
         rowsOptionsView.colorRightLabel.text = rowsColor.cgColor.alpha.toPercentageString()
 
