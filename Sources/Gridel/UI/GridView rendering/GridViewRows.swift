@@ -22,16 +22,8 @@ class GridViewRows: UIView {
         let gutter = CGFloat(Float(config.gutterSize))
         guard height > 0, gutter > 0 else { return }
 
-//        layer.opacity = config.opacity
-
-//        var swapColors = true
         let context = UIGraphicsGetCurrentContext()
         for y in stride(from: 0, to: bounds.height, by: height + gutter) {
-//            if swapColors {
-//            } else {
-//                context?.setFillColor(config.colorSpacing.cgColor)
-//            }
-//            swapColors.toggle()
             context?.setFillColor(config.colorPrimary.cgColor)
             let rowRect = CGRect(x: 0, y: CGFloat(y), width: bounds.width, height: height)
             context?.fill(rowRect)
