@@ -53,7 +53,6 @@ class GridelInputView: RoundedContainerView {
         if let leftView {
             textField.leftView = leftView
         }
-
     }
 
     private func renderViews() {
@@ -106,7 +105,6 @@ class GridelInputView: RoundedContainerView {
             } else {
                 textField.becomeFirstResponder()
             }
-
         }
     }
 
