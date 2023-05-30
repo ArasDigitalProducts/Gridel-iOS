@@ -41,22 +41,12 @@ public struct Gridel {
         gridelWindow?.rootViewController = rootView
 
         trigger.subscribe {
-            gridelWindow?.isUserInteractionEnabled = true
-            gridelWindow?.rootViewController?.present(settingsNavigationController, animated: true)
+            if !settingsNavigationController.isBeingPresented {
+                gridelWindow?.isUserInteractionEnabled = true
+                gridelWindow?.rootViewController?.present(settingsNavigationController, animated: true)
+            }
         }
     }
-
-//    static func applyGrid(with configStyle: ConfigStyle) {
-//        switch configStyle {
-//        case .simple(let configuration):
-//            applySimpleGrid(with: configuration)
-//        case .verbose(let configuration):
-//            applyVerboseGrid(with: configuration)
-//        }
-//
-//        print("applied \(configStyle)")
-//        isGridActive = true
-//    }
 
     static func applyRows(with config: RowsConfiguration) {
         guard let gridelWindow else { return }
@@ -72,19 +62,12 @@ public struct Gridel {
     static func applyColumns(with config: ColumnsConfiguration) {
         guard let gridelWindow else { return }
 
-//        gridViewRows = GridViewRows()
-//        gridViewRows.frame = gridelWindow.bounds
-//        gridViewRows.setup(with: config.toSimpleConfig)
-//        gridViewRows.isUserInteractionEnabled = false
-
         gridViewColumns = GridViewColumns()
         gridViewColumns.frame = gridelWindow.bounds
         gridViewColumns.setup(with: config)
         gridViewColumns.isUserInteractionEnabled = false
 
-//        gridelWindow.addSubview(gridViewRows)
         gridelWindow.addSubview(gridViewColumns)
-
     }
 
     static func removeRows() {
@@ -107,11 +90,6 @@ public enum ActivationAction {
         }
     }
 }
-
-//public enum ConfigStyle {
-//    case simple(configuration: RowsConfiguration)
-//    case verbose(configuration: ColumnsConfiguration)
-//}
 
 public struct RowsConfiguration {
     let height: Int
