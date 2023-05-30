@@ -119,6 +119,7 @@ public enum ConfigStyle {
 
 public struct RowsConfiguration {
     let height: Int
+    let gutterSize: Int
 //    let opacity: Float
     let colorPrimary: UIColor
     let colorSpacing: UIColor

@@ -19,21 +19,26 @@ class GridViewRows: UIView {
         guard let config else { return }
 
         let height = CGFloat(Float(config.height))
-        guard height > 0 else { return }
+        let gutter = CGFloat(Float(config.gutterSize))
+        guard height > 0, gutter > 0 else { return }
 
 //        layer.opacity = config.opacity
 
-        var swapColors = true
+//        var swapColors = true
         let context = UIGraphicsGetCurrentContext()
-        for y in stride(from: 0, to: bounds.height, by: height) {
-            if swapColors {
-                context?.setFillColor(config.colorPrimary.cgColor)
-            } else {
-                context?.setFillColor(config.colorSpacing.cgColor)
-            }
-            swapColors.toggle()
+        for y in stride(from: 0, to: bounds.height, by: height + gutter) {
+//            if swapColors {
+//            } else {
+//                context?.setFillColor(config.colorSpacing.cgColor)
+//            }
+//            swapColors.toggle()
+            context?.setFillColor(config.colorPrimary.cgColor)
             let rowRect = CGRect(x: 0, y: CGFloat(y), width: bounds.width, height: height)
             context?.fill(rowRect)
+
+            context?.setFillColor(config.colorSpacing.cgColor)
+            let spacingRect = CGRect(x: 0, y: CGFloat(y + height), width: bounds.width, height: gutter)
+            context?.fill(spacingRect)
         }
 
     }
