@@ -14,7 +14,7 @@ class SettingsViewController: UIViewController {
     var saveButton: UIBarButtonItem!
     var optionSegmentView: UISegmentedControl!
     var columnsOptionsView: ColumnsOptionsView!
-    var rowsOptionsView: UIView!
+    var rowsOptionsView: RowsOptionsView!
 
     // MARK: - columns settings
     var columnsColor: UIColor = .p300 {
@@ -72,6 +72,7 @@ class SettingsViewController: UIViewController {
 
     private func setupDelegates() {
         columnsOptionsView.delegate = self
+        rowsOptionsView.delegate = self
     }
 
     private func setupUI() {
@@ -187,7 +188,7 @@ extension SettingsViewController: UIColorPickerViewControllerDelegate {
 
 // MARK: - Columns settings
 extension SettingsViewController: ColumnsOptionsDelegate {
-    func colorInputTapped() {
+    func columnsColorInputTapped() {
         let colorPickerViewController = UIColorPickerViewController()
         colorPickerViewController.delegate = self
         present(colorPickerViewController, animated: true)
@@ -201,7 +202,7 @@ extension SettingsViewController: ColumnsOptionsDelegate {
         columnsMargins = margins
     }
 
-    func gutterUpdated(with gutter: Int) {
+    func columnsGutterUpdated(with gutter: Int) {
         columnsGutter = gutter
     }
 
@@ -217,4 +218,20 @@ extension SettingsViewController: ColumnsOptionsDelegate {
         columnsOptionsView.colorInputView.textField.text = columnsColor.toHexString().uppercased()
         columnsOptionsView.colorRightLabel.text = columnsColor.cgColor.alpha.toPercentageString()
     }
+}
+
+// MARK: - Rows settings
+extension SettingsViewController: RowsOptionsDelegate {
+    func rowsColorInputTapped() {
+
+    }
+
+    func rowsGutterUpdated(with gutter: Int) {
+        
+    }
+
+    func heightUpdated(with height: Int) {
+
+    }
+
 }

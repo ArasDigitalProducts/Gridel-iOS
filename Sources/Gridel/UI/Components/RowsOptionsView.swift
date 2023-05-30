@@ -26,6 +26,13 @@ class RowsOptionsView: UIView {
     )
     var heightAndGutterStackView = UIStackView()
 
+    var colorLeftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
+    var colorRightLabel = UILabel()
+    var colorInputView: GridelInputView!
+
+    //delegate
+    weak var delegate: RowsOptionsDelegate?
+
     init() {
         super.init(frame: .zero)
         setupUI()
@@ -55,6 +62,22 @@ class RowsOptionsView: UIView {
         heightAndGutterStackView.distribution = .fillEqually
         heightAndGutterStackView.spacing = 16
         heightInputView.rightView.tintColor = .white
+        //color
+        colorInputView = GridelInputView(
+            title: "Color",
+            keyboardType: .asciiCapable,
+            leftView: colorLeftView,
+            rightView: colorRightLabel
+        ) { [weak self] in
+            self?.colorInputTapped()
+        }
+        colorInputView.textField.text = "9884FF"
+        colorLeftView.backgroundColor = .p300
+        colorLeftView.layer.cornerRadius = 2
+        colorInputView.textField.isUserInteractionEnabled = false
+        colorInputView.textField.leftViewMode = .always
+        colorRightLabel.text = "20%"
+        colorRightLabel.textColor = .white
     }
 
     private func renderViews() {
@@ -112,9 +135,39 @@ class RowsOptionsView: UIView {
             heightAndGutterStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
             heightAndGutterStackView.heightAnchor.constraint(equalToConstant: 56)
         ])
+        // color input
+        containerView.addSubview(colorInputView)
+        colorInputView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            colorInputView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            colorInputView.topAnchor.constraint(equalTo: heightAndGutterStackView.bottomAnchor, constant: 16),
+            colorInputView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
+            colorInputView.heightAnchor.constraint(equalToConstant: 56)
+        ])
     }
 
     private func setupDelegates() {
-
+        heightInputView.textField.delegate = self
+        gutterInputView.textField.delegate = self
     }
+
+    private func colorInputTapped() {
+        delegate?.rowsColorInputTapped()
+    }
+}
+
+extension RowsOptionsView: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == heightInputView.textField {
+            delegate?.heightUpdated(with: Int(textField.text ?? "0") ?? 0)
+        } else if textField == gutterInputView {
+            delegate?.rowsGutterUpdated(with: Int(textField.text ?? "0") ?? 0)
+        }
+    }
+}
+
+protocol RowsOptionsDelegate: AnyObject {
+    func rowsColorInputTapped()
+    func heightUpdated(with height: Int)
+    func rowsGutterUpdated(with gutter: Int)
 }

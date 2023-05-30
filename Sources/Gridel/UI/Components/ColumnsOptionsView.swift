@@ -27,7 +27,6 @@ class ColumnsOptionsView: UIView {
 
     var colorLeftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
     var colorRightLabel = UILabel()
-
     var colorInputView: GridelInputView!
 
     //delegate
@@ -162,7 +161,7 @@ class ColumnsOptionsView: UIView {
     }
 
     private func colorInputTapped() {
-        delegate?.colorInputTapped()
+        delegate?.columnsColorInputTapped()
     }
 
     func setupDemoView(with config: ColumnsConfiguration) {
@@ -180,14 +179,14 @@ extension ColumnsOptionsView: UITextFieldDelegate {
         } else if textField == marginInputView.textField {
             delegate?.marginsUpdated(with: Int(textField.text ?? "0") ?? 0)
         } else if textField == gutterInputView.textField {
-            delegate?.gutterUpdated(with: Int(textField.text ?? "0") ?? 0)
+            delegate?.columnsGutterUpdated(with: Int(textField.text ?? "0") ?? 0)
         }
     }
 }
 
 protocol ColumnsOptionsDelegate: AnyObject {
-    func colorInputTapped()
+    func columnsColorInputTapped()
     func countUpdated(with count: Int)
     func marginsUpdated(with margins: Int)
-    func gutterUpdated(with gutter: Int)
+    func columnsGutterUpdated(with gutter: Int)
 }
