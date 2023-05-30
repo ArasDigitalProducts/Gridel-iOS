@@ -25,7 +25,7 @@ class GridViewColumns: UIView {
 
         guard margin > 0, columns > 0, gutter > 0 else { return }
 
-//        layer.opacity = config.opacity
+        layer.opacity = config.opacity
 
         let context = UIGraphicsGetCurrentContext()
 

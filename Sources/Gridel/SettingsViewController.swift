@@ -225,7 +225,14 @@ extension SettingsViewController: ColumnsOptionsDelegate {
         let columnCount = columnsCount ?? 1
         let gutterSize = columnsGutter ?? 0
 
-        let config = ColumnsConfiguration(color: columnsColor, colorSpacing: .blackBackground, marginSize: marginSize, columnCount: columnCount, gutterSize: gutterSize)
+        let config = ColumnsConfiguration(
+            color: columnsColor,
+            colorSpacing: .blackBackground,
+            marginSize: marginSize,
+            columnCount: columnCount,
+            gutterSize: gutterSize,
+            opacity: Float(columnsColor.rgba.alpha)
+        )
 
         Gridel.currentColumnsConfig = config
         columnsOptionsView.setupDemoView(with: config)
@@ -253,7 +260,13 @@ extension SettingsViewController: RowsOptionsDelegate {
         let height = rowsHeight ?? 0
         let gutter = rowsGutter ?? 0
 
-        let config = RowsConfiguration(height: height, gutterSize: gutter, colorPrimary: rowsColor, colorSpacing: .blackBackground)
+        let config = RowsConfiguration(
+            height: height,
+            gutterSize: gutter,
+            colorPrimary: rowsColor,
+            colorSpacing: .blackBackground,
+            opacity: Float(rowsColor.rgba.alpha)
+        )
 
         Gridel.currentRowsConfig = config
         rowsOptionsView.setupDemoView(with: config)

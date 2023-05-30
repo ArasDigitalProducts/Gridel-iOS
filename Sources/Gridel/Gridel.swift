@@ -118,6 +118,7 @@ public struct RowsConfiguration {
     let gutterSize: Int
     let colorPrimary: UIColor
     let colorSpacing: UIColor
+    let opacity: Float
 }
 
 public struct ColumnsConfiguration {
@@ -126,4 +127,5 @@ public struct ColumnsConfiguration {
     let marginSize: Int
     let columnCount: Int
     let gutterSize: Int
+    let opacity: Float
 }
