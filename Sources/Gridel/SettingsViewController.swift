@@ -6,230 +6,273 @@
 //
 
 import UIKit
-import SnapKit
 
 class SettingsViewController: UIViewController {
-    var colorPrimary: UIColor = .cyan
-    var colorSecondary: UIColor = .magenta
-    var colorSpacing: UIColor = .white
 
-    let containerView = UIView()
+    var containerView: UIView!
+    var cancelButton: UIBarButtonItem!
+    var saveButton: UIBarButtonItem!
+    var optionSegmentView: UISegmentedControl!
+    var columnsOptionsView: ColumnsOptionsView!
+    var rowsOptionsView: RowsOptionsView!
 
-    let applyButton = UIButton(type: .roundedRect)
+    // MARK: - columns settings
+    var columnsColor: UIColor = .p300 {
+        didSet {
+            columnsConfigUpdated()
+        }
+    }
+    var columnsCount: Int? {
+        didSet {
+            columnsConfigUpdated()
+        }
+    }
+    var columnsMargins: Int? {
+        didSet {
+            columnsConfigUpdated()
+        }
+    }
+    var columnsGutter: Int? {
+        didSet {
+            columnsConfigUpdated()
+        }
+    }
 
-    let marginSizeLabel = UILabel()
-    let marginSizeTextField = UITextField()
-    let columnCountLabel = UILabel()
-    let columnCountTextField = UITextField()
-    let gutterSizeLabel = UILabel()
-    let gutterSizeTextField = UITextField()
-    let rowHeightLabel = UILabel()
-    let rowHeightTextField = UITextField()
+    // MARK: - rows settings
+    var rowsColor: UIColor = .p300 {
+        didSet {
+            rowsConfigUpdated()
+        }
+    }
 
-    let opacityLabel = UILabel()
-    let opacitySlider = UISlider()
+    var rowsHeight: Int? {
+        didSet {
+            rowsConfigUpdated()
+        }
+    }
 
-    let optionSwitch = UISwitch()
-    let optionLabel = UILabel()
+    var rowsGutter: Int? {
+        didSet {
+            rowsConfigUpdated()
+        }
+    }
 
+
+    // MARK: - lifecycle
     override func viewDidLoad() {
         view.backgroundColor = .white
         setupHideKeyboardOnTap()
 
+        initViews()
         setupUI()
         renderViews()
+        setupDelegates()
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         Gridel.gridelWindow?.isUserInteractionEnabled = false
     }
 
+    private func initViews() {
+        cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelTapped))
+        saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveTapped))
+        optionSegmentView = UISegmentedControl(items: ["Columns", "Rows"])
+        containerView = UIView()
+        columnsOptionsView = ColumnsOptionsView()
+
+        rowsOptionsView = RowsOptionsView()
+    }
+
+    private func setupDelegates() {
+        columnsOptionsView.delegate = self
+        rowsOptionsView.delegate = self
+    }
+
     private func setupUI() {
-        applyButton.setTitle("Apply", for: .normal)
-        applyButton.layer.cornerRadius = 20
-        applyButton.backgroundColor = .systemBlue
-        applyButton.setTitleColor(.white, for: .normal)
+        view.backgroundColor = .blackBackground
+        containerView.backgroundColor = .blackBackground
 
-        marginSizeLabel.text = "Margin size"
-        marginSizeTextField.keyboardType = .numberPad
-        marginSizeTextField.borderStyle = .bezel
+        navigationItem.title = "Gridel"
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
 
-        columnCountLabel.text = "Number of columns"
-        columnCountTextField.keyboardType = .numberPad
-        columnCountTextField.borderStyle = .bezel
+        navigationItem.leftBarButtonItem = cancelButton
+        cancelButton.tintColor = .p300
 
-        gutterSizeLabel.text = "Gutter size"
-        gutterSizeTextField.keyboardType = .numberPad
-        gutterSizeTextField.borderStyle = .bezel
+        navigationItem.rightBarButtonItem = saveButton
+        saveButton.tintColor = .p300
 
-        rowHeightLabel.text = "Row height"
-        rowHeightTextField.keyboardType = .numberPad
-        rowHeightTextField.borderStyle = .bezel
-
-        opacityLabel.text = "Opacity"
-        opacitySlider.maximumValue = 1
-        opacitySlider.minimumValue = 0
-        opacitySlider.value = 0.5
-
-        applyButton.addTarget(self, action: #selector(applyButtonTapped), for: .touchUpInside)
-
-        optionSwitch.addTarget(self, action: #selector(switchChanged), for: UIControl.Event.valueChanged)
-        optionLabel.text = "Verbose"
+        optionSegmentView.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
+        optionSegmentView.backgroundColor = .g400
+        optionSegmentView.selectedSegmentTintColor = .p300
+        optionSegmentView.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
+        optionSegmentView.selectedSegmentIndex = 0
     }
 
     private func renderViews() {
         view.addSubview(containerView)
-        containerView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide.snp.edges)
-        }
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            containerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 52),
+            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
 
-        //marginSize
-        containerView.addSubview(marginSizeLabel)
-        containerView.addSubview(marginSizeTextField)
+        containerView.addSubview(optionSegmentView)
+        optionSegmentView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            optionSegmentView.heightAnchor.constraint(equalToConstant: 32),
+            optionSegmentView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            optionSegmentView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 24),
+            optionSegmentView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20)
+        ])
 
-        marginSizeLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(64)
-            make.leading.equalToSuperview().offset(8)
-        }
-        marginSizeTextField.snp.makeConstraints { make in
-            make.leading.equalTo(marginSizeLabel.snp.trailing).offset(16)
-            make.centerY.equalTo(marginSizeLabel.snp.centerY)
-            make.trailing.equalToSuperview().offset(-8)
-        }
-
-        //columnCount
-        containerView.addSubview(columnCountLabel)
-        containerView.addSubview(columnCountTextField)
-
-        columnCountLabel.snp.makeConstraints { make in
-            make.top.equalTo(marginSizeLabel.snp.bottom).offset(16)
-            make.leading.equalToSuperview().offset(8)
-        }
-
-        columnCountTextField.snp.makeConstraints { make in
-            make.leading.equalTo(columnCountLabel.snp.trailing).offset(16)
-            make.centerY.equalTo(columnCountLabel.snp.centerY)
-            make.trailing.equalToSuperview().offset(-8)
-        }
-
-        //gutterSize
-        containerView.addSubview(gutterSizeLabel)
-        containerView.addSubview(gutterSizeTextField)
-
-        gutterSizeLabel.snp.makeConstraints { make in
-            make.top.equalTo(columnCountLabel.snp.bottom).offset(16)
-            make.leading.equalToSuperview().offset(8)
-        }
-
-        gutterSizeTextField.snp.makeConstraints { make in
-            make.leading.equalTo(gutterSizeLabel.snp.trailing).offset(16)
-            make.centerY.equalTo(gutterSizeLabel.snp.centerY)
-            make.trailing.equalToSuperview().offset(-8)
-        }
-
-        //rowHeight
-        containerView.addSubview(rowHeightLabel)
-        containerView.addSubview(rowHeightTextField)
-
-        rowHeightLabel.snp.makeConstraints { make in
-            make.top.equalTo(gutterSizeLabel.snp.bottom).offset(16)
-            make.leading.equalToSuperview().offset(8)
-        }
-
-        rowHeightTextField.snp.makeConstraints { make in
-            make.leading.equalTo(rowHeightLabel.snp.trailing).offset(16)
-            make.centerY.equalTo(rowHeightLabel.snp.centerY)
-            make.trailing.equalToSuperview().offset(-8)
-        }
-
-        //Slider
-        containerView.addSubview(opacityLabel)
-        opacityLabel.snp.makeConstraints { make in
-            make.top.equalTo(rowHeightLabel.snp.bottom).offset(64)
-            make.centerX.equalToSuperview()
-        }
-
-        containerView.addSubview(opacitySlider)
-        opacitySlider.snp.makeConstraints { make in
-            make.top.equalTo(opacityLabel.snp.bottom).offset(16)
-            make.centerX.equalToSuperview()
-            make.height.equalTo(64)
-            make.leading.trailing.equalToSuperview().inset(16)
-        }
-
-
-        //OptionLabel
-        containerView.addSubview(optionLabel)
-        optionLabel.snp.makeConstraints { make in
-            make.top.equalTo(opacitySlider.snp.bottom).offset(32)
-            make.leading.equalToSuperview().offset(16)
-        }
-        //Option switch
-        containerView.addSubview(optionSwitch)
-        optionSwitch.snp.makeConstraints { make in
-            make.centerY.equalTo(optionLabel.snp.centerY)
-            make.trailing.equalToSuperview().inset(16)
-            make.leading.equalTo(optionLabel.snp.trailing)
-        }
-
-        //Apply button
-        containerView.addSubview(applyButton)
-        applyButton.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(64)
-            make.bottom.equalToSuperview().offset(-64)
-        }
+        containerView.addSubview(columnsOptionsView)
+        columnsOptionsView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            columnsOptionsView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            columnsOptionsView.topAnchor.constraint(equalTo: optionSegmentView.bottomAnchor, constant: 32),
+            columnsOptionsView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            columnsOptionsView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+        ])
 
     }
 
-    @objc
-    private func applyButtonTapped() {
-
-        if optionSwitch.isOn {
-            let configStyle = ConfigStyle.simple(configuration: .init(height: Int(rowHeightTextField.text ?? "0") ?? 0, opacity: opacitySlider.value, colorPrimary: colorPrimary, colorSpacing: colorSpacing))
-
-            Gridel.applyGrid(with: configStyle)
-        } else {
-            let configStyle = ConfigStyle.verbose(configuration: VerboseConfiguration(
-                colorPrimary: colorPrimary,
-                colorSecondary: colorSecondary,
-                colorSpacing: colorSpacing,
-                opacity: opacitySlider.value,
-                marginSize: Int(marginSizeTextField.text ?? "0") ?? 0,
-                columnCount: Int(columnCountTextField.text ?? "0") ?? 0,
-                gutterSize: Int(gutterSizeTextField.text ?? "0") ?? 0,
-                rowHeight: Int(rowHeightTextField.text ?? "0") ?? 0
-                )
-            )
-
-            Gridel.applyGrid(with: configStyle)
-        }
-
-        self.dismiss(animated: true)
-    }
-
-    @objc
-    private func switchChanged(configSwitch: UISwitch) {
-        if configSwitch.isOn {
-            optionLabel.text = "Simple"
-
-            marginSizeTextField.isEnabled = false
-            marginSizeTextField.backgroundColor = .gray
-            columnCountTextField.isEnabled = false
-            columnCountTextField.backgroundColor = .gray
-            gutterSizeTextField.isEnabled = false
-            gutterSizeTextField.backgroundColor = .gray
-        } else {
-            optionLabel.text = "Verbose"
-
-            marginSizeTextField.isEnabled = true
-            marginSizeTextField.backgroundColor = .systemBackground
-            columnCountTextField.isEnabled = true
-            columnCountTextField.backgroundColor = .systemBackground
-            gutterSizeTextField.isEnabled = true
-            gutterSizeTextField.backgroundColor = .systemBackground
+    @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            columnsSelected()
+        case 1:
+            rowsSelected()
+        default:
+            break
         }
     }
 
+    private func rowsSelected() {
+        columnsOptionsView.removeFromSuperview()
+        containerView.addSubview(rowsOptionsView)
+        rowsOptionsView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            rowsOptionsView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            rowsOptionsView.topAnchor.constraint(equalTo: optionSegmentView.bottomAnchor, constant: 32),
+            rowsOptionsView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            rowsOptionsView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+        ])
+    }
 
+    private func columnsSelected() {
+        rowsOptionsView.removeFromSuperview()
+        containerView.addSubview(columnsOptionsView)
+        columnsOptionsView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            columnsOptionsView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            columnsOptionsView.topAnchor.constraint(equalTo: optionSegmentView.bottomAnchor, constant: 32),
+            columnsOptionsView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            columnsOptionsView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+        ])
+    }
+
+    @objc func cancelTapped() {
+        dismiss(animated: true)
+    }
+
+    @objc func saveTapped() {
+        
+    }
+}
+
+// MARK: - Color picker delegate
+extension SettingsViewController: UIColorPickerViewControllerDelegate {
+    func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: UIColor, continuously: Bool) {
+        switch optionSegmentView.selectedSegmentIndex {
+        case 0:
+            columnsColor = color
+        case 1:
+            rowsColor = color
+        default: return
+        }
+    }
+
+    private func colorInputTapped() {
+        let colorPickerViewController = UIColorPickerViewController()
+        colorPickerViewController.delegate = self
+        present(colorPickerViewController, animated: true)
+
+    }
+}
+
+// MARK: - Columns settings
+extension SettingsViewController: ColumnsOptionsDelegate {
+    func columnsColorInputTapped() {
+        colorInputTapped()
+    }
+
+    func countUpdated(with count: Int) {
+        columnsCount = count
+    }
+
+    func marginsUpdated(with margins: Int) {
+        columnsMargins = margins
+    }
+
+    func columnsGutterUpdated(with gutter: Int) {
+        columnsGutter = gutter
+    }
+
+    private func columnsConfigUpdated() {
+        let marginSize = columnsMargins ?? 0
+        let columnCount = columnsCount ?? 1
+        let gutterSize = columnsGutter ?? 0
+
+        let config = ColumnsConfiguration(
+            color: columnsColor,
+            colorSpacing: .blackBackground,
+            marginSize: marginSize,
+            columnCount: columnCount,
+            gutterSize: gutterSize,
+            opacity: Float(columnsColor.rgba.alpha)
+        )
+
+        Gridel.currentColumnsConfig = config
+        columnsOptionsView.setupDemoView(with: config)
+        columnsOptionsView.colorInputView.leftView?.backgroundColor = columnsColor
+        columnsOptionsView.colorInputView.textField.text = columnsColor.toHexString().uppercased()
+        columnsOptionsView.colorRightLabel.text = columnsColor.cgColor.alpha.toPercentageString()
+    }
+}
+
+// MARK: - Rows settings
+extension SettingsViewController: RowsOptionsDelegate {
+    func rowsColorInputTapped() {
+        colorInputTapped()
+    }
+
+    func rowsGutterUpdated(with gutter: Int) {
+        rowsGutter = gutter
+    }
+
+    func heightUpdated(with height: Int) {
+        rowsHeight = height
+    }
+
+    private func rowsConfigUpdated() {
+        let height = rowsHeight ?? 0
+        let gutter = rowsGutter ?? 0
+
+        let config = RowsConfiguration(
+            height: height,
+            gutterSize: gutter,
+            colorPrimary: rowsColor,
+            colorSpacing: .blackBackground,
+            opacity: Float(rowsColor.rgba.alpha)
+        )
+
+        Gridel.currentRowsConfig = config
+        rowsOptionsView.setupDemoView(with: config)
+        rowsOptionsView.colorInputView.leftView?.backgroundColor = rowsColor
+        rowsOptionsView.colorInputView.textField.text = rowsColor.toHexString().uppercased()
+        rowsOptionsView.colorRightLabel.text = rowsColor.cgColor.alpha.toPercentageString()
+
+    }
 }

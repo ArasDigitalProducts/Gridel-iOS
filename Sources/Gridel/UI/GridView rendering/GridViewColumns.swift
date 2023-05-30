@@ -7,11 +7,11 @@
 
 import UIKit
 
-class GridViewColumns: UIView{
+class GridViewColumns: UIView {
 
-    private var config: VerboseConfiguration?
+    private var config: ColumnsConfiguration?
 
-    func setup(with config: VerboseConfiguration) {
+    func setup(with config: ColumnsConfiguration) {
         self.config = config
     }
 
@@ -43,7 +43,7 @@ class GridViewColumns: UIView{
 
         for _ in 1...(columns - 1) {
             let columnRect = CGRect(x: xStart, y: 0, width: columnWidth, height: bounds.height)
-            context?.setFillColor(config.colorPrimary.cgColor)
+            context?.setFillColor(config.color.cgColor)
             context?.fill(columnRect)
             xStart = xStart + columnWidth
 
@@ -54,7 +54,7 @@ class GridViewColumns: UIView{
         }
 
         let columnRect = CGRect(x: xStart, y: 0, width: columnWidth, height: bounds.height)
-        context?.setFillColor(config.colorPrimary.cgColor)
+        context?.setFillColor(config.color.cgColor)
         context?.fill(columnRect)
     }
 }

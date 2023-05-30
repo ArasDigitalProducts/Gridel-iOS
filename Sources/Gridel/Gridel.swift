@@ -11,15 +11,14 @@ public struct Gridel {
         }
 
     public static var gridelWindow: UIWindow?
-
     static var gridViewRows = GridViewRows()
     static var gridViewColumns = GridViewColumns()
-
-//    static var configStyle: ConfigStyle?
+    static var settingsViewController = SettingsViewController()
 
     static var trigger = Triggers.shake
 
-    static var isGridActive = false
+    static var currentColumnsConfig: ColumnsConfiguration?
+    static var currentRowsConfig: RowsConfiguration?
 
     public init() {
     }
@@ -33,33 +32,23 @@ public struct Gridel {
 //        gridelWindow?.backgroundColor = .clear
         gridelWindow?.isHidden = false
         gridelWindow?.isUserInteractionEnabled = false
+
         let rootView = UIViewController()
         rootView.view.backgroundColor = .clear
-        gridelWindow?.rootViewController = UIViewController()
+
+        let settingsNavigationController = UINavigationController(rootViewController: settingsViewController)
+
+        gridelWindow?.rootViewController = rootView
 
         trigger.subscribe {
-            if isGridActive {
-                removeGrid()
-            } else {
+            if gridelWindow?.rootViewController?.presentedViewController == nil {
                 gridelWindow?.isUserInteractionEnabled = true
-                gridelWindow?.rootViewController?.present(SettingsViewController(), animated: true)
+                gridelWindow?.rootViewController?.present(settingsNavigationController, animated: true)
             }
         }
     }
 
-    static func applyGrid(with configStyle: ConfigStyle) {
-        switch configStyle {
-        case .simple(let configuration):
-            applySimpleGrid(with: configuration)
-        case .verbose(let configuration):
-            applyVerboseGrid(with: configuration)
-        }
-
-        print("applied \(configStyle)")
-        isGridActive = true
-    }
-
-    static func applySimpleGrid(with config: SimpleConfiguration) {
+    static func applyRows(with config: RowsConfiguration) {
         guard let gridelWindow else { return }
 
         gridViewRows = GridViewRows()
@@ -70,29 +59,23 @@ public struct Gridel {
         gridelWindow.addSubview(gridViewRows)
     }
 
-    static func applyVerboseGrid(with config: VerboseConfiguration) {
+    static func applyColumns(with config: ColumnsConfiguration) {
         guard let gridelWindow else { return }
-
-        gridViewRows = GridViewRows()
-        gridViewRows.frame = gridelWindow.bounds
-        gridViewRows.setup(with: config.toSimpleConfig)
-        gridViewRows.isUserInteractionEnabled = false
 
         gridViewColumns = GridViewColumns()
         gridViewColumns.frame = gridelWindow.bounds
         gridViewColumns.setup(with: config)
         gridViewColumns.isUserInteractionEnabled = false
 
-        gridelWindow.addSubview(gridViewRows)
         gridelWindow.addSubview(gridViewColumns)
-
     }
 
-    static func removeGrid() {
+    static func removeRows() {
         gridViewRows.removeFromSuperview()
+    }
+
+    static func removeColumns() {
         gridViewColumns.removeFromSuperview()
-        print("removed grid")
-        isGridActive = false
     }
 
 }
@@ -108,31 +91,19 @@ public enum ActivationAction {
     }
 }
 
-public enum ConfigStyle {
-    case simple(configuration: SimpleConfiguration)
-    case verbose(configuration: VerboseConfiguration)
-}
-
-public struct SimpleConfiguration {
+public struct RowsConfiguration {
     let height: Int
-    let opacity: Float
+    let gutterSize: Int
     let colorPrimary: UIColor
     let colorSpacing: UIColor
+    let opacity: Float
 }
 
-public struct VerboseConfiguration {
-    let colorPrimary: UIColor
-    let colorSecondary: UIColor
+public struct ColumnsConfiguration {
+    let color: UIColor
     let colorSpacing: UIColor
-    let opacity: Float
-
     let marginSize: Int
     let columnCount: Int
-    let gutterSize: Int // razmak izmedju stupaca
-
-    let rowHeight: Int
-
-    var toSimpleConfig: SimpleConfiguration{
-        return SimpleConfiguration(height: rowHeight, opacity: opacity, colorPrimary: colorSecondary, colorSpacing: colorSpacing)
-    }
+    let gutterSize: Int
+    let opacity: Float
 }
