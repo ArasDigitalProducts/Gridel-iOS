@@ -167,7 +167,7 @@ extension RowsOptionsView: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == heightInputView.textField {
             delegate?.heightUpdated(with: Int(textField.text ?? "0") ?? 0)
-        } else if textField == gutterInputView {
+        } else if textField == gutterInputView.textField {
             delegate?.rowsGutterUpdated(with: Int(textField.text ?? "0") ?? 0)
         }
     }
