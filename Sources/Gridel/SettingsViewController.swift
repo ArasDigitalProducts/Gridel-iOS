@@ -254,7 +254,7 @@ extension SettingsViewController: RowsOptionsDelegate {
         let height = rowsHeight ?? 0
         let gutter = rowsGutter ?? 0
 
-        let config = RowsConfiguration(height: height, colorPrimary: rowsColor, colorSpacing: .blackBackground)
+        let config = RowsConfiguration(height: height, gutterSize: gutter, colorPrimary: rowsColor, colorSpacing: .blackBackground)
 
         rowsOptionsView.setupDemoView(with: config)
         rowsOptionsView.colorInputView.leftView?.backgroundColor = rowsColor
