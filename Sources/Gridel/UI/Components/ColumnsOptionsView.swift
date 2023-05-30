@@ -158,6 +158,16 @@ class ColumnsOptionsView: UIView {
         countInputView.textField.delegate = self
         marginInputView.textField.delegate = self
         gutterInputView.textField.delegate = self
+        showColumnsSwitch.addTarget(self, action: #selector(switchValueChanged(_:)), for: .valueChanged)
+    }
+
+    @objc func switchValueChanged(_ sender: UISwitch) {
+        if sender.isOn {
+            guard let config = Gridel.currentColumnsConfig else { return }
+            Gridel.applyColumns(with: config)
+        } else {
+            Gridel.removeColumns()
+        }
     }
 
     private func colorInputTapped() {

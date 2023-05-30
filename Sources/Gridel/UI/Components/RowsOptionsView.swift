@@ -149,6 +149,16 @@ class RowsOptionsView: UIView {
     private func setupDelegates() {
         heightInputView.textField.delegate = self
         gutterInputView.textField.delegate = self
+        showRowsSwitch.addTarget(self, action: #selector(switchValueChanged(_:)), for: .valueChanged)
+    }
+
+    @objc func switchValueChanged(_ sender: UISwitch) {
+        if sender.isOn {
+            guard let config = Gridel.currentRowsConfig else { return }
+            Gridel.applyRows(with: config)
+        } else {
+            Gridel.removeRows()
+        }
     }
 
     private func colorInputTapped() {

@@ -11,17 +11,14 @@ public struct Gridel {
         }
 
     public static var gridelWindow: UIWindow?
-
     static var gridViewRows = GridViewRows()
     static var gridViewColumns = GridViewColumns()
-
     static var settingsViewController = SettingsViewController()
-
-//    static var configStyle: ConfigStyle?
 
     static var trigger = Triggers.shake
 
-//    static var isGridActive = false
+    static var currentColumnsConfig: ColumnsConfiguration?
+    static var currentRowsConfig: RowsConfiguration?
 
     public init() {
     }

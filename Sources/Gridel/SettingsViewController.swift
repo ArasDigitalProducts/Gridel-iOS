@@ -180,8 +180,6 @@ class SettingsViewController: UIViewController {
     @objc func saveTapped() {
         
     }
-
-
 }
 
 // MARK: - Color picker delegate
@@ -229,6 +227,7 @@ extension SettingsViewController: ColumnsOptionsDelegate {
 
         let config = ColumnsConfiguration(color: columnsColor, colorSpacing: .blackBackground, marginSize: marginSize, columnCount: columnCount, gutterSize: gutterSize)
 
+        Gridel.currentColumnsConfig = config
         columnsOptionsView.setupDemoView(with: config)
         columnsOptionsView.colorInputView.leftView?.backgroundColor = columnsColor
         columnsOptionsView.colorInputView.textField.text = columnsColor.toHexString().uppercased()
@@ -256,6 +255,7 @@ extension SettingsViewController: RowsOptionsDelegate {
 
         let config = RowsConfiguration(height: height, gutterSize: gutter, colorPrimary: rowsColor, colorSpacing: .blackBackground)
 
+        Gridel.currentRowsConfig = config
         rowsOptionsView.setupDemoView(with: config)
         rowsOptionsView.colorInputView.leftView?.backgroundColor = rowsColor
         rowsOptionsView.colorInputView.textField.text = rowsColor.toHexString().uppercased()
