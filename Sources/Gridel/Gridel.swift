@@ -41,7 +41,7 @@ public struct Gridel {
         gridelWindow?.rootViewController = rootView
 
         trigger.subscribe {
-            if !settingsViewController.isBeingPresented {
+            if gridelWindow?.rootViewController?.presentedViewController == nil {
                 gridelWindow?.isUserInteractionEnabled = true
                 gridelWindow?.rootViewController?.present(settingsNavigationController, animated: true)
             }
