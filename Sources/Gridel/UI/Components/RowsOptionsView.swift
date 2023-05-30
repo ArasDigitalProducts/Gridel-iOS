@@ -13,6 +13,18 @@ class RowsOptionsView: UIView {
     var showRowsView = UIView()
     var showRowsLabel = UILabel()
     var showRowsSwitch = UISwitch()
+    var gridDemoViewContainer = UIView()
+    var gridDemoView = GridViewRows()
+    var heightInputView = GridelInputView(
+        title: "Height",
+        keyboardType: .numberPad,
+        rightView: UIImageView(image: UIImage(systemName: "chevron.down"))
+    )
+    var gutterInputView = GridelInputView(
+        title: "Gutter",
+        keyboardType: .numberPad
+    )
+    var heightAndGutterStackView = UIStackView()
 
     init() {
         super.init(frame: .zero)
@@ -36,6 +48,13 @@ class RowsOptionsView: UIView {
         showRowsSwitch.isOn = false
         showRowsSwitch.tintColor = .g75
         showRowsSwitch.onTintColor = .p300
+        //grid demo view
+        gridDemoView.backgroundColor = .clear
+        //height and gutter
+        heightAndGutterStackView.axis = .horizontal
+        heightAndGutterStackView.distribution = .fillEqually
+        heightAndGutterStackView.spacing = 16
+        heightInputView.rightView.tintColor = .white
     }
 
     private func renderViews() {
@@ -71,6 +90,27 @@ class RowsOptionsView: UIView {
         NSLayoutConstraint.activate([
             showRowsSwitch.trailingAnchor.constraint(equalTo: showRowsView.trailingAnchor, constant: -16),
             showRowsSwitch.centerYAnchor.constraint(equalTo: showRowsView.centerYAnchor)
+        ])
+
+        // grid demo view
+        containerView.addSubview(gridDemoViewContainer)
+        gridDemoViewContainer.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            gridDemoViewContainer.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            gridDemoViewContainer.topAnchor.constraint(equalTo: showRowsView.bottomAnchor, constant: 32),
+            gridDemoViewContainer.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            gridDemoViewContainer.heightAnchor.constraint(equalToConstant: 136)
+        ])
+        //height and gutter
+        heightAndGutterStackView.addArrangedSubview(heightInputView)
+        heightAndGutterStackView.addArrangedSubview(gutterInputView)
+        containerView.addSubview(heightAndGutterStackView)
+        heightAndGutterStackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            heightAndGutterStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            heightAndGutterStackView.topAnchor.constraint(equalTo: gridDemoViewContainer.bottomAnchor, constant: 40),
+            heightAndGutterStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
+            heightAndGutterStackView.heightAnchor.constraint(equalToConstant: 56)
         ])
     }
 

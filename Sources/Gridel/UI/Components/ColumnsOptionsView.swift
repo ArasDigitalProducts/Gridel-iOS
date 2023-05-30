@@ -133,7 +133,7 @@ class ColumnsOptionsView: UIView {
             countInputView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
             countInputView.heightAnchor.constraint(equalToConstant: 56)
         ])
-
+        // margin and gutter
         marginAndGutterStackView.addArrangedSubview(marginInputView)
         marginAndGutterStackView.addArrangedSubview(gutterInputView)
         containerView.addSubview(marginAndGutterStackView)
@@ -144,7 +144,7 @@ class ColumnsOptionsView: UIView {
             marginAndGutterStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
             marginAndGutterStackView.heightAnchor.constraint(equalToConstant: 56)
         ])
-
+        // color input 
         containerView.addSubview(colorInputView)
         colorInputView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
