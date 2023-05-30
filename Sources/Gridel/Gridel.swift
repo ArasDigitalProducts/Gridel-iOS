@@ -15,11 +15,13 @@ public struct Gridel {
     static var gridViewRows = GridViewRows()
     static var gridViewColumns = GridViewColumns()
 
+    static var settingsViewController = SettingsViewController()
+
 //    static var configStyle: ConfigStyle?
 
     static var trigger = Triggers.shake
 
-    static var isGridActive = false
+//    static var isGridActive = false
 
     public init() {
     }
@@ -37,66 +39,63 @@ public struct Gridel {
         let rootView = UIViewController()
         rootView.view.backgroundColor = .clear
 
-        let settingsNavigationController = UINavigationController(rootViewController: SettingsViewController())
+        let settingsNavigationController = UINavigationController(rootViewController: settingsViewController)
 
         gridelWindow?.rootViewController = rootView
 
         trigger.subscribe {
-            if isGridActive {
-                removeGrid()
-            } else {
-                gridelWindow?.isUserInteractionEnabled = true
-                gridelWindow?.rootViewController?.present(settingsNavigationController, animated: true)
-            }
+            gridelWindow?.isUserInteractionEnabled = true
+            gridelWindow?.rootViewController?.present(settingsNavigationController, animated: true)
         }
     }
 
-    static func applyGrid(with configStyle: ConfigStyle) {
-        switch configStyle {
-        case .simple(let configuration):
-            applySimpleGrid(with: configuration)
-        case .verbose(let configuration):
-            applyVerboseGrid(with: configuration)
-        }
+//    static func applyGrid(with configStyle: ConfigStyle) {
+//        switch configStyle {
+//        case .simple(let configuration):
+//            applySimpleGrid(with: configuration)
+//        case .verbose(let configuration):
+//            applyVerboseGrid(with: configuration)
+//        }
+//
+//        print("applied \(configStyle)")
+//        isGridActive = true
+//    }
 
-        print("applied \(configStyle)")
-        isGridActive = true
+    static func applyRows(with config: RowsConfiguration) {
+        guard let gridelWindow else { return }
+
+        gridViewRows = GridViewRows()
+        gridViewRows.frame = gridelWindow.bounds
+        gridViewRows.setup(with: config)
+
+        gridViewRows.isUserInteractionEnabled = false
+        gridelWindow.addSubview(gridViewRows)
     }
 
-    static func applySimpleGrid(with config: RowsConfiguration) {
-//        guard let gridelWindow else { return }
-//
-//        gridViewRows = GridViewRows()
-//        gridViewRows.frame = gridelWindow.bounds
-//        gridViewRows.setup(with: config)
-//
-//        gridViewRows.isUserInteractionEnabled = false
-//        gridelWindow.addSubview(gridViewRows)
-    }
+    static func applyColumns(with config: ColumnsConfiguration) {
+        guard let gridelWindow else { return }
 
-    static func applyVerboseGrid(with config: ColumnsConfiguration) {
-//        guard let gridelWindow else { return }
-//
 //        gridViewRows = GridViewRows()
 //        gridViewRows.frame = gridelWindow.bounds
 //        gridViewRows.setup(with: config.toSimpleConfig)
 //        gridViewRows.isUserInteractionEnabled = false
-//
-//        gridViewColumns = GridViewColumns()
-//        gridViewColumns.frame = gridelWindow.bounds
-//        gridViewColumns.setup(with: config)
-//        gridViewColumns.isUserInteractionEnabled = false
-//
+
+        gridViewColumns = GridViewColumns()
+        gridViewColumns.frame = gridelWindow.bounds
+        gridViewColumns.setup(with: config)
+        gridViewColumns.isUserInteractionEnabled = false
+
 //        gridelWindow.addSubview(gridViewRows)
-//        gridelWindow.addSubview(gridViewColumns)
+        gridelWindow.addSubview(gridViewColumns)
 
     }
 
-    static func removeGrid() {
+    static func removeRows() {
         gridViewRows.removeFromSuperview()
+    }
+
+    static func removeColumns() {
         gridViewColumns.removeFromSuperview()
-        print("removed grid")
-        isGridActive = false
     }
 
 }
@@ -112,10 +111,10 @@ public enum ActivationAction {
     }
 }
 
-public enum ConfigStyle {
-    case simple(configuration: RowsConfiguration)
-    case verbose(configuration: ColumnsConfiguration)
-}
+//public enum ConfigStyle {
+//    case simple(configuration: RowsConfiguration)
+//    case verbose(configuration: ColumnsConfiguration)
+//}
 
 public struct RowsConfiguration {
     let height: Int
