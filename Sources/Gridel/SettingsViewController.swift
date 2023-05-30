@@ -174,7 +174,7 @@ class SettingsViewController: UIViewController {
     }
 
     @objc func cancelTapped() {
-
+        dismiss(animated: true)
     }
 
     @objc func saveTapped() {

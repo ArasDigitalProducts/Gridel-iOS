@@ -120,7 +120,6 @@ public enum ConfigStyle {
 public struct RowsConfiguration {
     let height: Int
     let gutterSize: Int
-//    let opacity: Float
     let colorPrimary: UIColor
     let colorSpacing: UIColor
 }
@@ -128,15 +127,7 @@ public struct RowsConfiguration {
 public struct ColumnsConfiguration {
     let color: UIColor
     let colorSpacing: UIColor
-//    let opacity: Float
-
     let marginSize: Int
     let columnCount: Int
     let gutterSize: Int
-
-//    let rowHeight: Int
-
-//    var toSimpleConfig: SimpleConfiguration{
-//        return SimpleConfiguration(height: rowHeight, opacity: opacity, colorPrimary: colorSecondary, colorSpacing: colorSpacing)
-//    }
 }
