@@ -154,6 +154,13 @@ class RowsOptionsView: UIView {
     private func colorInputTapped() {
         delegate?.rowsColorInputTapped()
     }
+
+    func setupDemoView(with config: RowsConfiguration) {
+        gridDemoView = GridViewRows()
+        gridDemoView.frame = gridDemoViewContainer.bounds
+        gridDemoView.setup(with: config)
+        gridDemoViewContainer.addSubview(gridDemoView)
+    }
 }
 
 extension RowsOptionsView: UITextFieldDelegate {

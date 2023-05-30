@@ -41,9 +41,22 @@ class SettingsViewController: UIViewController {
     // MARK: - rows settings
     var rowsColor: UIColor = .p300 {
         didSet {
-            rowsColorUpdated(with: rowsColor)
+            rowsConfigUpdated()
         }
     }
+
+    var rowsHeight: Int? {
+        didSet {
+            rowsConfigUpdated()
+        }
+    }
+
+    var rowsGutter: Int? {
+        didSet {
+            rowsConfigUpdated()
+        }
+    }
+
 
     // MARK: - lifecycle
     override func viewDidLoad() {
@@ -168,9 +181,7 @@ class SettingsViewController: UIViewController {
         
     }
 
-    private func rowsColorUpdated(with color: UIColor) {
 
-    }
 }
 
 // MARK: - Color picker delegate
@@ -184,14 +195,19 @@ extension SettingsViewController: UIColorPickerViewControllerDelegate {
         default: return
         }
     }
+
+    private func colorInputTapped() {
+        let colorPickerViewController = UIColorPickerViewController()
+        colorPickerViewController.delegate = self
+        present(colorPickerViewController, animated: true)
+
+    }
 }
 
 // MARK: - Columns settings
 extension SettingsViewController: ColumnsOptionsDelegate {
     func columnsColorInputTapped() {
-        let colorPickerViewController = UIColorPickerViewController()
-        colorPickerViewController.delegate = self
-        present(colorPickerViewController, animated: true)
+        colorInputTapped()
     }
 
     func countUpdated(with count: Int) {
@@ -223,15 +239,27 @@ extension SettingsViewController: ColumnsOptionsDelegate {
 // MARK: - Rows settings
 extension SettingsViewController: RowsOptionsDelegate {
     func rowsColorInputTapped() {
-
+        colorInputTapped()
     }
 
     func rowsGutterUpdated(with gutter: Int) {
-        
+        rowsGutter = gutter
     }
 
     func heightUpdated(with height: Int) {
-
+        rowsHeight = height
     }
 
+    private func rowsConfigUpdated() {
+        let height = rowsHeight ?? 0
+        let gutter = rowsGutter ?? 0
+
+        let config = RowsConfiguration(height: height, colorPrimary: rowsColor, colorSpacing: .blackBackground)
+
+        rowsOptionsView.setupDemoView(with: config)
+        rowsOptionsView.colorInputView.leftView?.backgroundColor = columnsColor
+        rowsOptionsView.colorInputView.textField.text = rowsColor.toHexString().uppercased()
+        rowsOptionsView.colorRightLabel.text = rowsColor.cgColor.alpha.toPercentageString()
+
+    }
 }
