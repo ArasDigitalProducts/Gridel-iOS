@@ -177,10 +177,12 @@ class ColumnsOptionsView: UIView {
     }
 
     func setupDemoView(with config: ColumnsConfiguration) {
+//        gridDemoView.removeFromSuperview()
+//        gridDemoView = GridViewColumns()
 //        gridDemoView = GridViewColumns()
 //        gridDemoView.frame = gridDemoViewContainer.bounds
         gridDemoView.setup(with: config)
-        layoutIfNeeded()
+        gridDemoView.layoutIfNeeded()
 
 //        gridDemoViewContainer.addSubview(gridDemoView)
     }
