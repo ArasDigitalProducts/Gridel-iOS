@@ -15,8 +15,7 @@ class GridViewColumns: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupUI()
-        renderViews()
+
     }
 
     required init?(coder: NSCoder) {
@@ -25,10 +24,17 @@ class GridViewColumns: UIView {
 
     func setup(with config: ColumnsConfiguration) {
         self.config = config
+        setupUI()
+        renderViews()
+    }
 
+    private func setupUI() {
+        guard let config else {return}
+        stackView.axis = .horizontal
         stackView.arrangedSubviews.forEach { view in
             view.removeFromSuperview()
         }
+
         stackView.spacing = CGFloat(config.gutterSize)
 
         (0...config.columnCount).forEach { _ in
@@ -36,10 +42,7 @@ class GridViewColumns: UIView {
             columnView.backgroundColor = config.color
             stackView.addArrangedSubview(columnView)
         }
-    }
 
-    private func setupUI() {
-        stackView.axis = .horizontal
     }
 
     private func renderViews() {
@@ -57,10 +60,10 @@ class GridViewColumns: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(stackView)
         NSLayoutConstraint.activate([
-            containerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: CGFloat(config.marginSize)),
-            containerView.topAnchor.constraint(equalTo: topAnchor),
-            containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: CGFloat(-config.marginSize)),
-            containerView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: CGFloat(config.marginSize)),
+            stackView.topAnchor.constraint(equalTo: topAnchor),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: CGFloat(-config.marginSize)),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
 
