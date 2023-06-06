@@ -13,15 +13,22 @@ class GridViewColumns: UIView {
     private let stackView = UIStackView()
     private var config: ColumnsConfiguration?
 
-    func setup(with config: ColumnsConfiguration) {
-        self.config = config
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setupUI()
         renderViews()
     }
 
-    private func setupUI() {
-        guard let config else { return }
-        stackView.axis = .horizontal
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func setup(with config: ColumnsConfiguration) {
+        self.config = config
+
+        stackView.arrangedSubviews.forEach { view in
+            view.removeFromSuperview()
+        }
         stackView.spacing = CGFloat(config.gutterSize)
 
         (0...config.columnCount).forEach { _ in
@@ -29,6 +36,10 @@ class GridViewColumns: UIView {
             columnView.backgroundColor = config.color
             stackView.addArrangedSubview(columnView)
         }
+    }
+
+    private func setupUI() {
+        stackView.axis = .horizontal
     }
 
     private func renderViews() {
