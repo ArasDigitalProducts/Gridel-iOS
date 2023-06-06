@@ -36,6 +36,7 @@ class GridViewColumns: UIView {
         }
 
         stackView.spacing = CGFloat(config.gutterSize)
+        stackView.distribution = .fillEqually
 
         (0...config.columnCount).forEach { _ in
             let columnView = UIView()
