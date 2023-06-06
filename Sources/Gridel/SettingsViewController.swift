@@ -9,12 +9,22 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
-    var containerView: UIView!
-    var cancelButton: UIBarButtonItem!
-    var saveButton: UIBarButtonItem!
-    var optionSegmentView: UISegmentedControl!
-    var columnsOptionsView: ColumnsOptionsView!
-    var rowsOptionsView: RowsOptionsView!
+    lazy var containerView = UIView()
+    lazy var cancelButton = UIBarButtonItem(
+        title: "Cancel",
+        style: .plain,
+        target: self,
+        action: #selector(cancelTapped)
+    )
+    lazy var saveButton = UIBarButtonItem(
+        title: "Save",
+        style: .plain,
+        target: self,
+        action: #selector(saveTapped)
+    )
+    lazy var optionSegmentView = UISegmentedControl(items: ["Columns", "Rows"])
+    lazy var columnsOptionsView = ColumnsOptionsView()
+    lazy var rowsOptionsView = RowsOptionsView()
 
     // MARK: - columns settings
     var columnsColor: UIColor = .p300 {
@@ -62,8 +72,6 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         view.backgroundColor = .white
         setupHideKeyboardOnTap()
-
-        initViews()
         setupUI()
         renderViews()
         setupDelegates()
@@ -71,16 +79,6 @@ class SettingsViewController: UIViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         Gridel.gridelWindow?.isUserInteractionEnabled = false
-    }
-
-    private func initViews() {
-        cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelTapped))
-        saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveTapped))
-        optionSegmentView = UISegmentedControl(items: ["Columns", "Rows"])
-        containerView = UIView()
-        columnsOptionsView = ColumnsOptionsView()
-
-        rowsOptionsView = RowsOptionsView()
     }
 
     private func setupDelegates() {
