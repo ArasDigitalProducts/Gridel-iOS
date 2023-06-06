@@ -13,7 +13,6 @@ class ColumnsOptionsView: UIView {
     var showColumnsView = UIView()
     var showColumnsLabel = UILabel()
     var showColumnsSwitch = UISwitch()
-    var gridDemoViewContainer = UIView()
     var gridDemoView = GridViewColumns()
     var countBackgroundView = RoundedContainerView()
     var countInputView = GridelInputView(
@@ -118,20 +117,20 @@ class ColumnsOptionsView: UIView {
             showColumnsSwitch.centerYAnchor.constraint(equalTo: showColumnsView.centerYAnchor)
         ])
         // grid demo view
-        containerView.addSubview(gridDemoViewContainer)
-        gridDemoViewContainer.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(gridDemoView)
+        gridDemoView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            gridDemoViewContainer.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            gridDemoViewContainer.topAnchor.constraint(equalTo: showColumnsView.bottomAnchor, constant: 32),
-            gridDemoViewContainer.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            gridDemoViewContainer.heightAnchor.constraint(equalToConstant: 136)
+            gridDemoView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            gridDemoView.topAnchor.constraint(equalTo: showColumnsView.bottomAnchor, constant: 32),
+            gridDemoView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            gridDemoView.heightAnchor.constraint(equalToConstant: 136)
         ])
         // count
         containerView.addSubview(countInputView)
         countInputView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             countInputView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-            countInputView.topAnchor.constraint(equalTo: gridDemoViewContainer.bottomAnchor, constant: 40),
+            countInputView.topAnchor.constraint(equalTo: gridDemoView.bottomAnchor, constant: 40),
             countInputView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
             countInputView.heightAnchor.constraint(equalToConstant: 56)
         ])
@@ -179,9 +178,11 @@ class ColumnsOptionsView: UIView {
 
     func setupDemoView(with config: ColumnsConfiguration) {
         gridDemoView = GridViewColumns()
-        gridDemoView.frame = gridDemoViewContainer.bounds
+//        gridDemoView.frame = gridDemoViewContainer.bounds
         gridDemoView.setup(with: config)
-        gridDemoViewContainer.addSubview(gridDemoView)
+        layoutIfNeeded()
+
+//        gridDemoViewContainer.addSubview(gridDemoView)
     }
 }
 
