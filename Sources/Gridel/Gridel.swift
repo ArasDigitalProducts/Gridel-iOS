@@ -11,8 +11,8 @@ public struct Gridel {
         }
 
     public static var gridelWindow: UIWindow?
-    static var gridViewRows = GridViewRows()
-    static var gridViewColumns = GridViewColumns()
+    static var gridViewRows = RowsGridView()
+    static var gridViewColumns = ColumnsGridView()
     static var settingsViewController = SettingsViewController()
 
     static var trigger = Triggers.shake
@@ -52,7 +52,7 @@ public struct Gridel {
     static func applyRows(with config: RowsConfiguration) {
         guard let gridelWindow else { return }
 
-        gridViewRows = GridViewRows()
+        gridViewRows = RowsGridView()
         gridViewRows.frame = gridelWindow.bounds
         gridViewRows.setup(with: config)
 
@@ -63,7 +63,7 @@ public struct Gridel {
     static func applyColumns(with config: ColumnsConfiguration) {
         guard let gridelWindow else { return }
 
-        gridViewColumns = GridViewColumns()
+        gridViewColumns = ColumnsGridView()
         gridViewColumns.frame = gridelWindow.bounds
         gridViewColumns.setup(with: config)
         gridViewColumns.isUserInteractionEnabled = false

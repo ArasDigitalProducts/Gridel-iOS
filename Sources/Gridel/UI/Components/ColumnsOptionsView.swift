@@ -14,7 +14,7 @@ class ColumnsOptionsView: UIView {
     var showColumnsLabel = UILabel()
     var showColumnsSwitch = UISwitch()
     var gridDemoContainerView = UIView()
-    var gridDemoView = GridViewColumns()
+    var gridDemoView = ColumnsGridView()
     var countBackgroundView = RoundedContainerView()
     var countInputView = GridelInputView(
         title: "Count",
@@ -186,7 +186,7 @@ class ColumnsOptionsView: UIView {
 
         gridDemoView.removeFromSuperview()
 
-        gridDemoView = GridViewColumns()
+        gridDemoView = ColumnsGridView()
         gridDemoView.translatesAutoresizingMaskIntoConstraints = false
         gridDemoView.setup(with: config)
 

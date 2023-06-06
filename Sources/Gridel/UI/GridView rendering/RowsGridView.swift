@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GridViewRows: UIView {
+class RowsGridView: UIView {
 
     private var config: RowsConfiguration?
     

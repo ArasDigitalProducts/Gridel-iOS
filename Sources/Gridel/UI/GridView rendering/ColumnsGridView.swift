@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GridViewColumns: UIView {
+class ColumnsGridView: UIView {
 
     private let containerView = UIView()
     private let stackView = UIStackView()

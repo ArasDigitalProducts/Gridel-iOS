@@ -14,7 +14,7 @@ class RowsOptionsView: UIView {
     var showRowsLabel = UILabel()
     var showRowsSwitch = UISwitch()
     var gridDemoViewContainer = UIView()
-    var gridDemoView = GridViewRows()
+    var gridDemoView = RowsGridView()
     var heightInputView = GridelInputView(
         title: "Height",
         keyboardType: .numberPad,
@@ -183,7 +183,7 @@ class RowsOptionsView: UIView {
     }
 
     func setupDemoView(with config: RowsConfiguration) {
-        gridDemoView = GridViewRows()
+        gridDemoView = RowsGridView()
 
 //        var gridDemoContainerNewHeight = 0
 //        while gridDemoContainerNewHeight < 136 {
