@@ -185,16 +185,18 @@ class RowsOptionsView: UIView {
     func setupDemoView(with config: RowsConfiguration) {
         gridDemoView = GridViewRows()
 
-        var gridDemoContainerNewHeight = 0
-        while gridDemoContainerNewHeight < 136 {
-            gridDemoContainerNewHeight += config.height + config.gutterSize
-        }
-        gridDemoContainerHeightConstraint.constant = CGFloat(gridDemoContainerNewHeight)
-        NSLayoutConstraint.activate([
-            gridDemoContainerHeightConstraint
-        ])
+//        var gridDemoContainerNewHeight = 0
+//        while gridDemoContainerNewHeight < 136 {
+//            gridDemoContainerNewHeight += config.height + config.gutterSize
+//        }
+//        gridDemoContainerHeightConstraint.constant = CGFloat(gridDemoContainerNewHeight)
+//        NSLayoutConstraint.activate([
+//            gridDemoContainerHeightConstraint
+//        ])
+//        gridDemoView.layoutIfNeeded()
 
         gridDemoView.frame = gridDemoViewContainer.bounds
+        gridDemoView.translatesAutoresizingMaskIntoConstraints = false
         gridDemoView.setup(with: config)
         gridDemoViewContainer.addSubview(gridDemoView)
     }
