@@ -39,6 +39,22 @@ class RowsOptionsView: UIView {
         }
     }()
 
+    let gridDemoContainerInitialHeight: CGFloat = 136
+    lazy var gridDemoContainerHeightConstraint = NSLayoutConstraint(
+        item: gridDemoViewContainer,
+        attribute: .height,
+        relatedBy: .equal,
+        toItem: nil,
+        attribute: .notAnAttribute,
+        multiplier: 1.0,
+        constant: gridDemoContainerInitialHeight)
+
+//    lazy var gridDemoContainerHeightConstraint = NSLayoutConstraint(
+//        item: gridDemoViewContainer,
+//        attribute: .height,
+//        relatedBy: .equal,
+//        constant: 136)
+
     //delegate
     weak var delegate: RowsOptionsDelegate?
 
@@ -123,7 +139,7 @@ class RowsOptionsView: UIView {
             gridDemoViewContainer.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             gridDemoViewContainer.topAnchor.constraint(equalTo: showRowsView.bottomAnchor, constant: 32),
             gridDemoViewContainer.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            gridDemoViewContainer.heightAnchor.constraint(equalToConstant: 136)
+            gridDemoContainerHeightConstraint
         ])
         //height and gutter
         heightAndGutterStackView.addArrangedSubview(heightInputView)
@@ -168,6 +184,16 @@ class RowsOptionsView: UIView {
 
     func setupDemoView(with config: RowsConfiguration) {
         gridDemoView = GridViewRows()
+
+        var gridDemoContainerNewHeight = 0
+        while gridDemoContainerNewHeight < 136 {
+            gridDemoContainerNewHeight += config.height + config.gutterSize
+        }
+        gridDemoContainerHeightConstraint.constant = CGFloat(gridDemoContainerNewHeight)
+        NSLayoutConstraint.activate([
+            gridDemoContainerHeightConstraint
+        ])
+
         gridDemoView.frame = gridDemoViewContainer.bounds
         gridDemoView.setup(with: config)
         gridDemoViewContainer.addSubview(gridDemoView)
