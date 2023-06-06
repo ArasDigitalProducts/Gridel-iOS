@@ -19,6 +19,8 @@ public struct Gridel {
 
     static var currentColumnsConfig: ColumnsConfiguration?
     static var currentRowsConfig: RowsConfiguration?
+//    static var shouldShowRows: Bool = false
+//    static var shouldShowColumns: Bool = false
 
     public init() {
     }
@@ -29,7 +31,6 @@ public struct Gridel {
 
         gridelWindow = UIWindow(windowScene: scene)
         gridelWindow?.windowLevel = UIWindow.Level.alert + 1
-//        gridelWindow?.backgroundColor = .clear
         gridelWindow?.isHidden = false
         gridelWindow?.isUserInteractionEnabled = false
 

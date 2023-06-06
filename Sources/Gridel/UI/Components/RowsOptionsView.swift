@@ -28,7 +28,16 @@ class RowsOptionsView: UIView {
 
     var colorLeftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
     var colorRightLabel = UILabel()
-    var colorInputView: GridelInputView!
+    lazy var colorInputView: GridelInputView = {
+        return GridelInputView(
+            title: "Color",
+            keyboardType: .asciiCapable,
+            leftView: colorLeftView,
+            rightView: colorRightLabel
+        ) { [weak self] in
+            self?.colorInputTapped()
+        }
+    }()
 
     //delegate
     weak var delegate: RowsOptionsDelegate?
@@ -63,14 +72,6 @@ class RowsOptionsView: UIView {
         heightAndGutterStackView.spacing = 16
         heightInputView.rightView.tintColor = .white
         //color
-        colorInputView = GridelInputView(
-            title: "Color",
-            keyboardType: .asciiCapable,
-            leftView: colorLeftView,
-            rightView: colorRightLabel
-        ) { [weak self] in
-            self?.colorInputTapped()
-        }
         colorInputView.textField.text = "9884FF"
         colorLeftView.backgroundColor = .p300
         colorLeftView.layer.cornerRadius = 2
