@@ -27,7 +27,7 @@ class ColumnsOptionsView: UIView {
     var gutterInputView = GridelInputView(title: "Gutter", keyboardType: .numberPad)
     var marginAndGutterStackView = UIStackView()
     
-    var colorLeftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
+    var colorLeftView = UIView()
     var colorRightLabel = UILabel()
 
     let countPickerViewOptions: [Int] = Array((1...12))
