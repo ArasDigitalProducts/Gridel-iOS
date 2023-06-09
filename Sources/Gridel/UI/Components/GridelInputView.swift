@@ -98,6 +98,7 @@ class GridelInputView: RoundedContainerView {
             leftContainerView.addSubview(leftView)
             NSLayoutConstraint.activate([
                 leftContainerView.widthAnchor.constraint(equalToConstant: 21)
+                leftView.bottomAnchor.constraint(equalTo: leftContainerView.bottomAnchor)
             ])
         }
 
