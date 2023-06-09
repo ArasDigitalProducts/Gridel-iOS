@@ -29,7 +29,7 @@ class ColumnsGridView: UIView {
     }
 
     private func setupUI() {
-        guard let config else {return}
+        guard let config else { return }
         stackView.axis = .horizontal
         stackView.arrangedSubviews.forEach { view in
             view.removeFromSuperview()
