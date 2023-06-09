@@ -27,16 +27,25 @@ class ColumnsOptionsView: UIView {
     var gutterInputView = GridelInputView(title: "Gutter", keyboardType: .numberPad)
     var marginAndGutterStackView = UIStackView()
 
+    var colorLeftContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 21, height: 16))
     var colorLeftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
     var colorRightLabel = UILabel()
 
     let countPickerViewOptions: [Int] = Array((1...12))
 
     lazy var colorInputView: GridelInputView = {
+
+        colorLeftView.translatesAutoresizingMaskIntoConstraints = false
+        colorLeftContainerView.addSubview(colorLeftView)
+        NSLayoutConstraint.activate([
+            colorLeftView.centerXAnchor.constraint(equalTo: colorLeftContainerView.centerXAnchor),
+            colorLeftView.centerYAnchor.constraint(equalTo: colorLeftContainerView.centerYAnchor)
+        ])
+
         return GridelInputView(
             title: "Color",
             keyboardType: .asciiCapable,
-            leftView: colorLeftView,
+            leftView: colorLeftContainerView,
             rightView: colorRightLabel
         ) { [weak self] in
             self?.colorInputTapped()
