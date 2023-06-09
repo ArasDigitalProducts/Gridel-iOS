@@ -40,25 +40,40 @@ class RowsGridView: UIView {
         var offset: Float = 0
         let height = CGFloat(Float(config.height))
         let gutter = CGFloat(Float(config.gutterSize))
+        var lastView: UIView?
         while offset < Float(frame.height) {
             let rowView = UIView()
             rowView.translatesAutoresizingMaskIntoConstraints = false
             containerView.addSubview(rowView)
-            rowView.backgroundColor = .orange
+            rowView.backgroundColor = config.colorPrimary
             NSLayoutConstraint.activate([
                 rowView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
                 rowView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
                 rowView.heightAnchor.constraint(equalToConstant: height)
             ])
+
+            if let lastView {
+                NSLayoutConstraint.activate([
+                    rowView.topAnchor.constraint(equalTo: lastView.bottomAnchor)
+                ])
+
+            } else {
+                NSLayoutConstraint.activate([
+                    rowView.topAnchor.constraint(equalTo: containerView.topAnchor)
+                ])
+            }
+
             let spacerView = UIView()
             spacerView.translatesAutoresizingMaskIntoConstraints = false
             containerView.addSubview(spacerView)
-            spacerView.backgroundColor = .clear
+            spacerView.backgroundColor = config.colorSpacing
             NSLayoutConstraint.activate([
                 spacerView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
                 spacerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-                spacerView.heightAnchor.constraint(equalToConstant: gutter)
+                spacerView.heightAnchor.constraint(equalToConstant: gutter),
+                spacerView.topAnchor.constraint(equalTo: rowView.bottomAnchor)
             ])
+            lastView = spacerView
             offset += Float(height) + Float(gutter)
         }
 
