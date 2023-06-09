@@ -52,9 +52,10 @@ class GridelInputView: RoundedContainerView {
         textField.keyboardType = keyboardType
         textField.textColor = .white
 
+        leftContainerView.backgroundColor = .clear
+
         if let leftView {
             textField.leftView = leftContainerView
-            leftContainerView.backgroundColor = .orange
         }
     }
 
@@ -99,8 +100,8 @@ class GridelInputView: RoundedContainerView {
             leftContainerView.translatesAutoresizingMaskIntoConstraints = false
 
             NSLayoutConstraint.activate([
-                leftContainerView.widthAnchor.constraint(equalToConstant: 21),
-                leftContainerView.heightAnchor.constraint(equalToConstant: 16)
+                leftContainerView.widthAnchor.constraint(equalToConstant: 21)
+//                leftContainerView.heightAnchor.constraint(equalToConstant: 16)
             ])
             leftContainerView.addSubview(leftView)
             NSLayoutConstraint.activate([
