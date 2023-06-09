@@ -17,8 +17,7 @@ class RowsOptionsView: UIView {
     var gridDemoView = RowsGridView()
     var heightInputView = GridelInputView(
         title: "Height",
-        keyboardType: .numberPad,
-        rightView: UIImageView(image: UIImage(systemName: "chevron.down"))
+        keyboardType: .numberPad
     )
     var gutterInputView = GridelInputView(
         title: "Gutter",
@@ -220,7 +219,7 @@ extension RowsOptionsView: UITextFieldDelegate {
         let newValue = newNumber?.intValue ?? 0
 
         if newValue > 128 {
-            return false // Return false to block the text change
+            return false
         }
 
         return true
