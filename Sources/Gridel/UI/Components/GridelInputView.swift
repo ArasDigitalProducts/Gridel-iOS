@@ -54,7 +54,7 @@ class GridelInputView: RoundedContainerView {
 
         leftContainerView.backgroundColor = .clear
 
-        if let leftView {
+        if leftView != nil {
             textField.leftView = leftContainerView
         }
     }
@@ -97,8 +97,6 @@ class GridelInputView: RoundedContainerView {
 
         if let leftView {
             leftView.translatesAutoresizingMaskIntoConstraints = false
-//            leftContainerView.translatesAutoresizingMaskIntoConstraints = false
-
             NSLayoutConstraint.activate([
                 leftContainerView.widthAnchor.constraint(equalToConstant: 21),
                 leftContainerView.heightAnchor.constraint(equalToConstant: 18)
