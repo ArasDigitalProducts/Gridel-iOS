@@ -30,6 +30,7 @@ class RowsGridView: UIView {
     private func setupUI() {
         guard let config else { return }
         addSubview(containerView)
+        containerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
             containerView.topAnchor.constraint(equalTo: topAnchor),
@@ -41,6 +42,7 @@ class RowsGridView: UIView {
         let gutter = CGFloat(Float(config.gutterSize))
         while offset < Float(frame.height) {
             let rowView = UIView()
+            rowView.translatesAutoresizingMaskIntoConstraints = false
             containerView.addSubview(rowView)
             rowView.backgroundColor = .orange
             NSLayoutConstraint.activate([
@@ -49,6 +51,7 @@ class RowsGridView: UIView {
                 rowView.heightAnchor.constraint(equalToConstant: height)
             ])
             let spacerView = UIView()
+            spacerView.translatesAutoresizingMaskIntoConstraints = false
             containerView.addSubview(spacerView)
             spacerView.backgroundColor = .clear
             NSLayoutConstraint.activate([
