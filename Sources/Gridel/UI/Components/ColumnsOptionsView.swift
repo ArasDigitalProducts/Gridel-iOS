@@ -229,6 +229,9 @@ extension ColumnsOptionsView: UIPickerViewDelegate, UIPickerViewDataSource {
         return String(countPickerViewOptions[row])
     }
 
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        countInputView.textField.text = String(countPickerViewOptions[row])
+    }
 }
 
 protocol ColumnsOptionsDelegate: AnyObject {
