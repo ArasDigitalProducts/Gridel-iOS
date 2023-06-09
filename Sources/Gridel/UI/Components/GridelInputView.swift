@@ -95,7 +95,6 @@ class GridelInputView: RoundedContainerView {
     private func setupTouchGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         addGestureRecognizer(tapGesture)
-
     }
 
     @objc private func handleTap(_ gesture: UITapGestureRecognizer) {
