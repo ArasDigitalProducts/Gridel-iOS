@@ -19,6 +19,8 @@ class GridelInputView: RoundedContainerView {
     var rightView: UIView
     var leftView: UIView?
 
+    var leftContainerView = UIView()
+
     init(title: String? = nil,
          keyboardType: UIKeyboardType,
          leftView: UIView? = nil,
@@ -51,7 +53,7 @@ class GridelInputView: RoundedContainerView {
         textField.textColor = .white
 
         if let leftView {
-            textField.leftView = leftView
+            textField.leftView = leftContainerView
         }
     }
 
@@ -90,6 +92,15 @@ class GridelInputView: RoundedContainerView {
             rightView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
             rightView.heightAnchor.constraint(equalToConstant: 16)
         ])
+
+        if let leftView {
+            leftView.translatesAutoresizingMaskIntoConstraints = false
+            leftContainerView.addSubview(leftView)
+            NSLayoutConstraint.activate([
+                leftContainerView.widthAnchor.constraint(equalToConstant: 21)
+            ])
+        }
+
     }
 
     private func setupTouchGesture() {
