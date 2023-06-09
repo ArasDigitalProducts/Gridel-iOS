@@ -210,6 +210,22 @@ extension RowsOptionsView: UITextFieldDelegate {
             delegate?.rowsGutterUpdated(with: Int(textField.text ?? "0") ?? 0)
         }
     }
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+
+        let newString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        let newNumber = numberFormatter.number(from: newString ?? "")
+        let newValue = newNumber?.intValue ?? 0
+
+        if newValue > 128 {
+            return false // Return false to block the text change
+        }
+
+        return true
+    }
+
 }
 
 protocol RowsOptionsDelegate: AnyObject {

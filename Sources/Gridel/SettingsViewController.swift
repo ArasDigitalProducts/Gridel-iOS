@@ -225,7 +225,7 @@ extension SettingsViewController: ColumnsOptionsDelegate {
 
         let config = ColumnsConfiguration(
             color: columnsColor,
-            colorSpacing: .blackBackground,
+            colorSpacing: .clear,
             marginSize: marginSize,
             columnCount: columnCount,
             gutterSize: gutterSize,
@@ -262,7 +262,7 @@ extension SettingsViewController: RowsOptionsDelegate {
             height: height,
             gutterSize: gutter,
             colorPrimary: rowsColor,
-            colorSpacing: .blackBackground,
+            colorSpacing: .clear,
             opacity: Float(rowsColor.rgba.alpha)
         )
 
