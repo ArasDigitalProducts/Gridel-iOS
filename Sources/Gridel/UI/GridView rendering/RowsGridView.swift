@@ -23,7 +23,7 @@ class RowsGridView: UIView {
 
     func setup(with config: RowsConfiguration) {
         self.config = config
-        setupUI()
+        setupUI2()
         renderViews()
     }
 
@@ -35,6 +35,55 @@ class RowsGridView: UIView {
             containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
             containerView.topAnchor.constraint(equalTo: topAnchor),
             containerView.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
+
+        var offset: Float = 0
+        let height = CGFloat(Float(config.height))
+        let gutter = CGFloat(Float(config.gutterSize))
+        while offset < Float(frame.height) {
+            let rowView = UIView()
+            rowView.translatesAutoresizingMaskIntoConstraints = false
+            containerView.addSubview(rowView)
+            rowView.backgroundColor = .orange
+            NSLayoutConstraint.activate([
+                rowView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+                rowView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+                rowView.heightAnchor.constraint(equalToConstant: height)
+            ])
+            let spacerView = UIView()
+            spacerView.translatesAutoresizingMaskIntoConstraints = false
+            containerView.addSubview(spacerView)
+            spacerView.backgroundColor = .clear
+            NSLayoutConstraint.activate([
+                spacerView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+                spacerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+                spacerView.heightAnchor.constraint(equalToConstant: gutter)
+            ])
+            offset += Float(height) + Float(gutter)
+        }
+
+    }
+
+    private func setupUI2() {
+        guard let config else { return }
+
+        let scrollView = UIScrollView()
+        addSubview(scrollView)
+        addSubview(containerView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
+
+            containerView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            containerView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            containerView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            containerView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
 
         var offset: Float = 0
