@@ -54,6 +54,7 @@ class GridelInputView: RoundedContainerView {
 
         if let leftView {
             textField.leftView = leftContainerView
+            leftContainerView.backgroundColor = .orange
         }
     }
 
