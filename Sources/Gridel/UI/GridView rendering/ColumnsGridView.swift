@@ -38,7 +38,7 @@ class ColumnsGridView: UIView {
         stackView.spacing = CGFloat(config.gutterSize)
         stackView.distribution = .fillEqually
 
-        (0...config.columnCount).forEach { _ in
+        (1...config.columnCount).forEach { _ in
             let columnView = UIView()
             columnView.backgroundColor = config.color
             stackView.addArrangedSubview(columnView)
