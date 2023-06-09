@@ -95,7 +95,7 @@ class GridelInputView: RoundedContainerView {
 
         if let leftView {
             leftView.translatesAutoresizingMaskIntoConstraints = false
-//            leftContainerView.translatesAutoresizingMaskIntoConstraints = false
+            leftContainerView.translatesAutoresizingMaskIntoConstraints = false
 
             NSLayoutConstraint.activate([
                 leftContainerView.widthAnchor.constraint(equalToConstant: 21),
