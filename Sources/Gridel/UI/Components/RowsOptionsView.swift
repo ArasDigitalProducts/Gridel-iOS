@@ -186,7 +186,7 @@ class RowsOptionsView: UIView {
 
         gridDemoView = RowsGridView()
         gridDemoView.translatesAutoresizingMaskIntoConstraints = false
-        gridDemoView.setup(with: config)
+        gridDemoView.setup(with: config, fixedHeight: 136)
 
         gridDemoContainerView.addSubview(gridDemoView)
         NSLayoutConstraint.activate([
