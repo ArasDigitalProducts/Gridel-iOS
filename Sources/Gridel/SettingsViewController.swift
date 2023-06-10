@@ -27,7 +27,7 @@ class SettingsViewController: UIViewController {
     lazy var rowsOptionsView = RowsOptionsView()
 
     // MARK: - columns settings
-    var columnsColor: UIColor = .p300 {
+    var columnsColor: UIColor = .p300.withAlphaComponent(0.2) {
         didSet {
             columnsConfigUpdated()
         }
@@ -49,7 +49,7 @@ class SettingsViewController: UIViewController {
     }
 
     // MARK: - rows settings
-    var rowsColor: UIColor = .p300 {
+    var rowsColor: UIColor = .p300.withAlphaComponent(0.2) {
         didSet {
             rowsConfigUpdated()
         }
