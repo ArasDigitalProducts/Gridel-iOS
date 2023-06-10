@@ -138,7 +138,8 @@ class RowsOptionsView: UIView {
             gridDemoContainerView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             gridDemoContainerView.topAnchor.constraint(equalTo: showRowsView.bottomAnchor, constant: 32),
             gridDemoContainerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            gridDemoContainerView.heightAnchor.constraint(equalToConstant: 136)
+            gridDemoContainerHeightConstraint
+//            gridDemoContainerView.heightAnchor.constraint(equalToConstant: 136)
         ])
         //height and gutter
         heightAndGutterStackView.addArrangedSubview(heightInputView)
@@ -186,7 +187,7 @@ class RowsOptionsView: UIView {
 
         gridDemoView = RowsGridView()
         gridDemoView.translatesAutoresizingMaskIntoConstraints = false
-        gridDemoView.setup(with: config, fixedHeight: 136)
+        gridDemoView.setup(with: config, fixedHeight: Float(gridDemoContainerHeightConstraint.constant))
 
         gridDemoContainerView.addSubview(gridDemoView)
         NSLayoutConstraint.activate([
