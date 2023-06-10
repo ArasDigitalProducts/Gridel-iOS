@@ -13,7 +13,7 @@ class RowsOptionsView: UIView {
     var showRowsView = UIView()
     var showRowsLabel = UILabel()
     var showRowsSwitch = UISwitch()
-    var gridDemoViewContainer = UIView()
+    var gridDemoContainerView = UIView()
     var gridDemoView = RowsGridView()
     var heightInputView = GridelInputView(
         title: "Height",
@@ -40,7 +40,7 @@ class RowsOptionsView: UIView {
 
     let gridDemoContainerInitialHeight: CGFloat = 136
     lazy var gridDemoContainerHeightConstraint = NSLayoutConstraint(
-        item: gridDemoViewContainer,
+        item: gridDemoContainerView,
         attribute: .height,
         relatedBy: .equal,
         toItem: nil,
@@ -132,13 +132,13 @@ class RowsOptionsView: UIView {
         ])
 
         // grid demo view
-        containerView.addSubview(gridDemoViewContainer)
-        gridDemoViewContainer.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(gridDemoContainerView)
+        gridDemoContainerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            gridDemoViewContainer.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            gridDemoViewContainer.topAnchor.constraint(equalTo: showRowsView.bottomAnchor, constant: 32),
-            gridDemoViewContainer.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            gridDemoContainerHeightConstraint
+            gridDemoContainerView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            gridDemoContainerView.topAnchor.constraint(equalTo: showRowsView.bottomAnchor, constant: 32),
+            gridDemoContainerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            gridDemoContainerView.heightAnchor.constraint(equalToConstant: 136)
         ])
         //height and gutter
         heightAndGutterStackView.addArrangedSubview(heightInputView)
@@ -147,7 +147,7 @@ class RowsOptionsView: UIView {
         heightAndGutterStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             heightAndGutterStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-            heightAndGutterStackView.topAnchor.constraint(equalTo: gridDemoViewContainer.bottomAnchor, constant: 40),
+            heightAndGutterStackView.topAnchor.constraint(equalTo: gridDemoContainerView.bottomAnchor, constant: 40),
             heightAndGutterStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
             heightAndGutterStackView.heightAnchor.constraint(equalToConstant: 56)
         ])
@@ -182,22 +182,21 @@ class RowsOptionsView: UIView {
     }
 
     func setupDemoView(with config: RowsConfiguration) {
+        gridDemoView.removeFromSuperview()
+
         gridDemoView = RowsGridView()
-
-//        var gridDemoContainerNewHeight = 0
-//        while gridDemoContainerNewHeight < 136 {
-//            gridDemoContainerNewHeight += config.height + config.gutterSize
-//        }
-//        gridDemoContainerHeightConstraint.constant = CGFloat(gridDemoContainerNewHeight)
-//        NSLayoutConstraint.activate([
-//            gridDemoContainerHeightConstraint
-//        ])
-//        gridDemoView.layoutIfNeeded()
-
-        gridDemoView.frame = gridDemoViewContainer.bounds
         gridDemoView.translatesAutoresizingMaskIntoConstraints = false
         gridDemoView.setup(with: config)
-        gridDemoViewContainer.addSubview(gridDemoView)
+
+        gridDemoContainerView.addSubview(gridDemoView)
+        NSLayoutConstraint.activate([
+            gridDemoView.leadingAnchor.constraint(equalTo: gridDemoContainerView.leadingAnchor),
+            gridDemoView.topAnchor.constraint(equalTo: gridDemoContainerView.topAnchor),
+            gridDemoView.trailingAnchor.constraint(equalTo: gridDemoContainerView.trailingAnchor),
+            gridDemoView.bottomAnchor.constraint(equalTo: gridDemoContainerView.bottomAnchor)
+
+        ])
+        gridDemoView.layoutIfNeeded()
     }
 }
 
