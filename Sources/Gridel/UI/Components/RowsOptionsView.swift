@@ -48,12 +48,6 @@ class RowsOptionsView: UIView {
         multiplier: 1.0,
         constant: gridDemoContainerInitialHeight)
 
-//    lazy var gridDemoContainerHeightConstraint = NSLayoutConstraint(
-//        item: gridDemoViewContainer,
-//        attribute: .height,
-//        relatedBy: .equal,
-//        constant: 136)
-
     //delegate
     weak var delegate: RowsOptionsDelegate?
 
@@ -139,7 +133,6 @@ class RowsOptionsView: UIView {
             gridDemoContainerView.topAnchor.constraint(equalTo: showRowsView.bottomAnchor, constant: 32),
             gridDemoContainerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             gridDemoContainerHeightConstraint
-//            gridDemoContainerView.heightAnchor.constraint(equalToConstant: 136)
         ])
         //height and gutter
         heightAndGutterStackView.addArrangedSubview(heightInputView)

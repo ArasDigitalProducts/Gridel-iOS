@@ -10,6 +10,8 @@ import UIKit
 class RowsGridView: UIView {
 
     private let containerView = UIView()
+    private let scrollView = UIScrollView()
+
     private var config: RowsConfiguration?
     private var fixedHeight: Float?
 
@@ -25,66 +27,12 @@ class RowsGridView: UIView {
     func setup(with config: RowsConfiguration, fixedHeight: Float? = nil) {
         self.config = config
         self.fixedHeight = fixedHeight
-        setupUI2()
-        renderViews()
+        setupUI()
     }
 
     private func setupUI() {
         guard let config else { return }
-        addSubview(containerView)
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            containerView.topAnchor.constraint(equalTo: topAnchor),
-            containerView.trailingAnchor.constraint(equalTo: trailingAnchor)
-        ])
 
-        var offset: Float = 0
-        let height = CGFloat(Float(config.height))
-        let gutter = CGFloat(Float(config.gutterSize))
-        var lastView: UIView?
-        while offset < Float(frame.height) {
-            let rowView = UIView()
-            rowView.translatesAutoresizingMaskIntoConstraints = false
-            containerView.addSubview(rowView)
-            rowView.backgroundColor = config.colorPrimary
-            NSLayoutConstraint.activate([
-                rowView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-                rowView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-                rowView.heightAnchor.constraint(equalToConstant: height)
-            ])
-
-            if let lastView {
-                NSLayoutConstraint.activate([
-                    rowView.topAnchor.constraint(equalTo: lastView.bottomAnchor)
-                ])
-
-            } else {
-                NSLayoutConstraint.activate([
-                    rowView.topAnchor.constraint(equalTo: containerView.topAnchor)
-                ])
-            }
-
-            let spacerView = UIView()
-            spacerView.translatesAutoresizingMaskIntoConstraints = false
-            containerView.addSubview(spacerView)
-            spacerView.backgroundColor = config.colorSpacing
-            NSLayoutConstraint.activate([
-                spacerView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-                spacerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-                spacerView.heightAnchor.constraint(equalToConstant: gutter),
-                spacerView.topAnchor.constraint(equalTo: rowView.bottomAnchor)
-            ])
-            lastView = spacerView
-            offset += Float(height) + Float(gutter)
-        }
-
-    }
-
-    private func setupUI2() {
-        guard let config else { return }
-
-        let scrollView = UIScrollView()
         addSubview(scrollView)
         addSubview(containerView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -108,7 +56,8 @@ class RowsGridView: UIView {
         let gutter = CGFloat(Float(config.gutterSize))
         let finalHeight: Float = fixedHeight ?? Float(frame.height)
         var lastView: UIView?
-        while offset < finalHeight   {
+
+        while offset < finalHeight {
             let rowView = UIView()
             rowView.translatesAutoresizingMaskIntoConstraints = false
             containerView.addSubview(rowView)
@@ -123,7 +72,6 @@ class RowsGridView: UIView {
                 NSLayoutConstraint.activate([
                     rowView.topAnchor.constraint(equalTo: lastView.bottomAnchor)
                 ])
-
             } else {
                 NSLayoutConstraint.activate([
                     rowView.topAnchor.constraint(equalTo: containerView.topAnchor)
@@ -146,29 +94,4 @@ class RowsGridView: UIView {
 
     }
 
-    private func renderViews() {
-
-    }
-
-//    override func draw(_ rect: CGRect) {
-//        guard let config else { return }
-//
-//        let height = CGFloat(Float(config.height))
-//        let gutter = CGFloat(Float(config.gutterSize))
-//        guard height > 0, gutter > 0 else { return }
-//
-//        layer.opacity = config.opacity
-//
-//        let context = UIGraphicsGetCurrentContext()
-//        for y in stride(from: 0, to: bounds.height, by: height + gutter) {
-//            context?.setFillColor(config.colorPrimary.cgColor)
-//            let rowRect = CGRect(x: 0, y: CGFloat(y), width: bounds.width, height: height)
-//            context?.fill(rowRect)
-//
-//            context?.setFillColor(config.colorSpacing.cgColor)
-//            let spacingRect = CGRect(x: 0, y: CGFloat(y + height), width: bounds.width, height: gutter)
-//            context?.fill(spacingRect)
-//        }
-//
-//    }
 }
