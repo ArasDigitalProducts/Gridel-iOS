@@ -75,6 +75,7 @@ class SettingsViewController: UIViewController {
         setupUI()
         renderViews()
         setupDelegates()
+        setupKeyboardOffset()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
