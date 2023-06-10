@@ -11,6 +11,7 @@ class RowsGridView: UIView {
 
     private let containerView = UIView()
     private var config: RowsConfiguration?
+    private var fixedHeight: Float?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,8 +22,9 @@ class RowsGridView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setup(with config: RowsConfiguration) {
+    func setup(with config: RowsConfiguration, fixedHeight: Float? = nil) {
         self.config = config
+        self.fixedHeight = fixedHeight
         setupUI2()
         renderViews()
     }
@@ -104,8 +106,9 @@ class RowsGridView: UIView {
         var offset: Float = 0
         let height = CGFloat(Float(config.height))
         let gutter = CGFloat(Float(config.gutterSize))
+        let finalHeight: Float = fixedHeight ?? Float(frame.height)
         var lastView: UIView?
-        while offset < Float(136) {
+        while offset < finalHeight   {
             let rowView = UIView()
             rowView.translatesAutoresizingMaskIntoConstraints = false
             containerView.addSubview(rowView)
