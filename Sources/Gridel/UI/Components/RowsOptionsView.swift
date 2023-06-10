@@ -163,10 +163,7 @@ class RowsOptionsView: UIView {
     }
 
     @objc func switchValueChanged(_ sender: UISwitch) {
-        if sender.isOn {
-//            guard let config = Gridel.currentRowsConfig else { return }
-//            Gridel.applyRows(with: config)
-        } else {
+        if !sender.isOn {
             Gridel.removeRows()
         }
     }
