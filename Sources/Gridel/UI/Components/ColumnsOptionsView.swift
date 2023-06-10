@@ -173,8 +173,8 @@ class ColumnsOptionsView: UIView {
 
     @objc func switchValueChanged(_ sender: UISwitch) {
         if sender.isOn {
-            guard let config = Gridel.currentColumnsConfig else { return }
-            Gridel.applyColumns(with: config)
+//            guard let config = Gridel.currentColumnsConfig else { return }
+//            Gridel.applyColumns(with: config)
         } else {
             Gridel.removeColumns()
         }

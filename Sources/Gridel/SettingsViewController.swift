@@ -176,7 +176,16 @@ class SettingsViewController: UIViewController {
     }
 
     @objc func saveTapped() {
-        
+        dismiss(animated: true) {
+            if self.columnsOptionsView.showColumnsSwitch.isOn, let columnsConfig = Gridel.currentColumnsConfig {
+                Gridel.applyColumns(with: columnsConfig)
+            }
+
+            if self.rowsOptionsView.showRowsSwitch.isOn, let rowsConfig = Gridel.currentRowsConfig {
+                Gridel.applyRows(with: rowsConfig)
+            }
+
+        }
     }
 }
 
