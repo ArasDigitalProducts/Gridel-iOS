@@ -105,7 +105,7 @@ class RowsGridView: UIView {
         let height = CGFloat(Float(config.height))
         let gutter = CGFloat(Float(config.gutterSize))
         var lastView: UIView?
-        while offset < Float(frame.height) {
+        while offset < Float(136) {
             let rowView = UIView()
             rowView.translatesAutoresizingMaskIntoConstraints = false
             containerView.addSubview(rowView)
