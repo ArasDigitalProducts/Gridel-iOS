@@ -26,21 +26,6 @@ class SettingsViewController: UIViewController {
     lazy var columnsOptionsView = ColumnsOptionsView()
     lazy var rowsOptionsView = RowsOptionsView()
 
-    lazy var bottomFreeSpace: CGFloat = {
-//        if optionSegmentView.selectedSegmentIndex == 0 {
-
-        let navigationHeight = navigationController?.navigationBar.frame.height ?? 0
-        let containerHeight = containerView.frame.height
-
-        return view.frame.height - (navigationHeight + containerHeight)
-
-//            return view.frame.height - columnsOptionsView.colorInputView.frame.maxY
-//        } else {
-//            return view.frame.height - rowsOptionsView.colorInputView.frame.maxY
-//        }
-
-    }()
-
     // MARK: - columns settings
     var columnsColor: UIColor = .p300.withAlphaComponent(0.2) {
         didSet {
@@ -311,6 +296,7 @@ private extension SettingsViewController {
     private func keyboardWillShow(notification: NSNotification) {
         if let keyboardFrame: NSValue = notification.userInfo? [UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardHeight = keyboardFrame.cgRectValue.height
+            let bottomFreeSpace = getBottomAvailableSpace()
             if keyboardHeight > bottomFreeSpace {
                 view.frame.origin.y -= (keyboardHeight - bottomFreeSpace)
             }
@@ -321,5 +307,12 @@ private extension SettingsViewController {
     @objc
     private func keyboardWillHide() {
         view.frame.origin.y = 0
+    }
+
+    private func getBottomAvailableSpace() -> CGFloat {
+        let navigationHeight = navigationController?.navigationBar.frame.height ?? 0
+        let containerHeight = containerView.frame.height
+
+        return view.frame.height - (navigationHeight + containerHeight)
     }
 }
