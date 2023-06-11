@@ -193,9 +193,9 @@ class RowsOptionsView: UIView {
 
 extension RowsOptionsView: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField == heightInputView.textField, let text = textField.text {
+        if textField == heightInputView.textField, let text = textField.text, !text.isEmpty {
             delegate?.heightUpdated(with: Int(text) ?? 0)
-        } else if textField == gutterInputView.textField, let text = textField.text {
+        } else if textField == gutterInputView.textField, let text = textField.text, !text.isEmpty {
             delegate?.rowsGutterUpdated(with: Int(text) ?? 0)
         }
     }
