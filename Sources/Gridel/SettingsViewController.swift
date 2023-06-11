@@ -300,7 +300,7 @@ private extension SettingsViewController {
             let bottomFreeSpace = getBottomAvailableSpace()
             let padding: CGFloat = 20
             if keyboardHeight + padding > bottomFreeSpace {
-                view.frame.origin.y -= (keyboardHeight - bottomFreeSpace - padding)
+                view.frame.origin.y -= (keyboardHeight - bottomFreeSpace + padding)
             }
 
         }
