@@ -19,6 +19,8 @@ class GridelInputView: RoundedContainerView {
     var rightView: UIView
     var leftView: UIView?
 
+    var leftContainerView = UIView()
+
     init(title: String? = nil,
          keyboardType: UIKeyboardType,
          leftView: UIView? = nil,
@@ -50,8 +52,10 @@ class GridelInputView: RoundedContainerView {
         textField.keyboardType = keyboardType
         textField.textColor = .white
 
-        if let leftView {
-            textField.leftView = leftView
+        leftContainerView.backgroundColor = .clear
+
+        if leftView != nil {
+            textField.leftView = leftContainerView
         }
     }
 
@@ -90,12 +94,27 @@ class GridelInputView: RoundedContainerView {
             rightView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
             rightView.heightAnchor.constraint(equalToConstant: 16)
         ])
+
+        if let leftView {
+            leftView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                leftContainerView.widthAnchor.constraint(equalToConstant: 21),
+                leftContainerView.heightAnchor.constraint(equalToConstant: 18)
+            ])
+            leftContainerView.addSubview(leftView)
+            NSLayoutConstraint.activate([
+                leftView.heightAnchor.constraint(equalToConstant: 16),
+                leftView.widthAnchor.constraint(equalToConstant: 16),
+                leftView.bottomAnchor.constraint(equalTo: leftContainerView.bottomAnchor)
+            ])
+
+        }
+
     }
 
     private func setupTouchGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         addGestureRecognizer(tapGesture)
-
     }
 
     @objc private func handleTap(_ gesture: UITapGestureRecognizer) {

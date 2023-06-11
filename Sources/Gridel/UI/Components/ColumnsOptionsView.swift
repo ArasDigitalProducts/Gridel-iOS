@@ -16,6 +16,8 @@ class ColumnsOptionsView: UIView {
     var gridDemoContainerView = UIView()
     var gridDemoView = ColumnsGridView()
     var countBackgroundView = RoundedContainerView()
+
+    var countPickerView = UIPickerView()
     var countInputView = GridelInputView(
         title: "Count",
         keyboardType: .numberPad,
@@ -24,10 +26,11 @@ class ColumnsOptionsView: UIView {
     var marginInputView = GridelInputView(title: "Margins", keyboardType: .numberPad)
     var gutterInputView = GridelInputView(title: "Gutter", keyboardType: .numberPad)
     var marginAndGutterStackView = UIStackView()
-
+    
     var colorLeftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
     var colorRightLabel = UILabel()
-//    var colorInputView: GridelInputView!
+
+    let countPickerViewOptions: [Int] = Array((1...Constants.maxNumberOfColumns))
 
     lazy var colorInputView: GridelInputView = {
         return GridelInputView(
@@ -70,6 +73,7 @@ class ColumnsOptionsView: UIView {
         gridDemoView.backgroundColor = .clear
         //count input view
         countInputView.rightView.tintColor = .white
+        countInputView.textField.inputView = countPickerView
         //margin and gutter
         marginAndGutterStackView.axis = .horizontal
         marginAndGutterStackView.distribution = .fillEqually
@@ -163,13 +167,12 @@ class ColumnsOptionsView: UIView {
         marginInputView.textField.delegate = self
         gutterInputView.textField.delegate = self
         showColumnsSwitch.addTarget(self, action: #selector(switchValueChanged(_:)), for: .valueChanged)
+        countPickerView.delegate = self
+        countPickerView.dataSource = self
     }
 
     @objc func switchValueChanged(_ sender: UISwitch) {
-        if sender.isOn {
-            guard let config = Gridel.currentColumnsConfig else { return }
-            Gridel.applyColumns(with: config)
-        } else {
+        if !sender.isOn {
             Gridel.removeColumns()
         }
     }
@@ -200,13 +203,31 @@ class ColumnsOptionsView: UIView {
 
 extension ColumnsOptionsView: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField == countInputView.textField {
-            delegate?.countUpdated(with: Int(textField.text ?? "1") ?? 1)
-        } else if textField == marginInputView.textField {
-            delegate?.marginsUpdated(with: Int(textField.text ?? "0") ?? 0)
-        } else if textField == gutterInputView.textField {
-            delegate?.columnsGutterUpdated(with: Int(textField.text ?? "0") ?? 0)
+        if textField == countInputView.textField, let text = textField.text, !text.isEmpty {
+            delegate?.countUpdated(with: Int(text) ?? 1)
+        } else if textField == marginInputView.textField, let text = textField.text, !text.isEmpty {
+            delegate?.marginsUpdated(with: Int(text) ?? 0)
+        } else if textField == gutterInputView.textField, let text = textField.text, !text.isEmpty {
+            delegate?.columnsGutterUpdated(with: Int(text) ?? 0)
         }
+    }
+}
+
+extension ColumnsOptionsView: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        Constants.maxNumberOfColumns
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return String(countPickerViewOptions[row])
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        countInputView.textField.text = String(countPickerViewOptions[row])
     }
 }
 

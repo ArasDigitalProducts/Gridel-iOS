@@ -13,12 +13,11 @@ class RowsOptionsView: UIView {
     var showRowsView = UIView()
     var showRowsLabel = UILabel()
     var showRowsSwitch = UISwitch()
-    var gridDemoViewContainer = UIView()
+    var gridDemoContainerView = UIView()
     var gridDemoView = RowsGridView()
     var heightInputView = GridelInputView(
         title: "Height",
-        keyboardType: .numberPad,
-        rightView: UIImageView(image: UIImage(systemName: "chevron.down"))
+        keyboardType: .numberPad
     )
     var gutterInputView = GridelInputView(
         title: "Gutter",
@@ -41,19 +40,13 @@ class RowsOptionsView: UIView {
 
     let gridDemoContainerInitialHeight: CGFloat = 136
     lazy var gridDemoContainerHeightConstraint = NSLayoutConstraint(
-        item: gridDemoViewContainer,
+        item: gridDemoContainerView,
         attribute: .height,
         relatedBy: .equal,
         toItem: nil,
         attribute: .notAnAttribute,
         multiplier: 1.0,
         constant: gridDemoContainerInitialHeight)
-
-//    lazy var gridDemoContainerHeightConstraint = NSLayoutConstraint(
-//        item: gridDemoViewContainer,
-//        attribute: .height,
-//        relatedBy: .equal,
-//        constant: 136)
 
     //delegate
     weak var delegate: RowsOptionsDelegate?
@@ -133,12 +126,12 @@ class RowsOptionsView: UIView {
         ])
 
         // grid demo view
-        containerView.addSubview(gridDemoViewContainer)
-        gridDemoViewContainer.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(gridDemoContainerView)
+        gridDemoContainerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            gridDemoViewContainer.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            gridDemoViewContainer.topAnchor.constraint(equalTo: showRowsView.bottomAnchor, constant: 32),
-            gridDemoViewContainer.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            gridDemoContainerView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            gridDemoContainerView.topAnchor.constraint(equalTo: showRowsView.bottomAnchor, constant: 32),
+            gridDemoContainerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             gridDemoContainerHeightConstraint
         ])
         //height and gutter
@@ -148,7 +141,7 @@ class RowsOptionsView: UIView {
         heightAndGutterStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             heightAndGutterStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-            heightAndGutterStackView.topAnchor.constraint(equalTo: gridDemoViewContainer.bottomAnchor, constant: 40),
+            heightAndGutterStackView.topAnchor.constraint(equalTo: gridDemoContainerView.bottomAnchor, constant: 40),
             heightAndGutterStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
             heightAndGutterStackView.heightAnchor.constraint(equalToConstant: 56)
         ])
@@ -170,10 +163,7 @@ class RowsOptionsView: UIView {
     }
 
     @objc func switchValueChanged(_ sender: UISwitch) {
-        if sender.isOn {
-            guard let config = Gridel.currentRowsConfig else { return }
-            Gridel.applyRows(with: config)
-        } else {
+        if !sender.isOn {
             Gridel.removeRows()
         }
     }
@@ -183,33 +173,43 @@ class RowsOptionsView: UIView {
     }
 
     func setupDemoView(with config: RowsConfiguration) {
+        gridDemoView.removeFromSuperview()
+
         gridDemoView = RowsGridView()
-
-//        var gridDemoContainerNewHeight = 0
-//        while gridDemoContainerNewHeight < 136 {
-//            gridDemoContainerNewHeight += config.height + config.gutterSize
-//        }
-//        gridDemoContainerHeightConstraint.constant = CGFloat(gridDemoContainerNewHeight)
-//        NSLayoutConstraint.activate([
-//            gridDemoContainerHeightConstraint
-//        ])
-//        gridDemoView.layoutIfNeeded()
-
-        gridDemoView.frame = gridDemoViewContainer.bounds
         gridDemoView.translatesAutoresizingMaskIntoConstraints = false
-        gridDemoView.setup(with: config)
-        gridDemoViewContainer.addSubview(gridDemoView)
+        gridDemoView.setup(with: config, fixedHeight: Float(gridDemoContainerHeightConstraint.constant))
+
+        gridDemoContainerView.addSubview(gridDemoView)
+        NSLayoutConstraint.activate([
+            gridDemoView.leadingAnchor.constraint(equalTo: gridDemoContainerView.leadingAnchor),
+            gridDemoView.topAnchor.constraint(equalTo: gridDemoContainerView.topAnchor),
+            gridDemoView.trailingAnchor.constraint(equalTo: gridDemoContainerView.trailingAnchor),
+            gridDemoView.bottomAnchor.constraint(equalTo: gridDemoContainerView.bottomAnchor)
+
+        ])
+        gridDemoView.layoutIfNeeded()
     }
 }
 
 extension RowsOptionsView: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField == heightInputView.textField {
-            delegate?.heightUpdated(with: Int(textField.text ?? "0") ?? 0)
-        } else if textField == gutterInputView.textField {
-            delegate?.rowsGutterUpdated(with: Int(textField.text ?? "0") ?? 0)
+        if textField == heightInputView.textField, let text = textField.text, !text.isEmpty {
+            delegate?.heightUpdated(with: Int(text) ?? 0)
+        } else if textField == gutterInputView.textField, let text = textField.text, !text.isEmpty {
+            delegate?.rowsGutterUpdated(with: Int(text) ?? 0)
         }
     }
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let newString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        let newNumber = numberFormatter.number(from: newString ?? "")
+        let newValue = newNumber?.intValue ?? 0
+
+        return newValue <= Constants.maximumRowHeight
+    }
+
 }
 
 protocol RowsOptionsDelegate: AnyObject {

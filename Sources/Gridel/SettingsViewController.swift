@@ -27,7 +27,7 @@ class SettingsViewController: UIViewController {
     lazy var rowsOptionsView = RowsOptionsView()
 
     // MARK: - columns settings
-    var columnsColor: UIColor = .p300 {
+    var columnsColor: UIColor = .p300.withAlphaComponent(0.2) {
         didSet {
             columnsConfigUpdated()
         }
@@ -49,7 +49,7 @@ class SettingsViewController: UIViewController {
     }
 
     // MARK: - rows settings
-    var rowsColor: UIColor = .p300 {
+    var rowsColor: UIColor = .p300.withAlphaComponent(0.2) {
         didSet {
             rowsConfigUpdated()
         }
@@ -75,6 +75,7 @@ class SettingsViewController: UIViewController {
         setupUI()
         renderViews()
         setupDelegates()
+        setupKeyboardOffset()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -176,7 +177,15 @@ class SettingsViewController: UIViewController {
     }
 
     @objc func saveTapped() {
-        
+        dismiss(animated: true) {
+            if self.columnsOptionsView.showColumnsSwitch.isOn, let columnsConfig = Gridel.currentColumnsConfig {
+                Gridel.applyColumns(with: columnsConfig)
+            }
+
+            if self.rowsOptionsView.showRowsSwitch.isOn, let rowsConfig = Gridel.currentRowsConfig {
+                Gridel.applyRows(with: rowsConfig)
+            }
+        }
     }
 }
 
@@ -225,7 +234,7 @@ extension SettingsViewController: ColumnsOptionsDelegate {
 
         let config = ColumnsConfiguration(
             color: columnsColor,
-            colorSpacing: .blackBackground,
+            colorSpacing: .clear,
             marginSize: marginSize,
             columnCount: columnCount,
             gutterSize: gutterSize,
@@ -262,7 +271,7 @@ extension SettingsViewController: RowsOptionsDelegate {
             height: height,
             gutterSize: gutter,
             colorPrimary: rowsColor,
-            colorSpacing: .blackBackground,
+            colorSpacing: .clear,
             opacity: Float(rowsColor.rgba.alpha)
         )
 
@@ -272,5 +281,42 @@ extension SettingsViewController: RowsOptionsDelegate {
         rowsOptionsView.colorInputView.textField.text = rowsColor.toHexString().uppercased()
         rowsOptionsView.colorRightLabel.text = rowsColor.cgColor.alpha.toPercentageString()
 
+    }
+}
+
+// MARK: - keyboard offset
+private extension SettingsViewController {
+    func setupKeyboardOffset() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    @objc
+    private func keyboardWillShow(notification: NSNotification) {
+        view.frame.origin.y = 0
+        if let keyboardFrame: NSValue = notification.userInfo? [UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardHeight = keyboardFrame.cgRectValue.height
+            let bottomFreeSpace = getBottomAvailableSpace()
+            let padding: CGFloat = 20
+            if keyboardHeight + padding > bottomFreeSpace {
+                view.frame.origin.y -= (keyboardHeight - bottomFreeSpace + padding)
+            }
+        }
+    }
+
+    @objc
+    private func keyboardWillHide() {
+        view.frame.origin.y = 0
+    }
+
+    private func getBottomAvailableSpace() -> CGFloat {
+        switch optionSegmentView.selectedSegmentIndex {
+        case 0:
+            return columnsOptionsView.frame.size.height - (columnsOptionsView.colorInputView.frame.size.height + columnsOptionsView.colorInputView.frame.origin.y)
+        case 1:
+            return rowsOptionsView.frame.size.height - (rowsOptionsView.colorInputView.frame.size.height + rowsOptionsView.colorInputView.frame.origin.y)
+        default:
+            return 0
+        }
     }
 }
