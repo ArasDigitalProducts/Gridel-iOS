@@ -310,11 +310,13 @@ private extension SettingsViewController {
     }
 
     private func getBottomAvailableSpace() -> CGFloat {
-        if optionSegmentView.selectedSegmentIndex == 0 {
+        switch optionSegmentView.selectedSegmentIndex {
+        case 0:
             return columnsOptionsView.frame.size.height - (columnsOptionsView.colorInputView.frame.size.height + columnsOptionsView.colorInputView.frame.origin.y)
-        } else if optionSegmentView.selectedSegmentIndex == 1 {
+        case 1:
             return rowsOptionsView.frame.size.height - (rowsOptionsView.colorInputView.frame.size.height + rowsOptionsView.colorInputView.frame.origin.y)
+        default:
+            return 0
         }
-        return 0
     }
 }
