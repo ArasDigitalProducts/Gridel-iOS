@@ -27,11 +27,17 @@ class SettingsViewController: UIViewController {
     lazy var rowsOptionsView = RowsOptionsView()
 
     lazy var bottomFreeSpace: CGFloat = {
-        if optionSegmentView.selectedSegmentIndex == 0 {
-            return view.frame.height - columnsOptionsView.colorInputView.frame.maxY
-        } else {
-            return view.frame.height - columnsOptionsView.colorInputView.frame.maxY
-        }
+//        if optionSegmentView.selectedSegmentIndex == 0 {
+
+        let navigationHeight = navigationController?.navigationBar.frame.height ?? 0
+        let containerHeight = containerView.frame.height
+
+        return view.frame.height - (navigationHeight + containerHeight)
+
+//            return view.frame.height - columnsOptionsView.colorInputView.frame.maxY
+//        } else {
+//            return view.frame.height - rowsOptionsView.colorInputView.frame.maxY
+//        }
 
     }()
 
