@@ -26,6 +26,15 @@ class SettingsViewController: UIViewController {
     lazy var columnsOptionsView = ColumnsOptionsView()
     lazy var rowsOptionsView = RowsOptionsView()
 
+    lazy var bottomFreeSpace: CGFloat = {
+        if optionSegmentView.selectedSegmentIndex == 0 {
+            return view.frame.height - columnsOptionsView.colorInputView.frame.maxY
+        } else {
+            return view.frame.height - columnsOptionsView.colorInputView.frame.maxY
+        }
+
+    }()
+
     // MARK: - columns settings
     var columnsColor: UIColor = .p300.withAlphaComponent(0.2) {
         didSet {
@@ -282,5 +291,26 @@ extension SettingsViewController: RowsOptionsDelegate {
         rowsOptionsView.colorInputView.textField.text = rowsColor.toHexString().uppercased()
         rowsOptionsView.colorRightLabel.text = rowsColor.cgColor.alpha.toPercentageString()
 
+    }
+}
+
+// MARK: - keyboard offset
+private extension SettingsViewController {
+    func setupKeyboardOffset() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    @objc
+    private func keyboardWillShow(notification: NSNotification) {
+        if let keyboardFrame: NSValue = notification.userInfo? [UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardHeight = keyboardFrame.cgRectValue.height
+            view.frame.origin.y -= (keyboardHeight - bottomFreeSpace)
+        }
+    }
+
+    @objc
+    private func keyboardWillHide() {
+        view.frame.origin.y = 0
     }
 }
