@@ -310,9 +310,11 @@ private extension SettingsViewController {
     }
 
     private func getBottomAvailableSpace() -> CGFloat {
-        let navigationHeight = navigationController?.navigationBar.frame.height ?? 0
-        let containerHeight = containerView.frame.height
-
-        return view.frame.height - (navigationHeight + containerHeight)
+        if optionSegmentView.selectedSegmentIndex == 0 {
+            return columnsOptionsView.frame.size.height - (columnsOptionsView.colorInputView.frame.size.height + columnsOptionsView.colorInputView.frame.origin.y)
+        } else if optionSegmentView.selectedSegmentIndex == 1 {
+            return columnsOptionsView.frame.size.height - (columnsOptionsView.colorInputView.frame.size.height + columnsOptionsView.colorInputView.frame.origin.y)
+        }
+        return 0
     }
 }
