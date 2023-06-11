@@ -203,12 +203,12 @@ class ColumnsOptionsView: UIView {
 
 extension ColumnsOptionsView: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField == countInputView.textField {
-            delegate?.countUpdated(with: Int(textField.text ?? "1") ?? 1)
-        } else if textField == marginInputView.textField {
-            delegate?.marginsUpdated(with: Int(textField.text ?? "0") ?? 0)
-        } else if textField == gutterInputView.textField {
-            delegate?.columnsGutterUpdated(with: Int(textField.text ?? "0") ?? 0)
+        if textField == countInputView.textField, let text = textField.text {
+            delegate?.countUpdated(with: Int(text) ?? 1)
+        } else if textField == marginInputView.textField, let text = textField.text {
+            delegate?.marginsUpdated(with: Int(text) ?? 0)
+        } else if textField == gutterInputView.textField, let text = textField.text {
+            delegate?.columnsGutterUpdated(with: Int(text) ?? 0)
         }
     }
 }

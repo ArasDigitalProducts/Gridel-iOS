@@ -193,15 +193,14 @@ class RowsOptionsView: UIView {
 
 extension RowsOptionsView: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField == heightInputView.textField {
-            delegate?.heightUpdated(with: Int(textField.text ?? "0") ?? 0)
-        } else if textField == gutterInputView.textField {
-            delegate?.rowsGutterUpdated(with: Int(textField.text ?? "0") ?? 0)
+        if textField == heightInputView.textField, let text = textField.text {
+            delegate?.heightUpdated(with: Int(text) ?? 0)
+        } else if textField == gutterInputView.textField, let text = textField.text {
+            delegate?.rowsGutterUpdated(with: Int(text) ?? 0)
         }
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-
         let newString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
