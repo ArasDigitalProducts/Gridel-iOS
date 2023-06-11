@@ -8,7 +8,6 @@
 import UIKit
 
 class RowsGridView: UIView {
-
     private let containerView = UIView()
     private let scrollView = UIScrollView()
 
@@ -17,7 +16,6 @@ class RowsGridView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-
     }
 
     required init?(coder: NSCoder) {
@@ -91,7 +89,5 @@ class RowsGridView: UIView {
             lastView = spacerView
             offset += Float(height) + Float(gutter)
         }
-
     }
-
 }

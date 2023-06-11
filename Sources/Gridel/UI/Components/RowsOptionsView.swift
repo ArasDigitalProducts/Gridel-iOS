@@ -48,8 +48,6 @@ class RowsOptionsView: UIView {
         multiplier: 1.0,
         constant: gridDemoContainerInitialHeight)
 
-    private let maximumRowHeight = 128
-
     //delegate
     weak var delegate: RowsOptionsDelegate?
 
@@ -210,11 +208,7 @@ extension RowsOptionsView: UITextFieldDelegate {
         let newNumber = numberFormatter.number(from: newString ?? "")
         let newValue = newNumber?.intValue ?? 0
 
-        if newValue > maximumRowHeight {
-            return false
-        }
-
-        return true
+        return newValue <= Constants.maximumRowHeight
     }
 
 }

@@ -30,7 +30,7 @@ class ColumnsOptionsView: UIView {
     var colorLeftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
     var colorRightLabel = UILabel()
 
-    let countPickerViewOptions: [Int] = Array((1...12))
+    let countPickerViewOptions: [Int] = Array((1...Constants.maxNumberOfColumns))
 
     lazy var colorInputView: GridelInputView = {
         return GridelInputView(
@@ -219,7 +219,7 @@ extension ColumnsOptionsView: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        12
+        Constants.maxNumberOfColumns
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {

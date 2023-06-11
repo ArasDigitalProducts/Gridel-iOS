@@ -185,7 +185,6 @@ class SettingsViewController: UIViewController {
             if self.rowsOptionsView.showRowsSwitch.isOn, let rowsConfig = Gridel.currentRowsConfig {
                 Gridel.applyRows(with: rowsConfig)
             }
-
         }
     }
 }
@@ -302,7 +301,6 @@ private extension SettingsViewController {
             if keyboardHeight + padding > bottomFreeSpace {
                 view.frame.origin.y -= (keyboardHeight - bottomFreeSpace + padding)
             }
-
         }
     }
 
