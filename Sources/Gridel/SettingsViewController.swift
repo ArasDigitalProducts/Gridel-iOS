@@ -305,7 +305,10 @@ private extension SettingsViewController {
     private func keyboardWillShow(notification: NSNotification) {
         if let keyboardFrame: NSValue = notification.userInfo? [UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardHeight = keyboardFrame.cgRectValue.height
-            view.frame.origin.y -= (keyboardHeight - bottomFreeSpace)
+            if keyboardHeight > bottomFreeSpace {
+                view.frame.origin.y -= (keyboardHeight - bottomFreeSpace)
+            }
+
         }
     }
 
