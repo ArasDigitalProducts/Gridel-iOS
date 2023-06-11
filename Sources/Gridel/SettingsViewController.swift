@@ -315,7 +315,7 @@ private extension SettingsViewController {
         if optionSegmentView.selectedSegmentIndex == 0 {
             return columnsOptionsView.frame.size.height - (columnsOptionsView.colorInputView.frame.size.height + columnsOptionsView.colorInputView.frame.origin.y)
         } else if optionSegmentView.selectedSegmentIndex == 1 {
-            return columnsOptionsView.frame.size.height - (columnsOptionsView.colorInputView.frame.size.height + columnsOptionsView.colorInputView.frame.origin.y)
+            return rowsOptionsView.frame.size.height - (rowsOptionsView.colorInputView.frame.size.height + rowsOptionsView.colorInputView.frame.origin.y)
         }
         return 0
     }
